@@ -1,0 +1,51 @@
+- !<AssetImportMetadata/7acf77a0-c8fb-49b9-9f91-6a44dc6eba93>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 3f4f373c-6e20-4847-8ef4-e1f698ceb230
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 3f4f373c-6e20-4847-8ef4-e1f698ceb230
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> 6a8cd335-0b93-4a3f-978b-34fc3e3579ed
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/6a8cd335-0b93-4a3f-978b-34fc3e3579ed>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: d61ebf11-22a5-4072-80da-66e02b4d9ee9
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    horizontalSpacing: false
+    optionButtons: false
+    panelRoot: false
+    panelScreenTransform: false
+    verticalSpacing: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - panelRoot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      panelScreenTransform: !<reference.ScreenTransform> 00000000-0000-0000-0000-000000000000
+      optionButtons: !<reference.SceneObject[]>
+        []
+      horizontalSpacing: 0.120000
+      verticalSpacing: 0.100000
+  ScriptTypes:
+    -
+      {}

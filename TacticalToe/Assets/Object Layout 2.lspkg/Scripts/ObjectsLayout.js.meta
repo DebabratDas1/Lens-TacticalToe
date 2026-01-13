@@ -1,0 +1,59 @@
+- !<AssetImportMetadata/ea58d0a7-e8b3-de16-b52c-b3ec968d22de>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 5b3caa9b-1da8-4820-9622-0228e27755db
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 5b3caa9b-1da8-4820-9622-0228e27755db
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    AssetLibraryId: 3gVr3HT08nXcvALqzembym
+  AssetDataMap:
+    JavaScriptAsset: !<own> 2de7931b-00a3-4155-b993-d67dc45c0318
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/2de7931b-00a3-4155-b993-d67dc45c0318>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: fc844741-db16-4a1c-ae44-0d9f22a2e256
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    circleObjectCount: false
+    layoutType: false
+    objectsToSpawn: false
+    radiusX: false
+    radiusY: false
+    rectHeight: false
+    rectObjectCountX: false
+    rectObjectCountY: false
+    rectWidth: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - objectsToSpawn: !<reference.SceneObject[]>
+        []
+      layoutType: circle
+      circleObjectCount: 8
+      radiusX: 100
+      radiusY: 100
+      rectObjectCountX: 3
+      rectObjectCountY: 3
+      rectWidth: 80
+      rectHeight: 80
+  ScriptTypes:
+    -
+      {}

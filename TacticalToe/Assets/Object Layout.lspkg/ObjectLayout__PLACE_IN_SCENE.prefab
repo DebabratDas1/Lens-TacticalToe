@@ -1,0 +1,88 @@
+- !<ObjectPrefab/f647ebcf-9ca8-4762-947e-643c338201b0>
+  PackagePath: ""
+  objects:
+    - !<own> 241484a0-7918-4c32-b9ee-402f6026a11b
+  LazyLoading: false
+  RetainAssets: true
+- !<SceneObject/241484a0-7918-4c32-b9ee-402f6026a11b>
+  PrefabRemaps:
+    - 241484a0-7918-4c32-b9ee-402f6026a11b: 241484a0-7918-4c32-4611-bfd09fd95ee4
+    - 3e635c12-f9b8-4fc5-8e95-6cebd5f22717: 3e635c12-f9b8-4fc5-716a-93142a0dd8e8
+    - 47ab1e58-373f-4b9c-af8e-c4497a685777: 47ab1e58-373f-4b9c-5071-3bb68597a888
+    - b5bbf106-ccd2-4498-922f-442a00a1b90f: b5bbf106-ccd2-4498-6dd0-bbd5ff5e46f0
+  Name: ObjectLayout__PLACE_IN_SCENE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -200.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 3e635c12-f9b8-4fc5-8e95-6cebd5f22717
+  Components:
+    - !<own> 47ab1e58-373f-4b9c-af8e-c4497a685777
+- !<SceneObject/3e635c12-f9b8-4fc5-8e95-6cebd5f22717>
+  PrefabRemaps:
+    []
+  Name: Sphere
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> b5bbf106-ccd2-4498-922f-442a00a1b90f
+- !<ScriptComponent/47ab1e58-373f-4b9c-af8e-c4497a685777>
+  PrefabRemaps:
+    []
+  Name: ObjectsLayout
+  Enabled: true
+  ScriptAsset: !<reference> 22cfbd46-0f42-4b47-916e-7be803b4520b
+  ScriptInputsDefault:
+    layoutType: true
+    rectObjectCountX: true
+    rectObjectCountY: true
+    rectWidth: true
+    rectHeight: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      objectsToSpawn: !<reference.SceneObject[]>
+        - !<reference> 3e635c12-f9b8-4fc5-8e95-6cebd5f22717
+      layoutType: circle
+      circleObjectCount: 11
+      radiusX: 40
+      radiusY: 40
+      rectObjectCountX: 3
+      rectObjectCountY: 3
+      rectWidth: 80
+      rectHeight: 80
+  ScriptTypes:
+    "":
+      {}
+- !<RenderMeshVisual/b5bbf106-ccd2-4498-922f-442a00a1b90f>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> d85c14e5-8358-4638-9ab5-563ccf122eab
+  Mesh: !<reference> 40465f8a-513f-470a-8b1e-cf5ff9a4ead8
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
