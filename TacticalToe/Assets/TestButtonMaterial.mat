@@ -1,20 +1,14 @@
-- !<Material/a976d208-7f83-4992-a8af-8735ceaf87b3>
+- !<Material/3cfb054a-ae70-49dd-8e28-674c9595a86c>
   PackagePath: ""
   PassesInfo:
-    - !<own> 4195ea88-47bb-48b8-b384-085bba4b81eb
-- !<PassInfo/4195ea88-47bb-48b8-b384-085bba4b81eb>
+    - !<own> 73536ef0-2cc6-431f-98e9-d9767e133ad3
+- !<PassInfo/73536ef0-2cc6-431f-98e9-d9767e133ad3>
   CachedProperties:
     - Port_Default_N369:
         typeIdx: 5
         value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-    - uv2Offset:
-        typeIdx: 3
-        value: {x: 1.000000, y: 1.000000}
-    - uv2Scale:
-        typeIdx: 3
-        value: {x: 1.000000, y: 1.000000}
-  DepthWrite: true
-  DepthTest: true
+  DepthWrite: false
+  DepthTest: false
   DepthFunction: LessEqual
   TwoSided: false
   ColorMask: {x: true, y: true, z: true, w: true}
@@ -24,12 +18,12 @@
   FrustumCullPad: 0.000000
   InstanceCount: 1
   Defines:
-    - ENABLE_BASE_TEX
     - NODE_13_DROPLIST_ITEM 0
+    - NODE_27_DROPLIST_ITEM 0
     - NODE_49_DROPLIST_ITEM 0
     - NODE_69_DROPLIST_ITEM 0
-    - NODE_27_DROPLIST_ITEM 0
-  BlendMode: AlphaTest
+    - ENABLE_BASE_TEX
+  BlendMode: PremultipliedAlphaAuto
   Properties:
     Port_Default_N204:
       typeIdx: 1
@@ -37,22 +31,19 @@
     PreviewEnabled:
       typeIdx: 0
       value: 0
-    alphaTestThreshold:
-      typeIdx: 1
-      value: 0.500000
     baseColor:
       typeIdx: 5
       value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     baseTex:
       typeIdx: 9
       value:
-        id: 3c28b317-810e-4c42-8c54-4a4ddb38fc0f
+        id: 65b34c5e-b093-4ac9-b7a6-b3baffade6cd
         sampler:
           filteringMode: Trilinear
-          wrapModeU: Repeat
-          wrapModeV: Repeat
-          wrapModeW: Repeat
+          wrapModeU: ClampToEdge
+          wrapModeV: ClampToEdge
+          wrapModeW: ClampToEdge
           borderColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
           mipmaps: false
         type: Texture2D
-  Pass: !<reference> d6402801-a96c-43b9-a773-8e913ad28520
+  Pass: !<reference> d1964487-d647-4c1b-8cb2-32394c581a1e

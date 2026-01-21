@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/33515474-a3a1-4fcd-9da1-97631934df0e>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 671b24d7-f07f-4ca1-b8fa-bcb95efbb2d8
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 671b24d7-f07f-4ca1-b8fa-bcb95efbb2d8
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> 5d80c9c2-e5a1-437e-a352-80780c228b32
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/5d80c9c2-e5a1-437e-a352-80780c228b32>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: f86c9732-1149-4f0a-94be-7fe98c418fb3
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    draggablePrefab: false
+    handPosition: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - draggablePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      handPosition: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}

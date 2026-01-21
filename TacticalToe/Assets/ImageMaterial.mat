@@ -1,18 +1,12 @@
-- !<Material/a976d208-7f83-4992-a8af-8735ceaf87b3>
+- !<Material/9d41b322-96a6-4e4a-a6a4-f0099742f6a0>
   PackagePath: ""
   PassesInfo:
-    - !<own> 4195ea88-47bb-48b8-b384-085bba4b81eb
-- !<PassInfo/4195ea88-47bb-48b8-b384-085bba4b81eb>
+    - !<own> a497ecc1-8d10-4314-a896-027925a9d158
+- !<PassInfo/a497ecc1-8d10-4314-a896-027925a9d158>
   CachedProperties:
     - Port_Default_N369:
         typeIdx: 5
         value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-    - uv2Offset:
-        typeIdx: 3
-        value: {x: 1.000000, y: 1.000000}
-    - uv2Scale:
-        typeIdx: 3
-        value: {x: 1.000000, y: 1.000000}
   DepthWrite: true
   DepthTest: true
   DepthFunction: LessEqual
@@ -26,10 +20,10 @@
   Defines:
     - ENABLE_BASE_TEX
     - NODE_13_DROPLIST_ITEM 0
+    - NODE_27_DROPLIST_ITEM 0
     - NODE_49_DROPLIST_ITEM 0
     - NODE_69_DROPLIST_ITEM 0
-    - NODE_27_DROPLIST_ITEM 0
-  BlendMode: AlphaTest
+  BlendMode: PremultipliedAlphaAuto
   Properties:
     Port_Default_N204:
       typeIdx: 1
@@ -37,16 +31,13 @@
     PreviewEnabled:
       typeIdx: 0
       value: 0
-    alphaTestThreshold:
-      typeIdx: 1
-      value: 0.500000
     baseColor:
       typeIdx: 5
       value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     baseTex:
       typeIdx: 9
       value:
-        id: 3c28b317-810e-4c42-8c54-4a4ddb38fc0f
+        id: 2567d848-fa07-45ef-b9c1-38107939affb
         sampler:
           filteringMode: Trilinear
           wrapModeU: Repeat

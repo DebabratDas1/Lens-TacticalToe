@@ -1,0 +1,49 @@
+- !<AssetImportMetadata/aa67e524-87e8-44e4-9638-9ea9ba78d11e>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> a4c5ebac-2da4-4705-b321-3980b3306792
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> a4c5ebac-2da4-4705-b321-3980b3306792
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> b5864594-fb68-45c3-bc37-4980faf5b10b
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/b5864594-fb68-45c3-bc37-4980faf5b10b>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: aadd3950-f1ee-4bb8-81f3-bbfe221ef86b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    gridParent: false
+    spawnParent: false
+    turnBased: false
+    xo: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - turnBased: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      xo: !<reference.ObjectPrefab[]>
+        []
+      spawnParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      gridParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}

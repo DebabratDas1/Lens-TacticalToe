@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/efe80251-3ba0-4eea-b26e-7350d413ada8>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> df07df76-a345-4ef2-9904-d6d39911ed63
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> df07df76-a345-4ef2-9904-d6d39911ed63
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> eea1eec4-6bfd-4217-85a9-15d262eeb38c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/eea1eec4-6bfd-4217-85a9-15d262eeb38c>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: c57d14fc-5050-401d-b18d-5ba35bf5e99b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    juiceAnim: false
+    tweenObject: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - juiceAnim: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
