@@ -1,6 +1,6 @@
 // Cell.js
 // @input int cellIndex
-
+//@input Component.ScriptComponent controller
 
 
 // Enum
@@ -25,6 +25,9 @@ function onTouchEnd(eventData) {
 
     print("Clicked cell index " + script.cellIndex);
     print("Cell Type : "+ script.cellType);
+    print(script.getSceneObject().getComponent("Component.ScreenTransform").anchors.getCenter())
+
+    script.controller.gridTapped(script.cellIndex)
 }
 
 script.createEvent("TouchEndEvent").bind(onTouchEnd);
