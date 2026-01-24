@@ -24,7 +24,7 @@
     []
   Name: Image
   Enabled: true
-  RenderOrder: 3
+  RenderOrder: 0
   StretchMode: Fit
   VerticalAlignment: Center
   HorizontalAlignment: Center
@@ -157,6 +157,16 @@
   ScriptTypes:
     "":
       {}
+- !<InteractionComponent/54b1a981-20be-48d9-bf3e-193b51b36061>
+  PrefabRemaps:
+    []
+  Name: Interaction
+  Enabled: true
+  Camera: !<reference> 00000000-0000-0000-0000-000000000000
+  MinimumTouchSize: 0.000000
+  DepthFilter: true
+  MeshVisuals:
+    []
 - !<ScriptComponent/6dc9d783-9676-486f-4856-ad9fcda5f237>
   PrefabRemaps:
     []
@@ -224,13 +234,14 @@
     - !<own> 1e39be12-e534-4fb1-699d-683f837cfb64
     - !<own> 428cb2a4-fccd-4bd0-4830-81c6594a4715
     - !<own> f40ed767-6132-4322-6d6a-211921e4b28b
+    - !<own> 54b1a981-20be-48d9-bf3e-193b51b36061
     - !<own> 6dc9d783-9676-486f-4856-ad9fcda5f237
 - !<Image/d471e224-b6a0-409f-5f9f-28024d2ad430>
   PrefabRemaps:
     []
   Name: Image
   Enabled: true
-  RenderOrder: 3
+  RenderOrder: 0
   StretchMode: Fill
   VerticalAlignment: Center
   HorizontalAlignment: Center

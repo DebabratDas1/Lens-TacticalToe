@@ -1,6 +1,7 @@
 // Cell.js
 // @input int cellIndex
 //@input Component.ScriptComponent controller
+//@input Component.ScriptComponent tweenAlpha
 
 
 // Enum
@@ -31,6 +32,30 @@ function onTouchEnd(eventData) {
 }
 
 script.createEvent("TouchEndEvent").bind(onTouchEnd);
+
+
+function highlight(willActive){
+    print("Cell " + script.cellIndex + " highlight(" + willActive + ")");
+
+
+    if(willActive){
+        global.tweenManager.startTween(script.getSceneObject(), 'TestAlpha')
+
+    }
+    else{
+        global.tweenManager.stopTween(script.getSceneObject(), 'TestAlpha');
+
+    }
+    print("  tweenAlpha.enabled = " + script.tweenAlpha.enabled);
+    /*if (script.tweenAlpha) {
+        script.tweenAlpha.enabled = willActive;
+        print("  tweenAlpha.enabled = " + script.tweenAlpha.enabled);
+    } else {
+        print("  tweenAlpha not set on this cell");
+    }*/
+}
+
+script.highlight = highlight
 
 
 

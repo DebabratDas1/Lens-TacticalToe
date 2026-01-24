@@ -26,6 +26,7 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    cells: false
     gridParent: false
     spawnParent: false
     turnBased: false
@@ -40,6 +41,8 @@
     []
   DefaultScriptInputs:
     - turnBased: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      cells: !<reference.ScriptComponent[]>
+        []
       userCard: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       spawnParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       gridParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000

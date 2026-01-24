@@ -1,5 +1,7 @@
 //BoardController.js
 //@input Component.ScriptComponent turnBased
+//@input Component.ScriptComponent[] cells
+
 
 //@input Asset.ObjectPrefab userCard
 // @input SceneObject spawnParent
@@ -11,6 +13,7 @@ var currentTurn
 var positions = []
 var xoArray = []
 var grid = []
+var cell = []
 
 
 getPositionGrid()
@@ -28,11 +31,36 @@ function turnStarted(){
     getPlayers()
     getCurrentTurn()
     getGrid()
+    highlightAllCells(false)
 
 }
 
-script.turnBased.onTurnStart.add(turnStarted)
+script.turnBased.onTurnStart.add(function (evt) {
+        print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
+        turnStarted(); // your existing function
+    });
 
+/*function setupTurnBasedEvents() {
+    if (!script.turnBased || !script.turnBased.api) {
+        print("BoardController: turnBased.api not set");
+        return;
+    }
+
+    // Fires when a turn actually starts (for user 0 or 1)
+    script.turnBased.api.onTurnStart.add(function (evt) {
+        print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
+        turnStarted(); // your existing function
+    });
+
+    // Logs INCOMPLETE_TURN_DATA_SENT / RECEIVED
+    script.turnBased.api.onError.add(function (evt) {
+        print("TurnBased ERROR: " + evt.code + " - " + evt.description);
+    });
+}
+
+// Run once on awake
+script.createEvent("OnAwakeEvent").bind(setupTurnBasedEvents);
+*/
 
 async function getPlayers(){
     currentPlayer = await script.turnBased.getCurrentUserIndex()
@@ -54,11 +82,11 @@ async function getGrid(){
         grid = [
         global.CellType.None,
         global.CellType.None,
-        global.CellType.User1,
         global.CellType.None,
-        global.CellType.User1,
         global.CellType.None,
-        global.CellType.User2,
+        global.CellType.None,
+        global.CellType.None,
+        global.CellType.None,
         global.CellType.None,
         global.CellType.None,
 
@@ -103,7 +131,7 @@ function clearArray(){
     xoArray = []
 }
 
-
+var hasMovedThisTurn = false;
 function gridTapped(gridIndex){
     print("gridIndex : "+gridIndex)
 
@@ -113,6 +141,9 @@ function gridTapped(gridIndex){
 
 
     grid[gridIndex] = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
+
+    
+    hasMovedThisTurn = true;
 
     populateGrid()
 
@@ -138,7 +169,7 @@ function gridTapped(gridIndex){
         }
     }*/
 
-    script.turnBased.endTurn()
+    //script.turnBased.endTurn()
 
 
 }
@@ -172,4 +203,39 @@ return cardComponent;
 
 
 
-// NEED to remove Tween from Card Prefab, to position properly
+function endTurnSafely() {
+    if (!hasMovedThisTurn) {
+        print("Tried to end turn with no move");
+        return;
+    }
+
+    hasMovedThisTurn = false;
+    script.turnBased.endTurn();
+}
+
+// Expose via api so other scripts can call it
+script.endTurnSafely = endTurnSafely;
+
+/*script.turnBased.onTurnStart.add(function (evt) {
+        print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
+        turnStarted(); // your existing function
+    });*/
+
+
+function highlightCell(cellIndex, willHighlight){
+    script.cells[cellIndex].highlight(willHighlight);
+}
+
+function highlightAllCells(willHighlight){
+    print("highlightAllCells called, value = " + willHighlight);
+    for (var i = 0 ; i < script.cells.length; i++){
+        var cellScript = script.cells[i];
+        print("cell[" + i + "] script = " + cellScript);
+        if (cellScript && cellScript.highlight) {
+            print(" -> calling highlight on cell " + i);
+            cellScript.highlight(willHighlight);
+        } else {
+            print(" -> NO highlight() on cell " + i);
+        }
+    }
+}

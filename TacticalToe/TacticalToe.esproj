@@ -13,7 +13,7 @@ metaInfo:
     []
   tags:
     []
-  lensName: Untitled
+  lensName: Tactical Toe
   lensDescriptors:
     []
   lensApplicability:
@@ -22,9 +22,10 @@ metaInfo:
   lensClientCompatibilities:
     - Mobile
     - Web
+    - CameraKit
   platformBundlesEnabled: false
   iconHash: ""
-  videoPreviewHash: ""
+  videoPreviewHash: 48a18af31ca9dce48ffe2a9e407f68b6
   fromTemplateName: Default
   fromTemplateUrl: Lens Studio 5.17.0.25121001
   activationCamera: Front

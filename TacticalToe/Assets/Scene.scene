@@ -12,9 +12,14 @@
     - !<own> 60f96bff-3360-4a21-8da4-2c2df8c34e86
     - !<own> 128ac451-d39d-4666-8603-bab1cb274359
     - !<own> 2bf1fad2-2e59-42f8-ac25-926edd05b24b
+    - !<own> 2a737685-11f0-4fa7-b359-1da5a36a11b8
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
-      []
+      - |
+        id: 7
+        name: Layer 1
+        color: 0
+
     HasOrtho: true
   RenderOutput: !<reference> 923415f5-4245-4675-ade1-6d69d6d23e71
   RenderPreviewOutput: !<reference> 923415f5-4245-4675-ade1-6d69d6d23e71
@@ -202,25 +207,10 @@
     "":
       cellIndex: 8
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> 3fc176ef-9936-47e7-92a5-a2e1c0088559
   ScriptTypes:
     "":
       {}
-- !<SceneObject/009ec56f-d68d-4e05-93fc-bf9a2877b0eb>
-  PrefabRemaps:
-    []
-  Name: XO Spawn Parent Screen Region
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 3c68762c-3521-4ca1-9bbe-e1c633f30435
-  Components:
-    - !<own> 9625df0c-87eb-4106-9417-172be26a6ebe
-    - !<own> e117d42b-8469-4d22-9949-bec4cf62d7ad
 - !<SceneObject/033b655a-0078-414e-bbb3-c96591b311d1>
   PrefabRemaps:
     []
@@ -237,19 +227,43 @@
   Components:
     - !<own> 81407eb3-c87b-4354-a7f7-af65860c77c8
     - !<own> 10c552fd-8e01-4de3-a91d-2b39c11b334e
-- !<ScriptComponent/040b959c-7159-4fa4-9ebf-a7a2a95b575a>
+- !<ScriptComponent/0549e31a-7cf6-4ca9-aedc-cd2f8fe4d990>
   PrefabRemaps:
     []
-  Name: Card
+  Name: TweenAlpha
   Enabled: true
-  ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
   ScriptInputsDefault:
-    {}
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
-      turnBasedPlayerInfo: !<reference.ScriptComponent> fb66ba6a-6a5f-4566-a167-38ae8e7afc14
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
   ScriptTypes:
     "":
       {}
@@ -337,7 +351,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> 56d2adac-b33c-4b6f-af42-34b8ce33182f
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -415,6 +429,24 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<SceneObject/0a788b33-a1e9-4a8a-8b67-805fbeb84cd2>
+  PrefabRemaps:
+    []
+  Name: EndTurnButton
+  Enabled: true
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 0c48a267-0727-4b5b-9f49-d139abfc8789
+    - !<own> eaafacc7-1a50-4258-8edb-a308ff07f864
+    - !<own> 994a0550-8547-4b6d-a272-536ac87afbb6
+    - !<own> d0c3c7ab-aca2-4294-9972-81815daf28bc
 - !<SceneObject/0c38c066-71fe-44ab-bf5d-e99ad8c3b153>
   PrefabRemaps:
     []
@@ -430,6 +462,39 @@
     []
   Components:
     - !<own> 38af2cb0-b564-49e9-9758-f545ea40e9ab
+- !<ScreenTransform/0c48a267-0727-4b5b-9f49-d139abfc8789>
+  PrefabRemaps:
+    []
+  Name: Screen Transform
+  Enabled: true
+  IsAdvanced: false
+  Constraints:
+    pinToLeft: false
+    pinToTop: false
+    pinToRight: false
+    pinToBottom: false
+    fixedWidth: false
+    fixedHeight: false
+    deactivatedFixedSprite: false
+    deactivatedFixedPivot: false
+  Pivot: {x: 0.000000, y: 0.000000}
+  Transform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  RawMode: true
+  ForceBasic: true
+  Anchor:
+    left: 0.361768
+    bottom: -0.608456
+    right: 0.909245
+    top: -0.488196
+  Offset:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
 - !<Image/0cf472b9-4f28-418b-885a-74873f200aef>
   PrefabRemaps:
     []
@@ -443,7 +508,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> fcc5dafa-1c5a-41ec-bc2a-3ab39c2d652d
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -479,7 +544,7 @@
   PrefabRemaps:
     []
   Name: Full Frame Region
-  Enabled: true
+  Enabled: false
   Layers: 1048576
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -523,6 +588,7 @@
     "":
       cellIndex: 6
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> c0ab4a00-49fe-4ad2-81ba-326cab726e21
   ScriptTypes:
     "":
       {}
@@ -614,142 +680,89 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<ScriptComponent/166c953b-6ee5-4e0f-92da-fbd766f68bb7>
+- !<Text/16e36b2a-d7ca-4778-a036-ea3736aeeec4>
   PrefabRemaps:
     []
-  Name: Turn Based Player Info
+  Name: Text
   Enabled: true
-  ScriptAsset: !<reference> 8a7bdc69-76bf-461f-853b-ff2dce8f38b3
-  ScriptInputsDefault:
-    bitmoji3DConfigInputs: true
-    useTextDisplay: true
-    textDisplayConfigInputs: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      turnBased: !<reference.ScriptComponent> be14dfba-4dd9-41fa-9f23-63c0c93ecbbc
-      targetUser:
-        type: User1
-      useBitmoji3D: false
-      bitmoji3DConfigInputs:
-        bitmojiComponent: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-        autoLoadBitmoji3D: true
-        hideBitmoji3DIfNotFound: false
-      useBitmojiSticker: true
-      bitmojiStickerConfigInputs:
-        stickerType: StickerID
-        stickerId: ""
-        autoLoad: true
-        applyActionInputs:
-          outputType: Image
-          meshVisual: !<reference.MaterialMeshVisual> 00000000-0000-0000-0000-000000000000
-          image: !<reference.Image> fce06964-5c86-4d7c-87aa-1b6aa36278f3
-          material: !<reference.Material> 00000000-0000-0000-0000-000000000000
-          showAdvancedOptions: false
-          meshVisualCloneType: CloneOnce
-          materialPropertyName: baseTex
-          meshVisualMaterialIndex: 0
-        fallbackSettings:
-          placeholderTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-          loadingTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-          missingUserTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-      useTextDisplay: false
-      textDisplayConfigInputs:
-        fallbackText: ""
-        configurableSetTextInputs:
-          targetType: Text
-          text: !<reference.Text> 00000000-0000-0000-0000-000000000000
-          text3D: !<reference.Text3D> 00000000-0000-0000-0000-000000000000
-  ScriptTypes:
-    "":
-      {}
-- !<ScriptComponent/1699cf5d-c5b7-4611-abe6-25762c0b6734>
-  PrefabRemaps:
-    []
-  Name: TweenScreenTransform
-  Enabled: true
-  ScriptAsset: !<reference> a8572a73-2abe-4a99-8b4e-7f2957ac4ef1
-  ScriptInputsDefault:
-    sceneObjectReference: true
-    playAutomatically: true
-    loopType: true
-    movementType: true
-    anchorsParam: true
-    offsetsParam: true
-    startPosition: true
-    startScale: true
-    startRotation: true
-    startAnchorsSize: true
-    startAnchorsCenter: true
-    startOffsetsBounds: true
-    startOffsetsSize: true
-    startOffsetsCenter: true
-    endPosition: true
-    endScale: true
-    endRotation: true
-    endAnchorsSize: true
-    endAnchorsCenter: true
-    endOffsetsBounds: true
-    endOffsetsSize: true
-    endOffsetsCenter: true
-    additive: true
-    time: true
-    easingType: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: Test_Tween
-      playAutomatically: true
-      loopType: 0
-      type: 3
-      movementType: 0
-      anchorsParam: 0
-      offsetsParam: 0
-      startPosition: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
-      startScale: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
-      startRotation: !<float> 0.000000
-      startAnchorsBounds: !<Vec4> {x: -1.218000, y: 1.322800, z: -0.787500, w: 0.520100}
-      startAnchorsSize: !<Vec2> {x: 1.000000, y: 1.000000}
-      startAnchorsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
-      startOffsetsBounds: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
-      startOffsetsSize: !<Vec2> {x: 1.000000, y: 1.000000}
-      startOffsetsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
-      endPosition: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
-      endScale: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
-      endRotation: !<float> 0.000000
-      endAnchorsBounds: !<Vec4> {x: -0.151300, y: 0.130300, z: 0.010700, w: 0.168100}
-      endAnchorsSize: !<Vec2> {x: 2.000000, y: 2.000000}
-      endAnchorsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
-      endOffsetsBounds: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
-      endOffsetsSize: !<Vec2> {x: 2.000000, y: 2.000000}
-      endOffsetsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
-      additive: false
-      time: !<float> 1.000000
-      delay: 0.250000
-      easingFunction: Quintic
-      easingType: Out
-  ScriptTypes:
-    "":
-      {}
-- !<ScriptComponent/1c77cc9d-e568-4189-8ba7-ef137c387166>
-  PrefabRemaps:
-    []
-  Name: Card
-  Enabled: true
-  ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
-  ScriptInputsDefault:
-    {}
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      turnBasedPlayerInfo: !<reference.ScriptComponent> 5157fdad-45ae-461b-9fbd-fb777dc5a749
-  ScriptTypes:
-    "":
-      {}
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Text: BLOOM
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 125.000000
+  Font: !<reference> 00000000-0000-0000-0000-000000000000
+  FontWeight: 400
+  Italic: false
+  LayoutRect:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.250000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: -0.100000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<InteractionComponent/1d69e2b8-7fcf-436b-a0a3-5b23bbadee15>
   PrefabRemaps:
     []
@@ -768,12 +781,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 3
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -904,6 +919,7 @@
     "":
       cellIndex: 5
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> 0549e31a-7cf6-4ca9-aedc-cd2f8fe4d990
   ScriptTypes:
     "":
       {}
@@ -995,39 +1011,6 @@
     - !<own> e345a5ce-1fd6-45c9-bc50-39121cac531e
     - !<own> bf721a17-a391-4115-91db-8f87a42df7ff
     - !<own> 7640f4ba-c74c-41bf-8907-add4a0ae7111
-- !<ScreenTransform/27109309-fb3e-4c12-88d9-679c252f9339>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.000000
-    bottom: -1.000000
-    right: 1.000000
-    top: 1.000000
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
 - !<PostEffectVisual/2714a3bd-51ae-4fc1-bad6-88a81f793624>
   PrefabRemaps:
     []
@@ -1050,6 +1033,7 @@
   ScriptAsset: !<reference> 8a7bdc69-76bf-461f-853b-ff2dce8f38b3
   ScriptInputsDefault:
     bitmoji3DConfigInputs: true
+    useBitmojiSticker: true
     useTextDisplay: true
     textDisplayConfigInputs: true
   ScriptTypesDefault:
@@ -1064,7 +1048,7 @@
         bitmojiComponent: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
         autoLoadBitmoji3D: true
         hideBitmoji3DIfNotFound: false
-      useBitmojiSticker: true
+      useBitmojiSticker: false
       bitmojiStickerConfigInputs:
         stickerType: StickerID
         stickerId: ""
@@ -1141,6 +1125,23 @@
   Components:
     - !<own> d312a5b6-fe7a-4576-bc38-fa2fe7fd4c75
     - !<own> 96f9af8a-12e9-47d6-ba99-156482cf1c85
+- !<SceneObject/2a737685-11f0-4fa7-b359-1da5a36a11b8>
+  PrefabRemaps:
+    []
+  Name: Bloom Camera
+  Enabled: false
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 40.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> cc3fb53d-3ec6-45f5-b334-11aa5265c788
+    - !<own> f703556f-1dfb-4f7e-93ca-4337d6326901
+    - !<own> 635188f5-643a-45c3-b49f-e9b55e395f49
+  Components:
+    - !<own> 37858273-cc9e-47de-935a-b2055764cf3b
 - !<SceneObject/2bf1fad2-2e59-42f8-ac25-926edd05b24b>
   PrefabRemaps:
     []
@@ -1205,91 +1206,36 @@
   DepthFilter: true
   MeshVisuals:
     []
-- !<ScreenTransform/2d918eb8-e398-4a99-8b4c-c5e0d9a225ec>
+- !<SceneObject/2efa56ff-9594-46ff-bdc9-734945c8f68a>
   PrefabRemaps:
     []
-  Name: Screen Transform
+  Name: Title
   Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -0.525500
-    bottom: 0.190433
-    right: -0.243950
-    top: 0.358268
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
-- !<ScreenTransform/2eb14fd6-6d69-456d-b2e7-70f30b8bcc4a>
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.249190, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> c18a0075-e0db-4c42-af96-c7c8d5ab63a1
+- !<SceneObject/2fb1e315-9e0c-46d6-89c0-abc5c10f9f37>
   PrefabRemaps:
     []
-  Name: Screen Transform
+  Name: Delete Description
   Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.104243, y: 0.399212}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.015536
-    bottom: -0.878119
-    right: 1.010203
-    top: 0.958111
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
-- !<Image/2f68a14e-7d9f-4ae5-8600-29ce251bddb5>
-  PrefabRemaps:
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: -0.393760, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
     []
-  Name: Image
-  Enabled: true
-  RenderOrder: 3
-  StretchMode: Fit
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 48347c69-bfa9-49c0-93f8-45dcc90b72dd
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+  Components:
+    - !<own> 8efe1061-fcc9-41af-a810-b63f4a3a80d3
 - !<ScriptComponent/32810655-df33-425b-92d3-408dabf22134>
   PrefabRemaps:
     []
@@ -1304,6 +1250,7 @@
     "":
       cellIndex: 1
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> d98b2e22-c723-413f-a228-25f28c03eeb5
   ScriptTypes:
     "":
       {}
@@ -1324,6 +1271,26 @@
   ScriptTypes:
     "":
       {}
+- !<RenderMeshVisual/33d6740c-e770-408d-9558-e963a9ec7a48>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> a1c5dc5c-70ea-424d-b9c1-84f480c2bcc2
+  Mesh: !<reference> 59a3fc70-417b-48f9-81e7-ea7f6fe680fc
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<Image/34505b54-05e2-4f0d-baf0-54e096fee8c6>
   PrefabRemaps:
     []
@@ -1338,6 +1305,56 @@
   ShadowDensity: 1.000000
   Materials:
     - !<reference> 6446c253-f25b-43e5-9089-bee29449b70a
+  FlipX: false
+  FlipY: false
+  RotationAngle: 0
+  Pivot: {x: 0.000000, y: 0.000000}
+  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<Camera/37858273-cc9e-47de-935a-b2055764cf3b>
+  PrefabRemaps:
+    []
+  Name: Camera
+  Enabled: true
+  renderLayer: 128
+  MipmapLevel: 0
+  RenderOrder: 1
+  Size: 20.000000
+  Near: 1.000000
+  Far: 1000.000000
+  Fov: 60.000004
+  ClearColor: !<CameraClearColor>
+    Mode: None
+    Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+    InputTexture: !<reference> 00000000-0000-0000-0000-000000000000
+  ClearDepth: !<CameraClearDepth>
+    Mode: Value
+    Value: 1.000000
+    InputTexture: !<reference> 00000000-0000-0000-0000-000000000000
+  Aspect: 1.000000
+  CameraType: Perspective
+  DepthMode: Regular
+  DeviceProperty: All
+  AspectPreset: Custom
+  OitLayers: NoOit
+  RenderTarget: !<reference> 17c6c840-1e05-4b9d-8bc6-5559ae1ba9a0
+  DepthStencilRenderTarget: !<reference> 00000000-0000-0000-0000-000000000000
+  MaskTexture: !<reference> 00000000-0000-0000-0000-000000000000
+  RayTracing: !<reference> 00000000-0000-0000-0000-000000000000
+  DevicePropertiesSource: !<reference> 00000000-0000-0000-0000-000000000000
+- !<Image/38071aa8-b5ac-4076-8165-44ec55085b0d>
+  PrefabRemaps:
+    []
+  Name: Image
+  Enabled: true
+  RenderOrder: 4
+  StretchMode: Fit
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 5fb9ff87-058d-4fb0-bf8d-e28a11895935
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -1424,7 +1441,6 @@
   Children:
     - !<own> 9a6a7d45-b54d-4d10-b54a-ed1cccc54435
     - !<own> 0d356966-7cb9-4354-a038-e142fcddc9a3
-    - !<own> fe05bd42-33ef-472c-8bc7-352c65160a11
   Components:
     - !<own> efcb6ffd-89d4-4a0f-a564-aaddea5f65bb
     - !<own> 8ec3dbd6-1097-42d8-be5a-bf5f13ef159f
@@ -1436,12 +1452,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 6
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -1464,31 +1482,6 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<SceneObject/3c68762c-3521-4ca1-9bbe-e1c633f30435>
-  PrefabRemaps:
-    - 040b959c-7159-4fa4-9ebf-a7a2a95b575a: 5f66dd4b-3959-4542-7e2e-58f3dff5a847
-    - 2eb14fd6-6d69-456d-b2e7-70f30b8bcc4a: 9a4ae316-fdc1-46ce-4488-6391f7a8c071
-    - 3c68762c-3521-4ca1-9bbe-e1c633f30435: 66e9333c-fd24-44fa-77ad-6953a734f6e0
-    - 46edad7e-cae1-442d-81bd-775e42600507: 9d26dc4e-78f8-4f43-480a-6cd18f9ae97b
-    - 6ab0e3d4-561c-46b1-9a89-baae1b2676b1: 88350d4d-e1d6-46ac-7f59-fc15505e8283
-    - 92a21e23-bb0a-4add-a95c-5135156978be: 0c4147e5-b479-482e-48ad-a3886ae24d58
-    - 9682d404-a2bf-47ad-adff-6a2a4bb5a5a7: 474b79ff-5499-49db-72d8-ccba8a0cab34
-    - dddb1206-5314-4a98-8285-c4ef0c6799f6: a5d2fdf4-2351-4478-5f6b-b9fa36f575ff
-  Name: B_1_CardPrefab
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 6ab0e3d4-561c-46b1-9a89-baae1b2676b1
-  Components:
-    - !<own> 9682d404-a2bf-47ad-adff-6a2a4bb5a5a7
-    - !<own> 92a21e23-bb0a-4add-a95c-5135156978be
-    - !<own> 040b959c-7159-4fa4-9ebf-a7a2a95b575a
-    - !<own> 46edad7e-cae1-442d-81bd-775e42600507
 - !<ScreenTransform/3d0a601a-c6a5-47c4-84ce-14bb94056ff0>
   PrefabRemaps:
     []
@@ -1585,6 +1578,47 @@
     - !<own> 53946d96-558c-4c1d-a492-2f7a16d17070
     - !<own> 65460e73-4868-443b-913e-30ffee06c0ff
     - !<own> a3b5c107-876e-4a11-abfd-962edb05f209
+    - !<own> cb43a793-d6ec-4bdf-b8dc-6bf25a8c83c5
+- !<ScriptComponent/3fc176ef-9936-47e7-92a5-a2e1c0088559>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScreenTransform/4268ade4-e312-4c46-93f4-54c5e1986e3c>
   PrefabRemaps:
     []
@@ -1643,12 +1677,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 7
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -1660,12 +1696,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 5
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -1720,16 +1758,7 @@
     - !<own> b0a15f63-0d01-4eeb-bfbd-7661d00ff427
     - !<own> 4ddaa588-73aa-4f19-b4c7-2e42b4e1769c
     - !<own> 513a3184-b200-40a6-b21a-d491cc991422
-- !<InteractionComponent/46edad7e-cae1-442d-81bd-775e42600507>
-  PrefabRemaps:
-    []
-  Name: Interaction
-  Enabled: true
-  Camera: !<reference> 00000000-0000-0000-0000-000000000000
-  MinimumTouchSize: 0.000000
-  DepthFilter: true
-  MeshVisuals:
-    []
+    - !<own> f217f6d9-0f6a-4425-8448-a34ce038852a
 - !<ScreenTransform/47f1ed70-5891-4da0-a51e-45e26cf3deff>
   PrefabRemaps:
     []
@@ -1776,6 +1805,37 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   VFXAsset: !<reference> 2e48adfa-ec86-4cdf-a6b0-42eb61e8823d
+- !<SceneObject/48a5ed2c-b946-42e9-a1c6-107efd1ff852>
+  PrefabRemaps:
+    []
+  Name: "Bloom Text [SET_TO_BLOOM_CAMERA_LAYER]"
+  Enabled: true
+  Layers: 128
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 85e36d74-ed23-46e1-bbb1-184d810eec46
+- !<SceneObject/4930b639-dbf8-4153-a16c-792c54a86ece>
+  PrefabRemaps:
+    []
+  Name: UI
+  Enabled: true
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 0a788b33-a1e9-4a8a-8b67-805fbeb84cd2
+  Components:
+    - !<own> f1b183e8-0ddc-4f7d-9d15-3b977ff0a411
+    - !<own> f8471739-673f-42db-8c35-4051a5cef6b6
 - !<SceneObject/493ef583-c919-4d80-87d0-d5b68c10aae5>
   PrefabRemaps:
     []
@@ -1862,39 +1922,6 @@
   Components:
     - !<own> 26235f72-ddfc-4a3c-948d-20a2ef66f83c
     - !<own> 34505b54-05e2-4f0d-baf0-54e096fee8c6
-- !<ScreenTransform/50f42e73-5715-4631-a416-512f314bd9fd>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.306811, y: -0.658092}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -0.151259
-    bottom: 0.010749
-    right: 0.130330
-    top: 0.168076
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
 - !<ScriptComponent/513a3184-b200-40a6-b21a-d491cc991422>
   PrefabRemaps:
     []
@@ -1909,56 +1936,7 @@
     "":
       cellIndex: 0
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
-  ScriptTypes:
-    "":
-      {}
-- !<ScriptComponent/5157fdad-45ae-461b-9fbd-fb777dc5a749>
-  PrefabRemaps:
-    []
-  Name: Turn Based Player Info
-  Enabled: true
-  ScriptAsset: !<reference> 8a7bdc69-76bf-461f-853b-ff2dce8f38b3
-  ScriptInputsDefault:
-    bitmoji3DConfigInputs: true
-    useTextDisplay: true
-    textDisplayConfigInputs: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      turnBased: !<reference.ScriptComponent> be14dfba-4dd9-41fa-9f23-63c0c93ecbbc
-      targetUser:
-        type: User1
-      useBitmoji3D: false
-      bitmoji3DConfigInputs:
-        bitmojiComponent: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-        autoLoadBitmoji3D: true
-        hideBitmoji3DIfNotFound: false
-      useBitmojiSticker: true
-      bitmojiStickerConfigInputs:
-        stickerType: StickerID
-        stickerId: ""
-        autoLoad: true
-        applyActionInputs:
-          outputType: Image
-          meshVisual: !<reference.MaterialMeshVisual> 00000000-0000-0000-0000-000000000000
-          image: !<reference.Image> 64998043-06fd-4999-afce-178f58679038
-          material: !<reference.Material> 00000000-0000-0000-0000-000000000000
-          showAdvancedOptions: false
-          meshVisualCloneType: CloneOnce
-          materialPropertyName: baseTex
-          meshVisualMaterialIndex: 0
-        fallbackSettings:
-          placeholderTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-          loadingTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-          missingUserTexture: !<reference.Texture> 4bb337af-cf9a-4ab7-b7ad-7796e3e97a14
-      useTextDisplay: false
-      textDisplayConfigInputs:
-        fallbackText: ""
-        configurableSetTextInputs:
-          targetType: Text
-          text: !<reference.Text> 00000000-0000-0000-0000-000000000000
-          text3D: !<reference.Text3D> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> f217f6d9-0f6a-4425-8448-a34ce038852a
   ScriptTypes:
     "":
       {}
@@ -1992,7 +1970,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> 29707127-069d-4c10-a208-e6c6bbde55ea
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -2012,25 +1990,6 @@
   ShadowDensity: 1.000000
   Materials:
     - !<reference> 02bd4bbb-e8b8-4b24-8be3-3ac64b716478
-- !<Image/55c88b80-d27e-4bd5-a54a-7983955c40ec>
-  PrefabRemaps:
-    []
-  Name: Image
-  Enabled: true
-  RenderOrder: 3
-  StretchMode: Fit
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 48347c69-bfa9-49c0-93f8-45dcc90b72dd
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
 - !<Image/5742f620-8538-48aa-ace7-112f26237caa>
   PrefabRemaps:
     []
@@ -2118,22 +2077,6 @@
   Components:
     - !<own> c152bbfd-d5d1-4031-8942-ae4631ffb131
     - !<own> 3dc31113-2332-4d6d-8bc7-0b078804c137
-- !<ScriptComponent/5ad14393-0148-4e3c-bf96-849129b072b7>
-  PrefabRemaps:
-    []
-  Name: Card
-  Enabled: true
-  ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
-  ScriptInputsDefault:
-    {}
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      turnBasedPlayerInfo: !<reference.ScriptComponent> 166c953b-6ee5-4e0f-92da-fbd766f68bb7
-  ScriptTypes:
-    "":
-      {}
 - !<Image/5d923aac-536c-4f7d-ad29-1dc03795877c>
   PrefabRemaps:
     []
@@ -2171,6 +2114,7 @@
     - !<own> 0cf472b9-4f28-418b-885a-74873f200aef
     - !<own> fc14ae44-991e-47db-8ee3-66f3bd4a5b1c
     - !<own> 6b339d43-d4f3-4678-812b-5b2adcf653fa
+    - !<own> e41d7e13-aba6-4ba4-9f89-cc2cd4fb7c84
 - !<ScreenTransform/6066f7f5-74e5-47e8-9461-4e2f7cdb7d2a>
   PrefabRemaps:
     []
@@ -2204,6 +2148,46 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
+- !<ScriptComponent/60b57efe-6ed3-4c41-92ca-c3de42b27289>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/60f96bff-3360-4a21-8da4-2c2df8c34e86>
   PrefabRemaps:
     []
@@ -2235,25 +2219,23 @@
     []
   Components:
     - !<own> 940263c4-edc4-4b56-8ce1-eaf437f87f12
-- !<Image/64998043-06fd-4999-afce-178f58679038>
+- !<SceneObject/635188f5-643a-45c3-b49f-e9b55e395f49>
   PrefabRemaps:
     []
-  Name: Image
+  Name: "Info Card [DELETE_ME]"
   Enabled: true
-  RenderOrder: 3
-  StretchMode: Fill
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 7f5be622-05eb-431a-a4bc-0a2c1d77d305
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -39.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 25.742777, y: 25.742777, z: 25.742777}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 2efa56ff-9594-46ff-bdc9-734945c8f68a
+    - !<own> f7ae6616-c6c9-41ec-8a85-5cb255395fa8
+    - !<own> 2fb1e315-9e0c-46d6-89c0-abc5c10f9f37
+  Components:
+    - !<own> 38071aa8-b5ac-4076-8165-44ec55085b0d
 - !<InteractionComponent/65460e73-4868-443b-913e-30ffee06c0ff>
   PrefabRemaps:
     []
@@ -2264,6 +2246,21 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<SceneObject/65cae666-b9a2-4336-8a63-bf3c6d0c456d>
+  PrefabRemaps:
+    []
+  Name: "Torus 2 [SET_TO_BLOOM_CAMERA_LAYER"
+  Enabled: true
+  Layers: 128
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 33d6740c-e770-408d-9558-e963a9ec7a48
 - !<AudioListenerComponent/67154c8e-d7f6-441f-93c9-df86fb55ccf8>
   PrefabRemaps:
     []
@@ -2283,6 +2280,7 @@
     "":
       cellIndex: 2
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> 60b57efe-6ed3-4c41-92ca-c3de42b27289
   ScriptTypes:
     "":
       {}
@@ -2303,22 +2301,6 @@
     - !<own> 97428190-c047-4848-8c68-1b8b83b53a6b
     - !<own> 005ef8ee-9558-4ed7-ad3e-563948555ad9
     - !<own> 3a487b9c-f358-46e4-b530-91964254f5fc
-- !<SceneObject/6ab0e3d4-561c-46b1-9a89-baae1b2676b1>
-  PrefabRemaps:
-    []
-  Name: Avatar
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 2eb14fd6-6d69-456d-b2e7-70f30b8bcc4a
-    - !<own> dddb1206-5314-4a98-8285-c4ef0c6799f6
 - !<SceneObject/6abdf945-8c8f-4e2c-ad34-8a7ca647c6bc>
   PrefabRemaps:
     []
@@ -2400,6 +2382,7 @@
     "":
       cellIndex: 7
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> e41d7e13-aba6-4ba4-9f89-cc2cd4fb7c84
   ScriptTypes:
     "":
       {}
@@ -2593,22 +2576,6 @@
     - !<own> cd27129d-edd4-4310-9e40-2c094a066495
     - !<own> 095ce870-1d11-40aa-952e-abca5595b5cc
     - !<own> d9b8e9f9-f195-4337-a741-3348b65ad27e
-- !<SceneObject/75c6eca6-e84f-4c6b-a416-a98f65a387d3>
-  PrefabRemaps:
-    []
-  Name: Avatar
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> f55774a2-e5b2-408c-b22b-13ec3dbc4345
-    - !<own> fce06964-5c86-4d7c-87aa-1b6aa36278f3
 - !<ScreenTransform/75e6b50c-294d-4693-8fa6-b3234a5dbe01>
   PrefabRemaps:
     []
@@ -2650,12 +2617,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 8
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -2710,22 +2679,6 @@
   Components:
     - !<own> 8159c82e-9c38-441a-b1c8-8dcbcec6def1
     - !<own> 74271735-992f-484d-a84b-25fd9bc69215
-- !<SceneObject/7ce1f9d2-30eb-446e-818c-9995e61aa63b>
-  PrefabRemaps:
-    []
-  Name: Avatar
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> cc47dd98-121e-4b7a-b3f8-fc5c6b47c477
-    - !<own> 9c7e3c64-709d-4d9c-865c-7c826e21ce06
 - !<SceneObject/7d1d518b-7ca7-4b28-8b52-3f6bfa4ec484>
   PrefabRemaps:
     []
@@ -2822,6 +2775,7 @@
     - !<own> 082bef76-c336-4221-9df4-399e6a2c795f
     - !<own> ae6a94e5-5954-4ca1-ae99-7415bcd8a317
     - !<own> 24cff27b-5aa1-4f1c-93b9-a613c55e7469
+    - !<own> 0549e31a-7cf6-4ca9-aedc-cd2f8fe4d990
 - !<ScriptComponent/84700b82-48e3-4375-9a80-c7f598540868>
   PrefabRemaps:
     []
@@ -2831,12 +2785,14 @@
   ScriptInputsDefault:
     cellIndex: true
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 0
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -2859,6 +2815,89 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<Text/85e36d74-ed23-46e1-bbb1-184d810eec46>
+  PrefabRemaps:
+    []
+  Name: Text
+  Enabled: true
+  RenderOrder: 1
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Text: BLOOM
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 125.000000
+  Font: !<reference> 00000000-0000-0000-0000-000000000000
+  FontWeight: 400
+  Italic: false
+  LayoutRect:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 0.095842, y: 0.763714, z: 0.998215, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.250000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: -0.100000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<ColliderComponent/8778991a-2dfb-41b8-a434-8f36df898346>
   PrefabRemaps:
     []
@@ -2877,40 +2916,6 @@
   ForceCompound: false
   Intangible: false
   ShowCollider: false
-- !<SceneObject/87e07619-5d73-4a9c-887e-201d065a954e>
-  PrefabRemaps:
-    []
-  Name: TestCardTween
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 7ce1f9d2-30eb-446e-818c-9995e61aa63b
-  Components:
-    - !<own> 50f42e73-5715-4631-a416-512f314bd9fd
-    - !<own> 2f68a14e-7d9f-4ae5-8600-29ce251bddb5
-    - !<own> 1699cf5d-c5b7-4611-abe6-25762c0b6734
-    - !<own> f6767df2-129d-4170-8d92-51847cbcc6e1
-- !<SceneObject/88d16867-4fd4-44d0-881d-7a3a26d9ff7f>
-  PrefabRemaps:
-    []
-  Name: Avatar
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 8b715926-78d2-4044-a2fd-59b994a05a16
-    - !<own> 64998043-06fd-4999-afce-178f58679038
 - !<InteractionComponent/89ae30f3-4bbe-4196-b491-2599a7af2e2e>
   PrefabRemaps:
     []
@@ -2921,39 +2926,6 @@
   DepthFilter: true
   MeshVisuals:
     []
-- !<ScreenTransform/8b715926-78d2-4044-a2fd-59b994a05a16>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.104243, y: 0.399212}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.015536
-    bottom: -0.878119
-    right: 1.010203
-    top: 0.958111
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
 - !<Image/8e8b1a7e-387c-4dc1-980e-29a42f33dd72>
   PrefabRemaps:
     []
@@ -2980,25 +2952,89 @@
   Enabled: true
   ScreenRegionType: FullFrame
   ResizeWithKeyboard: false
-- !<Image/92a21e23-bb0a-4add-a95c-5135156978be>
+- !<Text/8efe1061-fcc9-41af-a810-b63f4a3a80d3>
   PrefabRemaps:
     []
-  Name: Image
+  Name: Text
   Enabled: true
-  RenderOrder: 0
-  StretchMode: Fit
-  VerticalAlignment: Center
+  RenderOrder: 7
+  StretchMode: Stretch
+  VerticalAlignment: Top
   HorizontalAlignment: Center
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 48347c69-bfa9-49c0-93f8-45dcc90b72dd
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+  Text: 'Make sure to delete the "Info Card [DELETE_ME]" object'
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 2.000000
+  Font: !<reference> 30193a3c-f7db-4e71-9373-f6ce184747cc
+  FontWeight: 700
+  Italic: false
+  LayoutRect:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.000000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: 0.000000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<ScriptComponent/940263c4-edc4-4b56-8ce1-eaf437f87f12>
   PrefabRemaps:
     []
@@ -3086,72 +3122,6 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<ScreenTransform/9625df0c-87eb-4106-9417-172be26a6ebe>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.000000
-    bottom: -1.000000
-    right: 1.000000
-    top: 1.000000
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
-- !<ScreenTransform/9682d404-a2bf-47ad-adff-6a2a4bb5a5a7>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -0.525500
-    bottom: 0.190433
-    right: -0.243950
-    top: 0.358268
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
 - !<ColliderComponent/9696fd65-7155-4d12-8968-9db62fca935f>
   PrefabRemaps:
     []
@@ -3233,6 +3203,7 @@
     - !<own> 9d3595d3-8faa-4a1b-a4de-806fb7facdeb
     - !<own> 1d69e2b8-7fcf-436b-a0a3-5b23bbadee15
     - !<own> 0ea7644a-2935-438d-934e-6517d4a3f61c
+    - !<own> c0ab4a00-49fe-4ad2-81ba-326cab726e21
 - !<ColliderComponent/986cf617-3a34-4c9f-b63a-3d5b2b890991>
   PrefabRemaps:
     []
@@ -3251,6 +3222,22 @@
   ForceCompound: false
   Intangible: false
   ShowCollider: false
+- !<ScriptComponent/994a0550-8547-4b6d-a272-536ac87afbb6>
+  PrefabRemaps:
+    []
+  Name: EndTurnButton
+  Enabled: true
+  ScriptAsset: !<reference> 4bdafa6f-1ead-4227-a3ff-d81be11bdd26
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      boardController: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/9a6a7d45-b54d-4d10-b54a-ed1cccc54435>
   PrefabRemaps:
     []
@@ -3267,25 +3254,6 @@
   Components:
     - !<own> 6aed4fbf-b9db-4691-85b2-6ba765a098fb
     - !<own> d89b0a8b-cd10-43ea-9db9-b81c216cce04
-- !<Image/9c7e3c64-709d-4d9c-865c-7c826e21ce06>
-  PrefabRemaps:
-    []
-  Name: Image
-  Enabled: true
-  RenderOrder: 3
-  StretchMode: Fill
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 7f5be622-05eb-431a-a4bc-0a2c1d77d305
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
 - !<ColliderComponent/9c98db2a-26d0-4161-8764-0a723a30d8a6>
   PrefabRemaps:
     []
@@ -3317,7 +3285,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> f66cc8f3-6439-4161-b8be-3c464aa64366
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -3379,6 +3347,7 @@
     "":
       cellIndex: 4
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> cb43a793-d6ec-4bdf-b8dc-6bf25a8c83c5
   ScriptTypes:
     "":
       {}
@@ -3395,7 +3364,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> 6fa415a1-a419-47fb-98d3-f9d8cd38d282
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -3443,7 +3412,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> bd0ac32a-771c-495f-95b2-7b06ac6a1df4
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -3503,7 +3472,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> 94974fae-de6d-4c50-b1e9-ee8f6c06f2f7
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -3536,12 +3505,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 2
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -3553,15 +3524,31 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 1
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
+- !<PostEffectVisual/b2aec388-f49f-4387-8420-591199678a2d>
+  PrefabRemaps:
+    []
+  Name: Post Effect
+  Enabled: true
+  RenderOrder: 3
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 6fb80179-dccf-4644-8516-59c77ad1d257
 - !<AudioComponent/b3862c0d-0ade-4e3f-b901-4d3d57bcb1a4>
   PrefabRemaps:
     []
@@ -3642,7 +3629,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 7d1c6949-79cc-4ef3-b2f7-f0dbad3995e4
+    - !<reference> c20a0ac4-c066-4aa7-8625-f13e8d1e6197
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -3661,8 +3648,6 @@
     turnLimitInput: true
     useTurnHistory: true
     turnsSavedLimitInput: true
-    autoRestoreTurn: true
-    tappableAreasInput: true
     user1FlowObjectsInputSO: true
     user2FlowObjectsInputSO: true
     gameOverObjectsInputSO: true
@@ -3698,9 +3683,26 @@
       turnLimitInput: 2
       useTurnHistory: false
       turnsSavedLimitInput: 0
-      autoRestoreTurn: false
+      autoRestoreTurn: true
       tappableAreasInput:
-        []
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> ed50b777-80fe-4062-817b-2b9db0e1fcb8
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 07837b93-ab09-47cf-90ed-408001dee23f
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 086f40c0-6913-4049-a735-77f84fcbf3b1
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 589b72f2-0227-4202-a716-76a2423b4c0a
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> b97dd1a7-5253-4617-b546-11ebb076f65e
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> e018f4b4-371b-404a-abcc-6d276c894dc5
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 7117a327-4ff6-41fc-9daf-6eb5e00b4dce
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 6066f7f5-74e5-47e8-9461-4e2f7cdb7d2a
+        - key: ""
+          screenTransform: !<reference.ScreenTransform> 4268ade4-e312-4c46-93f4-54c5e1986e3c
       user1FlowObjectsInputSO: !<reference.SceneObject[]>
         []
       user2FlowObjectsInputSO: !<reference.SceneObject[]>
@@ -3774,6 +3776,46 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<ScriptComponent/c0ab4a00-49fe-4ad2-81ba-326cab726e21>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScreenTransform/c152bbfd-d5d1-4031-8942-ae4631ffb131>
   PrefabRemaps:
     []
@@ -3807,6 +3849,89 @@
     bottom: -800.000000
     right: 750.000000
     top: 800.000000
+- !<Text/c18a0075-e0db-4c42-af96-c7c8d5ab63a1>
+  PrefabRemaps:
+    []
+  Name: Text
+  Enabled: true
+  RenderOrder: 5
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Text: Important Note
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 3.000000
+  Font: !<reference> 30193a3c-f7db-4e71-9373-f6ce184747cc
+  FontWeight: 700
+  Italic: false
+  LayoutRect:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.250000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: -0.040000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<SceneObject/c19fe363-511b-4b64-9969-841c90d204c2>
   PrefabRemaps:
     []
@@ -3841,6 +3966,7 @@
     - !<own> adf30baf-46ea-4bbc-af04-5a7650ccbd50
     - !<own> a26ab016-0d9b-451c-adbd-a286c1f5109e
     - !<own> 67a81bfb-c29b-4209-8cab-2dc17326c2ba
+    - !<own> 60b57efe-6ed3-4c41-92ca-c3de42b27289
 - !<Image/c6b63207-1e1e-43e7-aeb5-15df63b9d44b>
   PrefabRemaps:
     []
@@ -3892,6 +4018,46 @@
     []
   Components:
     - !<own> dc43c2e4-5d14-4844-b4a0-9b676dbc9b1b
+- !<ScriptComponent/c91a0b88-4539-4b68-9fbb-9ea226aaf963>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/c92deb1d-5079-4ad8-90be-fc67d1cbd802>
   PrefabRemaps:
     []
@@ -3908,39 +4074,62 @@
   Components:
     - !<own> 1ff11624-0d90-4cfb-863e-c79a7a21a045
     - !<own> d7d3fb19-5236-40ac-bbef-d58954dcf814
-- !<ScreenTransform/cc47dd98-121e-4b7a-b3f8-fc5c6b47c477>
+- !<ScriptComponent/cb43a793-d6ec-4bdf-b8dc-6bf25a8c83c5>
   PrefabRemaps:
     []
-  Name: Screen Transform
+  Name: TweenAlpha
   Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.104243, y: 0.399212}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.015536
-    bottom: -0.878119
-    right: 1.010203
-    top: 0.958111
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/cc3fb53d-3ec6-45f5-b334-11aa5265c788>
+  PrefabRemaps:
+    []
+  Name: "Example Content [DELETE_ME]"
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -40.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> cdee356b-0e3f-4ab6-a980-bcb41265b6b3
+    - !<own> e436cf8a-2c72-4458-855e-5f58fa41c644
+  Components:
+    []
 - !<Image/cd27129d-edd4-4310-9e40-2c094a066495>
   PrefabRemaps:
     []
@@ -3960,6 +4149,21 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<SceneObject/cdee356b-0e3f-4ab6-a980-bcb41265b6b3>
+  PrefabRemaps:
+    []
+  Name: "Normal Text [SET_TO_DEFAULT_LAYER]"
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 4.295600, y: 4.295600, z: 4.295600}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 48a5ed2c-b946-42e9-a1c6-107efd1ff852
+  Components:
+    - !<own> 16e36b2a-d7ca-4778-a036-ea3736aeeec4
 - !<SceneObject/ceb7442a-9c8d-46f5-9967-f9e99119bd8e>
   PrefabRemaps:
     []
@@ -3977,24 +4181,16 @@
     - !<own> 39dbd8be-7674-4f40-a45c-b6fd4f00b764
     - !<own> 89ae30f3-4bbe-4196-b491-2599a7af2e2e
     - !<own> 1e2c5558-a5d0-4dcf-bb95-682eb6720d64
-- !<SceneObject/cf9a43ad-55c1-4a21-96dc-47258adf53b8>
+- !<InteractionComponent/d0c3c7ab-aca2-4294-9972-81815daf28bc>
   PrefabRemaps:
     []
-  Name: A_1_CardPrefab
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 88d16867-4fd4-44d0-881d-7a3a26d9ff7f
-  Components:
-    - !<own> ebcb8089-d41f-4dcb-8867-3fcc6ac7d8b2
-    - !<own> 55c88b80-d27e-4bd5-a54a-7983955c40ec
-    - !<own> 5157fdad-45ae-461b-9fbd-fb777dc5a749
-    - !<own> 1c77cc9d-e568-4189-8ba7-ef137c387166
+  Name: Interaction
+  Enabled: true
+  Camera: !<reference> 00000000-0000-0000-0000-000000000000
+  MinimumTouchSize: 0.000000
+  DepthFilter: true
+  MeshVisuals:
+    []
 - !<SceneObject/d1e4f3d8-47cf-42db-83f2-1ce8abdf485f>
   PrefabRemaps:
     []
@@ -4010,7 +4206,7 @@
     - !<own> 0d84c567-fd44-4173-902e-d4afd773703b
     - !<own> 3a040126-32d0-4caa-a220-0b4038e90c58
     - !<own> fea72ebc-37dc-4e3b-8ef8-61c23c83da7f
-    - !<own> 009ec56f-d68d-4e05-93fc-bf9a2877b0eb
+    - !<own> 4930b639-dbf8-4153-a16c-792c54a86ece
   Components:
     - !<own> e9b38f30-869f-434d-a132-4be3377c6be9
     - !<own> 2cad7811-e1a6-42f7-a459-20d6069f943f
@@ -4081,6 +4277,7 @@
     - !<own> bdcfaffe-8626-4e15-bb0b-dfa1ee0e168a
     - !<own> 1f180e1c-30be-41de-9e47-a850804b242c
     - !<own> 00892fe3-8c91-48cf-898c-bbb8a2bae1c6
+    - !<own> 3fc176ef-9936-47e7-92a5-a2e1c0088559
 - !<SceneObject/d691df15-9948-4bb2-b421-d857d825edac>
   PrefabRemaps:
     []
@@ -4114,6 +4311,7 @@
     - !<own> aff9e168-25c9-4ecc-bf64-6e31a4fab174
     - !<own> 2d7e707d-0096-41f3-ab43-8f6070fb109c
     - !<own> e46071fe-f1c9-4b53-b5fd-95cde97d82cc
+    - !<own> c91a0b88-4539-4b68-9fbb-9ea226aaf963
 - !<Image/d7d3fb19-5236-40ac-bbef-d58954dcf814>
   PrefabRemaps:
     []
@@ -4159,6 +4357,46 @@
   Enabled: true
   ScreenRegionType: FullFrame
   ResizeWithKeyboard: false
+- !<ScriptComponent/d98b2e22-c723-413f-a228-25f28c03eeb5>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScriptComponent/d9b8e9f9-f195-4337-a741-3348b65ad27e>
   PrefabRemaps:
     []
@@ -4167,12 +4405,14 @@
   ScriptAsset: !<reference> 610e2903-c880-49ce-8bbd-dd77897cf229
   ScriptInputsDefault:
     controller: true
+    tweenAlpha: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       cellIndex: 4
       controller: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      tweenAlpha: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
@@ -4239,31 +4479,22 @@
   ScriptInputs:
     "":
       turnBased: !<reference.ScriptComponent> be14dfba-4dd9-41fa-9f23-63c0c93ecbbc
+      cells: !<reference.ScriptComponent[]>
+        - !<reference> 513a3184-b200-40a6-b21a-d491cc991422
+        - !<reference> 32810655-df33-425b-92d3-408dabf22134
+        - !<reference> 67a81bfb-c29b-4209-8cab-2dc17326c2ba
+        - !<reference> e46071fe-f1c9-4b53-b5fd-95cde97d82cc
+        - !<reference> a3b5c107-876e-4a11-abfd-962edb05f209
+        - !<reference> 24cff27b-5aa1-4f1c-93b9-a613c55e7469
+        - !<reference> 0ea7644a-2935-438d-934e-6517d4a3f61c
+        - !<reference> 6b339d43-d4f3-4678-812b-5b2adcf653fa
+        - !<reference> 00892fe3-8c91-48cf-898c-bbb8a2bae1c6
       userCard: !<reference.ObjectPrefab> d57eb043-fc49-4f54-be8b-77c7b2ded6b0
       spawnParent: !<reference.SceneObject> c83db391-91b2-41ff-9b03-df8a61dc0655
       gridParent: !<reference.SceneObject> 0d356966-7cb9-4354-a038-e142fcddc9a3
   ScriptTypes:
     "":
       {}
-- !<Image/dddb1206-5314-4a98-8285-c4ef0c6799f6>
-  PrefabRemaps:
-    []
-  Name: Image
-  Enabled: true
-  RenderOrder: 0
-  StretchMode: Fill
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 7f5be622-05eb-431a-a4bc-0a2c1d77d305
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
 - !<ScreenTransform/e018f4b4-371b-404a-abcc-6d276c894dc5>
   PrefabRemaps:
     []
@@ -4297,13 +4528,6 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
-- !<ScreenRegionComponent/e117d42b-8469-4d22-9949-bec4cf62d7ad>
-  PrefabRemaps:
-    []
-  Name: Screen Region
-  Enabled: true
-  ScreenRegionType: FullFrame
-  ResizeWithKeyboard: false
 - !<ScreenTransform/e12d4663-4bcc-40bb-95c2-34122dff3e57>
   PrefabRemaps:
     []
@@ -4406,6 +4630,61 @@
     bottom: -275.000000
     right: 200.000000
     top: 275.000000
+- !<ScriptComponent/e41d7e13-aba6-4ba4-9f89-cc2cd4fb7c84>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/e436cf8a-2c72-4458-855e-5f58fa41c644>
+  PrefabRemaps:
+    []
+  Name: "Torus 1 [SET_TO_DEFAULT_LAYER]"
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: -80.850784, y: -80.952911, z: 111.698822}
+    Scale: {x: 15.014447, y: 15.014445, z: 15.014445}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 65cae666-b9a2-4336-8a63-bf3c6d0c456d
+  Components:
+    - !<own> f4e4fe20-0a9b-406d-93ef-73f28f0f933a
 - !<ScriptComponent/e46071fe-f1c9-4b53-b5fd-95cde97d82cc>
   PrefabRemaps:
     []
@@ -4420,6 +4699,7 @@
     "":
       cellIndex: 3
       controller: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
+      tweenAlpha: !<reference.ScriptComponent> c91a0b88-4539-4b68-9fbb-9ea226aaf963
   ScriptTypes:
     "":
       {}
@@ -4469,6 +4749,25 @@
   MaskTexture: !<reference> 00000000-0000-0000-0000-000000000000
   RayTracing: !<reference> 00000000-0000-0000-0000-000000000000
   DevicePropertiesSource: !<reference> 00000000-0000-0000-0000-000000000000
+- !<Image/eaafacc7-1a50-4258-8edb-a308ff07f864>
+  PrefabRemaps:
+    []
+  Name: Image
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: FillAndCut
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> b0188e95-9e9a-41db-85f7-c260a2634c94
+  FlipX: false
+  FlipY: false
+  RotationAngle: 0
+  Pivot: {x: 0.000000, y: 0.000000}
+  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
 - !<InteractionComponent/eb477c65-a73b-4176-94d3-7b3aeba2cb4f>
   PrefabRemaps:
     []
@@ -4479,39 +4778,6 @@
   DepthFilter: true
   MeshVisuals:
     []
-- !<ScreenTransform/ebcb8089-d41f-4dcb-8867-3fcc6ac7d8b2>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -0.525500
-    bottom: 0.190433
-    right: -0.243950
-    top: 0.358268
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
 - !<Image/eca746f6-2f9b-4294-9c0c-02a136b51820>
   PrefabRemaps:
     []
@@ -4612,25 +4878,7 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
-- !<SceneObject/f141a670-c9e5-4221-93e0-1acc8e977186>
-  PrefabRemaps:
-    []
-  Name: A_1_CardPrefab
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 75c6eca6-e84f-4c6b-a416-a98f65a387d3
-  Components:
-    - !<own> 2d918eb8-e398-4a99-8b4c-c5e0d9a225ec
-    - !<own> f77a3765-c980-4e03-8711-4e4c0fb4ce90
-    - !<own> 166c953b-6ee5-4e0f-92da-fbd766f68bb7
-    - !<own> 5ad14393-0148-4e3c-bf96-849129b072b7
-- !<ScreenTransform/f55774a2-e5b2-408c-b22b-13ec3dbc4345>
+- !<ScreenTransform/f1b183e8-0ddc-4f7d-9d15-3b977ff0a411>
   PrefabRemaps:
     []
   Name: Screen Transform
@@ -4645,7 +4893,7 @@
     fixedHeight: false
     deactivatedFixedSprite: false
     deactivatedFixedPivot: false
-  Pivot: {x: 0.104243, y: 0.399212}
+  Pivot: {x: 0.000000, y: 0.000000}
   Transform:
     position: {x: 0.000000, y: 0.000000, z: 0.000000}
     rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -4654,47 +4902,103 @@
   RawMode: true
   ForceBasic: true
   Anchor:
-    left: -1.015536
-    bottom: -0.878119
-    right: 1.010203
-    top: 0.958111
+    left: -1.000000
+    bottom: -1.000000
+    right: 1.000000
+    top: 1.000000
   Offset:
     left: 0.000000
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
-- !<VFXComponent/f6767df2-129d-4170-8d92-51847cbcc6e1>
+- !<ScriptComponent/f217f6d9-0f6a-4425-8448-a34ce038852a>
   PrefabRemaps:
     []
-  Name: VFX
-  Enabled: false
-  RenderOrder: 3
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    playAutomatically: true
+    movementType: true
+    startInput: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 45878ca5-dfb2-4ccc-bfba-8c4fa3cdfa61
+      tweenName: TestAlpha
+      playAutomatically: true
+      loopType: 2
+      movementType: 0
+      startInput: !<float> 0.000000
+      endInput: 0.150000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: true
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<RenderMeshVisual/f4e4fe20-0a9b-406d-93ef-73f28f0f933a>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 2
   StretchMode: Stretch
   VerticalAlignment: Center
   HorizontalAlignment: Center
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  VFXAsset: !<reference> 2e48adfa-ec86-4cdf-a6b0-42eb61e8823d
-- !<Image/f77a3765-c980-4e03-8711-4e4c0fb4ce90>
+  Materials:
+    - !<reference> a1c5dc5c-70ea-424d-b9c1-84f480c2bcc2
+  Mesh: !<reference> 59a3fc70-417b-48f9-81e7-ea7f6fe680fc
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/f703556f-1dfb-4f7e-93ca-4337d6326901>
   PrefabRemaps:
     []
-  Name: Image
+  Name: "Bloom [PLACE_BELOW_ALL_OBJECTS_IN_HIERARCHY]"
   Enabled: true
-  RenderOrder: 3
-  StretchMode: Fit
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 48347c69-bfa9-49c0-93f8-45dcc90b72dd
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> b2aec388-f49f-4387-8420-591199678a2d
+- !<SceneObject/f7ae6616-c6c9-41ec-8a85-5cb255395fa8>
+  PrefabRemaps:
+    []
+  Name: Desctiption
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.399348, y: 0.146274, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 0.750000, y: 0.750000, z: 0.750000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> fc24f47a-ec8e-415b-ba94-773239dba493
 - !<InteractionComponent/f7efc1e6-fcb6-47e4-b035-8d11cdef11b2>
   PrefabRemaps:
     []
@@ -4705,6 +5009,13 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<ScreenRegionComponent/f8471739-673f-42db-8c35-4051a5cef6b6>
+  PrefabRemaps:
+    []
+  Name: Screen Region
+  Enabled: true
+  ScreenRegionType: FullFrame
+  ResizeWithKeyboard: false
 - !<Image/fb268efb-e4fb-426f-b067-e80953c34933>
   PrefabRemaps:
     []
@@ -4734,6 +5045,94 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<Text/fc24f47a-ec8e-415b-ba94-773239dba493>
+  PrefabRemaps:
+    []
+  Name: Text
+  Enabled: true
+  RenderOrder: 6
+  StretchMode: Stretch
+  VerticalAlignment: Top
+  HorizontalAlignment: Left
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Text: |-
+    For Bloom to work properly, it needs to be placed
+    last in your Objects hierarchy.
+    
+    For more information check the Bloom's guide on
+    the asset's description, inside the Assets Linrary.
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 2.000000
+  Font: !<reference> f17cefc7-2da3-4877-8d5a-2413f0fac740
+  FontWeight: 400
+  Italic: false
+  LayoutRect:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 0.497627, y: 0.497612, z: 0.497627, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.250000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: 0.000000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<ScriptComponent/fca65ccb-91a9-44e4-9757-3f8625963ff0>
   PrefabRemaps:
     []
@@ -4760,25 +5159,6 @@
   ScriptTypes:
     "":
       {}
-- !<Image/fce06964-5c86-4d7c-87aa-1b6aa36278f3>
-  PrefabRemaps:
-    []
-  Name: Image
-  Enabled: true
-  RenderOrder: 3
-  StretchMode: Fill
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 7f5be622-05eb-431a-a4bc-0a2c1d77d305
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
 - !<SceneObject/fddf01ae-a799-4237-b292-c8c284989aac>
   PrefabRemaps:
     []
@@ -4797,22 +5177,6 @@
     - !<own> 85c574de-87e4-491f-b5ba-fc51d429b192
     - !<own> acd6d2e5-d9d1-4d18-9297-889c78cbd498
     - !<own> 43696501-cda9-4e4c-97d2-0beea2b15509
-- !<SceneObject/fe05bd42-33ef-472c-8bc7-352c65160a11>
-  PrefabRemaps:
-    []
-  Name: XO Spawn Parent
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> cf9a43ad-55c1-4a21-96dc-47258adf53b8
-    - !<own> f141a670-c9e5-4221-93e0-1acc8e977186
-  Components:
-    - !<own> 27109309-fb3e-4c12-88d9-679c252f9339
 - !<SceneObject/fe5e2775-1461-4551-9bc3-d390862d15d8>
   PrefabRemaps:
     []
@@ -4831,6 +5195,7 @@
     - !<own> a6220fbc-ffec-49e8-b705-7823d624a6e5
     - !<own> 810b0b10-934f-45a6-9f36-996d86cd7973
     - !<own> 32810655-df33-425b-92d3-408dabf22134
+    - !<own> d98b2e22-c723-413f-a228-25f28c03eeb5
 - !<SceneObject/fea72ebc-37dc-4e3b-8ef8-61c23c83da7f>
   PrefabRemaps:
     []
@@ -4844,7 +5209,6 @@
     HasSegmentScaleCompensation: false
   Children:
     - !<own> fddf01ae-a799-4237-b292-c8c284989aac
-    - !<own> 87e07619-5d73-4a9c-887e-201d065a954e
     - !<own> e218dcea-ed75-455c-96a3-ce3fcc8955c7
   Components:
     - !<own> e12d4663-4bcc-40bb-95c2-34122dff3e57
