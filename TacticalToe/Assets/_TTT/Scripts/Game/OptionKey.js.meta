@@ -1,20 +1,20 @@
-- !<AssetImportMetadata/efe80251-3ba0-4eea-b26e-7350d413ada8>
+- !<AssetImportMetadata/7de1546f-4681-466c-a7b1-10d9dc68d14a>
   ImportedAssetIds:
-    JavaScriptAsset: !<reference> df07df76-a345-4ef2-9904-d6d39911ed63
+    JavaScriptAsset: !<reference> ed87e1de-857f-4c03-83ab-fb49d3f0e667
   ImporterName: JavaScriptAssetImporter
-  PrimaryAsset: !<reference> df07df76-a345-4ef2-9904-d6d39911ed63
+  PrimaryAsset: !<reference> ed87e1de-857f-4c03-83ab-fb49d3f0e667
   PackageType: NotAPackage
   LegacyPackagePolicy: ~
   ExtraData:
     {}
   AssetDataMap:
-    JavaScriptAsset: !<own> eea1eec4-6bfd-4217-85a9-15d262eeb38c
+    JavaScriptAsset: !<own> 3a79a649-175b-471b-8ffa-a6e9aaca7e9b
   DependentFiles:
     []
   ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
-- !<ScriptAssetData/eea1eec4-6bfd-4217-85a9-15d262eeb38c>
+- !<ScriptAssetData/3a79a649-175b-471b-8ffa-a6e9aaca7e9b>
   SvgIcon: ""
   SetupScript:
     code: ""
@@ -22,13 +22,14 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: c57d14fc-5050-401d-b18d-5ba35bf5e99b
+  ComponentUid: 66772bab-3ba3-4f3a-8583-208106a5a9aa
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    juiceAnim: false
-    optionKey1: false
-    tweenObject: false
+    downBounds: false
+    spellManager: false
+    spellTypeNumber: false
+    upBounds: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -38,9 +39,10 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - juiceAnim: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-      tweenObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      optionKey1: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+    - upBounds: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+      downBounds: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+      spellManager: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      spellTypeNumber: 0
   ScriptTypes:
     -
       {}
