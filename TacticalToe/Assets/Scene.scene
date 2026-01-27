@@ -50,6 +50,13 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<ScreenRegionComponent/028b5ace-75b2-4771-b92b-d3349c2c1127>
+  PrefabRemaps:
+    []
+  Name: Screen Region
+  Enabled: true
+  ScreenRegionType: FullFrame
+  ResizeWithKeyboard: false
 - !<ScriptComponent/0549e31a-7cf6-4ca9-aedc-cd2f8fe4d990>
   PrefabRemaps:
     []
@@ -72,7 +79,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -445,6 +452,22 @@
     []
   Components:
     []
+- !<SceneObject/1341c00a-d3b4-4d3e-bff6-776c401fc4fa>
+  PrefabRemaps:
+    []
+  Name: MorphEffect
+  Enabled: false
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 638ef9f6-f96f-447a-9f79-8584765e6cc5
+    - !<own> 63c724c8-d9a2-4d35-9e4e-0ab5c43a356d
 - !<Text/16e36b2a-d7ca-4778-a036-ea3736aeeec4>
   PrefabRemaps:
     []
@@ -528,6 +551,44 @@
     CapitalizationOverride: None
   DepthTest: false
   TwoSided: false
+- !<ScriptComponent/198eeb00-eaea-40d0-aa8e-123c35a1d1b1>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/1b57bb7e-94b8-4a72-93da-2f35ea343b66>
   PrefabRemaps:
     []
@@ -916,6 +977,39 @@
     - !<own> e80f8544-5d84-4bf6-b1bc-032540084c01
   Components:
     []
+- !<ScreenTransform/2c689426-0844-4ccd-a216-087db77a5fb3>
+  PrefabRemaps:
+    []
+  Name: Screen Transform
+  Enabled: true
+  IsAdvanced: false
+  Constraints:
+    pinToLeft: false
+    pinToTop: false
+    pinToRight: false
+    pinToBottom: false
+    fixedWidth: false
+    fixedHeight: false
+    deactivatedFixedSprite: false
+    deactivatedFixedPivot: false
+  Pivot: {x: 0.000000, y: 0.000000}
+  Transform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  RawMode: true
+  ForceBasic: true
+  Anchor:
+    left: -1.000000
+    bottom: -1.000000
+    right: 1.000000
+    top: 1.000000
+  Offset:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
 - !<Canvas/2cad7811-e1a6-42f7-a459-20d6069f943f>
   PrefabRemaps:
     []
@@ -1067,6 +1161,44 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<ScriptComponent/34366a7a-cd42-4e81-bd47-ec5d479bb9a9>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<Camera/37858273-cc9e-47de-935a-b2055764cf3b>
   PrefabRemaps:
     []
@@ -1166,6 +1298,44 @@
   Components:
     - !<own> efcb6ffd-89d4-4a0f-a564-aaddea5f65bb
     - !<own> 8ec3dbd6-1097-42d8-be5a-bf5f13ef159f
+- !<ScriptComponent/3c8b6363-556e-42c2-b61b-19beb5671718>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/3eb452bb-2d36-41e9-a7da-524a99765433>
   PrefabRemaps:
     []
@@ -1201,6 +1371,7 @@
     - !<own> 65460e73-4868-443b-913e-30ffee06c0ff
     - !<own> a3b5c107-876e-4a11-abfd-962edb05f209
     - !<own> cb43a793-d6ec-4bdf-b8dc-6bf25a8c83c5
+    - !<own> d11395e7-48ce-4bbf-9bb3-c55fc8049434
 - !<ScriptComponent/3fc176ef-9936-47e7-92a5-a2e1c0088559>
   PrefabRemaps:
     []
@@ -1223,7 +1394,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -1318,6 +1489,7 @@
     - !<own> 4ddaa588-73aa-4f19-b4c7-2e42b4e1769c
     - !<own> 513a3184-b200-40a6-b21a-d491cc991422
     - !<own> f217f6d9-0f6a-4425-8448-a34ce038852a
+    - !<own> 7261f8e9-01a1-4d77-8567-fa2f34a7d577
 - !<ScreenTransform/47f1ed70-5891-4da0-a51e-45e26cf3deff>
   PrefabRemaps:
     []
@@ -1382,6 +1554,44 @@
   Components:
     - !<own> f1b183e8-0ddc-4f7d-9d15-3b977ff0a411
     - !<own> f8471739-673f-42db-8c35-4051a5cef6b6
+- !<ScriptComponent/49f4ea15-9df8-4b95-bd19-7be51e2bee3d>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScreenTransform/4b3b17cf-1585-4e94-b0d9-df30b6cf9ba5>
   PrefabRemaps:
     []
@@ -1649,6 +1859,7 @@
     - !<own> fc14ae44-991e-47db-8ee3-66f3bd4a5b1c
     - !<own> 6b339d43-d4f3-4678-812b-5b2adcf653fa
     - !<own> e41d7e13-aba6-4ba4-9f89-cc2cd4fb7c84
+    - !<own> 8615d56a-97dc-40b4-92f4-9804b7059a52
 - !<ScriptComponent/60268fe4-fd47-4f91-b404-f2ce105c1710>
   PrefabRemaps:
     []
@@ -1748,7 +1959,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -1845,6 +2056,58 @@
   ShadowDensity: 1.000000
   Materials:
     - !<reference> 970060cd-1bb5-4b31-b536-c6f047d4fa08
+  FlipX: false
+  FlipY: false
+  RotationAngle: 0
+  Pivot: {x: 0.000000, y: 0.000000}
+  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<ScreenTransform/638ef9f6-f96f-447a-9f79-8584765e6cc5>
+  PrefabRemaps:
+    []
+  Name: Screen Transform
+  Enabled: true
+  IsAdvanced: false
+  Constraints:
+    pinToLeft: false
+    pinToTop: false
+    pinToRight: false
+    pinToBottom: false
+    fixedWidth: false
+    fixedHeight: false
+    deactivatedFixedSprite: false
+    deactivatedFixedPivot: false
+  Pivot: {x: 0.000000, y: 0.000000}
+  Transform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  RawMode: true
+  ForceBasic: true
+  Anchor:
+    left: -1.569025
+    bottom: -0.190217
+    right: 0.784141
+    top: 1.194321
+  Offset:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+- !<Image/63c724c8-d9a2-4d35-9e4e-0ab5c43a356d>
+  PrefabRemaps:
+    []
+  Name: Image
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Fill
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 019b83ef-d031-4e1d-8b6c-ee6b5700a0d3
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -2063,6 +2326,42 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
+- !<ScriptComponent/7261f8e9-01a1-4d77-8567-fa2f34a7d577>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 45878ca5-dfb2-4ccc-bfba-8c4fa3cdfa61
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: true
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScreenTransform/741a9374-1e44-4012-ae79-94f0d8f33fb7>
   PrefabRemaps:
     []
@@ -2470,6 +2769,7 @@
     - !<own> ae6a94e5-5954-4ca1-ae99-7415bcd8a317
     - !<own> 24cff27b-5aa1-4f1c-93b9-a613c55e7469
     - !<own> 0549e31a-7cf6-4ca9-aedc-cd2f8fe4d990
+    - !<own> 93afaef3-accb-49ef-ad94-b802f557f849
 - !<Image/8443b9ac-0419-429a-b16b-3eee1f9d7176>
   PrefabRemaps:
     []
@@ -2591,6 +2891,44 @@
     CapitalizationOverride: None
   DepthTest: false
   TwoSided: false
+- !<ScriptComponent/8615d56a-97dc-40b4-92f4-9804b7059a52>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScriptComponent/8a4c7a58-b861-430a-ab04-febe2ea70506>
   PrefabRemaps:
     []
@@ -2881,6 +3219,44 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
+- !<ScriptComponent/93afaef3-accb-49ef-ad94-b802f557f849>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/93c35ed6-32d2-43eb-a160-5527d0d646ee>
   PrefabRemaps:
     []
@@ -3002,6 +3378,7 @@
     - !<own> 1d69e2b8-7fcf-436b-a0a3-5b23bbadee15
     - !<own> 0ea7644a-2935-438d-934e-6517d4a3f61c
     - !<own> c0ab4a00-49fe-4ad2-81ba-326cab726e21
+    - !<own> 198eeb00-eaea-40d0-aa8e-123c35a1d1b1
 - !<ScriptComponent/994a0550-8547-4b6d-a272-536ac87afbb6>
   PrefabRemaps:
     []
@@ -3212,6 +3589,44 @@
   DepthFilter: true
   MeshVisuals:
     []
+- !<ScriptComponent/a32abacd-2731-456f-8e9c-9fc244265834>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<ScriptComponent/a3b5c107-876e-4a11-abfd-962edb05f209>
   PrefabRemaps:
     []
@@ -3613,17 +4028,19 @@
     {}
   ScriptInputs:
     "":
+      turnBased: !<reference.ScriptComponent> be14dfba-4dd9-41fa-9f23-63c0c93ecbbc
       stealOptionKey: !<reference.ScriptComponent> 6aac1153-69a3-4399-baff-b70441996e2a
       spell1OptionKey: !<reference.ScriptComponent> ce644ebd-4023-4f14-8832-c8088ef15ef2
       spell2OptionKey: !<reference.ScriptComponent> 8a4c7a58-b861-430a-ab04-febe2ea70506
       spell3OptionKey: !<reference.ScriptComponent> fe1de1f9-4260-4364-919b-b464903606f1
+      boardController: !<reference.ScriptComponent> dcc5b3e7-9737-4788-b370-e55404bfea38
   ScriptTypes:
     "":
       {}
 - !<SceneObject/bbe11b0e-f2b8-40e3-94c1-ef6eb90776c6>
   PrefabRemaps:
     []
-  Name: HighlighterOption1 3
+  Name: HighlighterOption4
   Enabled: true
   Layers: 1048576
   LocalTransform: !<TransformEntity>
@@ -3862,7 +4279,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -3880,6 +4297,22 @@
   ScriptTypes:
     "":
       {}
+- !<SceneObject/c0d928a0-f120-448c-8437-cac3ca603b00>
+  PrefabRemaps:
+    []
+  Name: SpellEffects
+  Enabled: true
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 1341c00a-d3b4-4d3e-bff6-776c401fc4fa
+  Components:
+    - !<own> 2c689426-0844-4ccd-a216-087db77a5fb3
+    - !<own> 028b5ace-75b2-4771-b92b-d3349c2c1127
 - !<ScriptComponent/c12ec40b-3d30-42e8-9f53-11ac4ef92689>
   PrefabRemaps:
     []
@@ -4071,6 +4504,7 @@
     - !<own> a26ab016-0d9b-451c-adbd-a286c1f5109e
     - !<own> 67a81bfb-c29b-4209-8cab-2dc17326c2ba
     - !<own> 60b57efe-6ed3-4c41-92ca-c3de42b27289
+    - !<own> 49f4ea15-9df8-4b95-bd19-7be51e2bee3d
 - !<InteractionComponent/c75f9de9-f51a-4828-a823-edbea0dad6a4>
   PrefabRemaps:
     []
@@ -4160,7 +4594,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -4216,7 +4650,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -4284,6 +4718,44 @@
   ScriptTypes:
     "":
       {}
+- !<ScriptComponent/d11395e7-48ce-4bbf-9bb3-c55fc8049434>
+  PrefabRemaps:
+    []
+  Name: TweenAlpha
+  Enabled: true
+  ScriptAsset: !<reference> 833c9224-c85a-485c-ac8b-e2c0251b9961
+  ScriptInputsDefault:
+    sceneObjectReference: true
+    loopType: true
+    from: true
+    to: true
+    offset: true
+    additive: true
+    recursive: true
+    delay: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tweenName: GridAlphaLow
+      playAutomatically: false
+      loopType: 0
+      movementType: 1
+      startInput: 0.150000
+      endInput: !<float> 0.000000
+      from: !<float> 0.000000
+      to: !<float> 0.000000
+      offset: !<float> 0.000000
+      additive: false
+      recursive: false
+      time: 0.400000
+      delay: !<float> 0.000000
+      easingFunction: Bounce
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/d1e4f3d8-47cf-42db-83f2-1ce8abdf485f>
   PrefabRemaps:
     []
@@ -4300,6 +4772,7 @@
     - !<own> fea72ebc-37dc-4e3b-8ef8-61c23c83da7f
     - !<own> 4930b639-dbf8-4153-a16c-792c54a86ece
     - !<own> 7bf76da4-9f42-4308-90ad-8ad48c637308
+    - !<own> c0d928a0-f120-448c-8437-cac3ca603b00
   Components:
     - !<own> e9b38f30-869f-434d-a132-4be3377c6be9
     - !<own> 2cad7811-e1a6-42f7-a459-20d6069f943f
@@ -4542,6 +5015,7 @@
     - !<own> 1f180e1c-30be-41de-9e47-a850804b242c
     - !<own> 00892fe3-8c91-48cf-898c-bbb8a2bae1c6
     - !<own> 3fc176ef-9936-47e7-92a5-a2e1c0088559
+    - !<own> a32abacd-2731-456f-8e9c-9fc244265834
 - !<SceneObject/d691df15-9948-4bb2-b421-d857d825edac>
   PrefabRemaps:
     []
@@ -4620,6 +5094,7 @@
     - !<own> 2d7e707d-0096-41f3-ab43-8f6070fb109c
     - !<own> e46071fe-f1c9-4b53-b5fd-95cde97d82cc
     - !<own> c91a0b88-4539-4b68-9fbb-9ea226aaf963
+    - !<own> 3c8b6363-556e-42c2-b61b-19beb5671718
 - !<Image/d89b0a8b-cd10-43ea-9db9-b81c216cce04>
   PrefabRemaps:
     []
@@ -4661,7 +5136,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -4831,6 +5306,7 @@
       userCard: !<reference.ObjectPrefab> d57eb043-fc49-4f54-be8b-77c7b2ded6b0
       spawnParent: !<reference.SceneObject> c83db391-91b2-41ff-9b03-df8a61dc0655
       gridParent: !<reference.SceneObject> 0d356966-7cb9-4354-a038-e142fcddc9a3
+      spellManager: !<reference.ScriptComponent> ba97beb1-8f7e-4cd4-b95e-eee4ed1947c8
   ScriptTypes:
     "":
       {}
@@ -4958,7 +5434,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -5270,7 +5746,7 @@
   ScriptInputs:
     "":
       sceneObjectReference: !<reference.SceneObject> 45878ca5-dfb2-4ccc-bfba-8c4fa3cdfa61
-      tweenName: TestAlpha
+      tweenName: GridAlphaHigh
       playAutomatically: true
       loopType: 2
       movementType: 0
@@ -5606,6 +6082,7 @@
     - !<own> 810b0b10-934f-45a6-9f36-996d86cd7973
     - !<own> 32810655-df33-425b-92d3-408dabf22134
     - !<own> d98b2e22-c723-413f-a228-25f28c03eeb5
+    - !<own> 34366a7a-cd42-4e81-bd47-ec5d479bb9a9
 - !<SceneObject/fea72ebc-37dc-4e3b-8ef8-61c23c83da7f>
   PrefabRemaps:
     []

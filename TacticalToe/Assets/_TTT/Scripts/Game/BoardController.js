@@ -15,6 +15,17 @@ var xoArray = []
 var grid = []
 var cell = []
 
+var spellFunctionalGrids = []
+var activatedSpellType;
+
+
+
+function getGridData(){
+    return grid;
+}
+
+script.getGridData = getGridData;
+
 
 getPositionGrid()
 
@@ -32,6 +43,8 @@ function turnStarted(){
     getCurrentTurn()
     getGrid()
     highlightAllCells(false)
+
+    script.spellManager.turnStarted();
 
 }
 
@@ -132,15 +145,69 @@ function clearArray(){
 }
 
 var hasMovedThisTurn = false;
+
 function gridTapped(gridIndex){
     print("gridIndex : "+gridIndex)
+    print("Inside Grid Tapped");
 
-    if(grid[gridIndex] != 0){
+    /*if(grid[gridIndex] != 0){
         return;
+    }*/
+    if(activatedSpellType == undefined || activatedSpellType == global.SpellType.None){
+        print("Inside Grid Tapped Spell None");
+        
+
+        if(grid[gridIndex] != 0){
+        return;
+        }
+
+        grid[gridIndex] = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
+
+
+
+    }
+    else if(activatedSpellType == global.SpellType.Steal){
+        print("Inside Grid Tapped Spell STEAL");
+        print("spellFunctionalGrids.includes(gridIndex)" + spellFunctionalGrids.includes(gridIndex));
+        print("spellFunctionalGrids   "+spellFunctionalGrids);
+
+
+        if(spellFunctionalGrids.includes(gridIndex)){
+            print("FunctionalSpell includes current grid");
+
+            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex]);
+
+            if(currentPlayer == 0 && grid[gridIndex] == global.CellType.User2){
+                print("Current user is 0, and Tapped grid is occupied by Another user2");
+                print("Previous grid : "+grid);
+
+                grid[gridIndex] = global.CellType.User1;
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+
+            }
+            else if(currentPlayer == 1 && grid[gridIndex] == global.CellType.User1){
+                print("Current user is 1, and Tapped grid is occupied by Another user1");
+                print("Previous grid : "+grid);
+                grid[gridIndex] = global.CellType.User2;
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+
+
+            }
+            else{
+                print("Error during stealing")
+            }
+
+        
+        }
+
     }
 
 
-    grid[gridIndex] = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
+    print("Grid  = "+grid);
 
     
     hasMovedThisTurn = true;
@@ -222,6 +289,13 @@ script.endTurnSafely = endTurnSafely;
     });*/
 
 
+
+
+/// ######################## SPELL #################
+
+
+//@input Component.ScriptComponent spellManager;
+
 function highlightCell(cellIndex, willHighlight){
     script.cells[cellIndex].highlight(willHighlight);
 }
@@ -239,3 +313,77 @@ function highlightAllCells(willHighlight){
         }
     }
 }
+
+function highlightAsPerSpell(spellType){
+    if(spellType == global.SpellType.Steal){
+        print("Inside steal spell to highlight cells");
+        if(currentPlayer == 0){
+            // TODO : Highlight Cells with type CellType.User2
+            for(var i = 0; i< grid.length; i++){
+                if(grid[i] == global.CellType.User2){
+                    highlightCell(i, true);
+                }
+            }
+        }
+        else{
+            for(var i = 0; i< grid.length; i++){
+                if(grid[i] == global.CellType.User1){
+                    highlightCell(i, true);
+                }
+            }
+        }
+    }
+    else{
+        print("Will be implemented Soon");
+    }
+}
+
+script.highlightAllCells = highlightAllCells;
+script.highlightAsPerSpell = highlightAsPerSpell;
+
+
+function handleSpell(spellType){
+
+    print("Inside Handle Spell *******");
+    spellFunctionalGrids = [];
+    highlightAllCells(false);
+    activatedSpellType = global.SpellType.None;
+
+    // If spell type none, that is spell is NOT activated
+    if(spellType == global.SpellType.None){
+        
+        
+    }
+
+    // Spell Type is STEAL
+    else if(spellType == global.SpellType.Steal){
+        print("Inside Stael Type Spell Handling ----");
+        for(var i = 0; i<grid.length; i++){
+            if(currentPlayer == 0){
+                if(grid[i] == global.CellType.User2){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+                }
+            }
+            else{
+                if(grid[i] == global.CellType.User1){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+            }
+
+            }
+            
+        }
+        activatedSpellType = global.SpellType.Steal;
+
+        print(spellFunctionalGrids + "spellFunctionalGrids");
+    }
+
+    else{
+        print("More spells is being processed");
+    }
+
+}
+
+script.handleSpell = handleSpell
+

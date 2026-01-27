@@ -29,6 +29,7 @@
     cells: false
     gridParent: false
     spawnParent: false
+    spellManager: false
     turnBased: false
     userCard: false
   ScriptTypesHidden:
@@ -46,6 +47,7 @@
       userCard: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       spawnParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       gridParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      spellManager: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}

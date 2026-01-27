@@ -35,18 +35,22 @@ script.createEvent("TouchEndEvent").bind(onTouchEnd);
 
 
 function highlight(willActive){
+    print("Inside ====== cell highlight");
     print("Cell " + script.cellIndex + " highlight(" + willActive + ")");
 
 
     if(willActive){
-        global.tweenManager.startTween(script.getSceneObject(), 'TestAlpha')
+        global.tweenManager.stopTween(script.getSceneObject(), 'GridAlphaLow');
+        global.tweenManager.startTween(script.getSceneObject(), 'GridAlphaHigh')
 
     }
     else{
-        global.tweenManager.stopTween(script.getSceneObject(), 'TestAlpha');
+        print("Inside else of cell highlight that is disable highlight");
+        global.tweenManager.stopTween(script.getSceneObject(), 'GridAlphaHigh')
+        global.tweenManager.startTween(script.getSceneObject(), 'GridAlphaLow');
 
     }
-    print("  tweenAlpha.enabled = " + script.tweenAlpha.enabled);
+    //print("  tweenAlpha.enabled = " + script.tweenAlpha.enabled);
     /*if (script.tweenAlpha) {
         script.tweenAlpha.enabled = willActive;
         print("  tweenAlpha.enabled = " + script.tweenAlpha.enabled);
