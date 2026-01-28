@@ -15,11 +15,11 @@ global.CellType = {
     };
 
 
-
+var card;
 
 script.cellType = global.CellType.None;
 
-function onTouchEnd(eventData) {
+async function onTouchEnd(eventData) {
     var p = eventData.getTouchPosition(); // 0..1
     // Convert [0..1] -> [-1..1]
     var screenPos = new vec2(p.x * 2.0 - 1.0, p.y * 2.0 - 1.0);
@@ -31,12 +31,12 @@ function onTouchEnd(eventData) {
     script.controller.gridTapped(script.cellIndex)
 }
 
-script.createEvent("TouchEndEvent").bind(onTouchEnd);
+await script.createEvent("TouchEndEvent").bind(onTouchEnd);
 
 
 function highlight(willActive){
-    print("Inside ====== cell highlight");
-    print("Cell " + script.cellIndex + " highlight(" + willActive + ")");
+    //print("Inside ====== cell highlight");
+    //print("Cell " + script.cellIndex + " highlight(" + willActive + ")");
 
 
     if(willActive){
@@ -45,7 +45,7 @@ function highlight(willActive){
 
     }
     else{
-        print("Inside else of cell highlight that is disable highlight");
+        //print("Inside else of cell highlight that is disable highlight");
         global.tweenManager.stopTween(script.getSceneObject(), 'GridAlphaHigh')
         global.tweenManager.startTween(script.getSceneObject(), 'GridAlphaLow');
 
@@ -64,7 +64,16 @@ script.highlight = highlight
 
 
 
+function setCard(cardComponent){
+    card = cardComponent;
+}
 
+function getCard(){
+    return card;
+}
+
+script.setCard = setCard;
+script.getCard = getCard;
 
 
 

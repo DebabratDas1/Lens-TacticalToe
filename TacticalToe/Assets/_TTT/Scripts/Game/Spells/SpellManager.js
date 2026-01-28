@@ -21,6 +21,13 @@ global.SpellType = {
 
 //@input Component.ScriptComponent boardController
 
+//@input Component.Image morphCastedEffectImage;
+//@input Component.Image shieldCastedEffectImage;
+//@input Component.Image fireCastedEffectImage;
+// @input Component.ScriptComponent animHandler
+
+
+
 
     var isSpellActivate = false;
     var activatedSpellType = SpellType.None;
@@ -28,26 +35,37 @@ global.SpellType = {
     var otherPlayerAvailableSpell;
     var currentPlayer;
     var otherPlayer;
+    var currentTurn;
 
 
-    async function turnStarted(){
-        currentPlayer = await script.turnBased.getCurrentUserIndex();
-        otherPlayer = await script.turnBased.getOtherUserIndex();
+    async function turnStarted(_currentPlayer, _otherPlayer, _currentTurn){
 
-        getAvailableSpells(currentPlayer);
-        getOtherPlayerAvailableSpells(otherPlayer);
+        ("Inside SpellManager Turn Started");
+        currentPlayer = _currentPlayer;
+        print("Current Player = "+currentPlayer);
+        otherPlayer = _otherPlayer;
+        print("Other Player = "+otherPlayer);
+
+        currentTurn = _currentTurn;
+        print("currentTurn  = "+currentTurn);
+
+
+
+        await getAvailableSpells(currentPlayer);
+        await getOtherPlayerAvailableSpells(otherPlayer);
 
     }
 
     script.turnStarted = turnStarted;
 
 
-    async function getAvailableSpells(currentPlayer){
-       availableSpell =  await script.turnBased.getUserVariable(currentPlayer, "availableSpells");
+    async function getAvailableSpells(playerNo){
+        print("Inside getAvailble spells");
+       availableSpell =  await script.turnBased.getUserVariable(playerNo, "availableSpells");
        if(availableSpell == undefined){
             availableSpell = [2,2,2,2,2];
        }
-       print("available spells of current user : "+ availableSpell);
+       print("available spells of user : "+ playerNo +" is : "+ availableSpell);
     }
 
     async function setAvailableSpells(){
@@ -238,9 +256,85 @@ function HighlightFunctionalGrids(){
 }
 
 
+function getSpellDetails(spellType, currentTurn){
+    var newSpellEffect;
+
+    if(spellType == global.SpellType.Steal){
+        newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : currentTurn+2,
+        "effectiveUser" : currentPlayer,
+
+        //"duration": 2 // Set duration based on the spell type
+        };
+
+    }
+    else{
+        print("Some error occured to getSpellDetails");
+    }
+
+    return newSpellEffect;
+    
+}
+
+script.getSpellDetails = getSpellDetails;
+
+
+function processAttchedSpell(cardToApply, spell){
+    var spellType = spell.type;
+    var caster = spell.caster;
+    var effectiveTurn = spell.effectiveTurn;
+    var effectiveUser = spell.effectiveUser;
+    print("Inside process attched spell in SpellManager, spell = "+spell);
+    print("spell.caster = "+caster);
+
+    if(effectiveTurn == currentTurn && effectiveUser == currentPlayer){
+        // Need to Action
+        //Need to call BoardController's Function
+    }
+    else if(effectiveTurn > currentTurn){
+        // Apply Attached Effect
+        print("Inside attached effect");
+        cardToApply.showAttchedSpell(spellType);
+    }
+    else{
+        print("Some error occurred to processAttachedSpell");
+    }
+}
+script.processAttchedSpell = processAttchedSpell;
+
 // 1. Spell Casted Effects
 // 2. Spell Applied Cell Effects
 // 3. Spell is working effect
 
+async function showCastedSpellAnimation(spellType){
+    var effectToApply;
+    if(spellType == global.SpellType.Steal){
+        effectToApply = script.morphCastedEffectImage;
+    }
+    else if(spellType == global.SpellType.Spell2){
+        effectToApply = script.shieldCastedEffectImage;
 
+    }
+    else{
+        print("ERROR to get casted effect image for : "+spellType);
+    }
+    effectToApply.getSceneObject().enabled = true;
+    // Await the animation completion
+    /*await new Promise(function(resolve) {
+        script.animHandler.playVideoAnimation(effectToApply, function() {
+            print("SpellManager: Animation promise resolved.");
+            resolve(); 
+        });
+    });*/
+    
+    print("SpellManager: showCastedSpellAnimation complete.");
+
+
+}
+
+
+script.showCastedSpellAnimation = showCastedSpellAnimation;
 

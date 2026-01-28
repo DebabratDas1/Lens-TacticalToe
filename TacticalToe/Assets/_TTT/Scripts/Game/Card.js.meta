@@ -26,6 +26,12 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    defaultTexture: false
+    effectImage: false
+    freezeTexture: false
+    spell3Texture: false
+    spell4Texture: false
+    stealTexture: false
     turnBasedPlayerInfo: false
   ScriptTypesHidden:
     {}
@@ -37,6 +43,12 @@
     []
   DefaultScriptInputs:
     - turnBasedPlayerInfo: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      effectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      stealTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      freezeTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      spell3Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      spell4Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      defaultTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}

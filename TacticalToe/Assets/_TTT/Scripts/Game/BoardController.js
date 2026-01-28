@@ -2,6 +2,8 @@
 //@input Component.ScriptComponent turnBased
 //@input Component.ScriptComponent[] cells
 
+// @input Component.ScriptComponent animHandler  // AnimationHandler.js
+
 
 //@input Asset.ObjectPrefab userCard
 // @input SceneObject spawnParent
@@ -10,6 +12,7 @@
 var currentPlayer
 var otherPlayer
 var currentTurn
+//var turnNumber;
 var positions = []
 var xoArray = []
 var grid = []
@@ -30,7 +33,7 @@ script.getGridData = getGridData;
 getPositionGrid()
 
 function getPositionGrid(){
-    print("Inside getPositionGrid")
+//    print("Inside getPositionGrid")
     for(var i = 0; i < script.gridParent.getChildrenCount(); i++){
         var pos = script.gridParent.getChild(i).getComponent("Component.ScreenTransform").anchors.getCenter()
         positions.push(pos)
@@ -38,18 +41,27 @@ function getPositionGrid(){
 }
 
 
-function turnStarted(){
-    getPlayers()
-    getCurrentTurn()
-    getGrid()
-    highlightAllCells(false)
+async function turnStarted(){
 
-    script.spellManager.turnStarted();
+
+    await getPlayers()
+    await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
+
+    //getCurrentTurn()
+    await getGrid()
+    highlightAllCells(false)
+    //await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
+
+
+    
 
 }
 
 script.turnBased.onTurnStart.add(function (evt) {
-        print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
+    //    print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
+        currentPlayer = evt.currentUserIndex;
+        currentTurn = evt.turnCount;
+        print("Turn Count "+currentTurn)
         turnStarted(); // your existing function
     });
 
@@ -76,58 +88,92 @@ script.createEvent("OnAwakeEvent").bind(setupTurnBasedEvents);
 */
 
 async function getPlayers(){
-    currentPlayer = await script.turnBased.getCurrentUserIndex()
+    //currentPlayer = await script.turnBased.getCurrentUserIndex()
     otherPlayer = await script.turnBased.getOtherUserIndex()
 
-    print(currentPlayer + " is current player ")
+    //print(currentPlayer + " is current player ")
     print(otherPlayer + " is other player ")
 
 }
 
 async function getCurrentTurn(){
-    currentTurn = await script.turnBased.getTurnCount()
+    //currentTurn = await script.turnBased.getTurnCount()
     print("Turn Count "+currentTurn)
 }
 
 async function getGrid(){
     grid = await script.turnBased.getGlobalVariable("gridData")
-    if(grid == undefined){
-        grid = [
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-        global.CellType.None,
-
-        ]
-
+    if (grid == undefined) {
+    grid = [];
+    for (var i = 0; i < 9; i++) {
+        grid.push({
+            "owner": global.CellType.None,
+            "spells": []
+        });
     }
-    print("Grid : "+grid);
+}
+    //print("Grid : "+grid);
+    debugGrid();
     populateGrid()
 }
 
+function debugGrid() {
+    print("======= GRID DEBUG =======");
+    for (var i = 0; i < grid.length; i++) {
+        var cell = grid[i];
+        var spellCount = cell.spells ? cell.spells.length : 0;
+        
+        print("Cell [" + i + "] | Owner: " + cell.owner + " | Spells: " + spellCount);
+        
+        if (spellCount > 0) {
+            print("  -> Spell Details: " + JSON.stringify(cell.spells));
+        }
+    }
+    print("==========================");
+}
+
 function populateGrid(){
-    print("Inside populateGrid, Grid = "+grid);
+    //print("Inside populateGrid, Grid = "+grid);
 
     clearArray()
 
     for(var i = 0; i<grid.length; i++){
 
-        if(grid[i] == global.CellType.User1 || grid[i] == global.CellType.User2){
+        if(grid[i].owner == global.CellType.User1 || grid[i].owner == global.CellType.User2){
             var newObj = script.userCard.instantiate(script.spawnParent)
             var transform = newObj.getComponent("Component.ScreenTransform")
             newObj.name = "Card_Cell_" + i;
             transform.anchors.setCenter(positions[i])
             xoArray.push(newObj)
             var newCard = getCardComponent(newObj);
-            print("New Card Name : " +newCard.getName());
+            //print("New Card Name : " +newCard.getName());
 
-            var targetUser = (grid[i] == global.CellType.User1) ? 0 : 1;
+            script.cells[i].setCard(newCard);
+
+            var targetUser = (grid[i].owner == global.CellType.User1) ? 0 : 1;
             newCard.setTargetUser(targetUser);
+
+
+            // During doing "Populate Grid", we need to consider 2 things
+            // 1. If effective turn is less than current turn show the steady (ongoing effect) 
+            // 2. If effective turn == current turn && effective user == currentPlayer, apply spell function
+
+
+            // Now to apply effects for ongoing spells
+
+            var spells = grid[i].spells;
+
+            for(var spellsIndex = 0; spellsIndex< spells.length; spellsIndex++){
+                print("Spells[spellsIndex] : "+ spells[spellsIndex]);
+                script.spellManager.processAttchedSpell(newCard, spells[spellsIndex]);
+
+            }
+
+
+
+
+
+
 
 
         }
@@ -146,7 +192,7 @@ function clearArray(){
 
 var hasMovedThisTurn = false;
 
-function gridTapped(gridIndex){
+async function gridTapped(gridIndex){
     print("gridIndex : "+gridIndex)
     print("Inside Grid Tapped");
 
@@ -157,11 +203,11 @@ function gridTapped(gridIndex){
         print("Inside Grid Tapped Spell None");
         
 
-        if(grid[gridIndex] != 0){
+        if(grid[gridIndex].owner != 0){
         return;
         }
 
-        grid[gridIndex] = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
+        grid[gridIndex].owner = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
 
 
 
@@ -175,22 +221,32 @@ function gridTapped(gridIndex){
         if(spellFunctionalGrids.includes(gridIndex)){
             print("FunctionalSpell includes current grid");
 
-            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex]);
+            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex].owner);
 
-            if(currentPlayer == 0 && grid[gridIndex] == global.CellType.User2){
+            if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User2){
                 print("Current user is 0, and Tapped grid is occupied by Another user2");
                 print("Previous grid : "+grid);
+                
+                //#####################
+                //grid[gridIndex] = global.CellType.User1;
+                attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+                //#####################
 
-                grid[gridIndex] = global.CellType.User1;
+
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
 
             }
-            else if(currentPlayer == 1 && grid[gridIndex] == global.CellType.User1){
+            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
                 print("Current user is 1, and Tapped grid is occupied by Another user1");
                 print("Previous grid : "+grid);
-                grid[gridIndex] = global.CellType.User2;
+                //grid[gridIndex].owner = global.CellType.User2;
+
+                attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+
+
+
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
@@ -301,12 +357,12 @@ function highlightCell(cellIndex, willHighlight){
 }
 
 function highlightAllCells(willHighlight){
-    print("highlightAllCells called, value = " + willHighlight);
+   // print("highlightAllCells called, value = " + willHighlight);
     for (var i = 0 ; i < script.cells.length; i++){
         var cellScript = script.cells[i];
-        print("cell[" + i + "] script = " + cellScript);
+        //print("cell[" + i + "] script = " + cellScript);
         if (cellScript && cellScript.highlight) {
-            print(" -> calling highlight on cell " + i);
+            //print(" -> calling highlight on cell " + i);
             cellScript.highlight(willHighlight);
         } else {
             print(" -> NO highlight() on cell " + i);
@@ -320,14 +376,14 @@ function highlightAsPerSpell(spellType){
         if(currentPlayer == 0){
             // TODO : Highlight Cells with type CellType.User2
             for(var i = 0; i< grid.length; i++){
-                if(grid[i] == global.CellType.User2){
+                if(grid[i].owner == global.CellType.User2){
                     highlightCell(i, true);
                 }
             }
         }
         else{
             for(var i = 0; i< grid.length; i++){
-                if(grid[i] == global.CellType.User1){
+                if(grid[i].owner == global.CellType.User1){
                     highlightCell(i, true);
                 }
             }
@@ -360,13 +416,13 @@ function handleSpell(spellType){
         print("Inside Stael Type Spell Handling ----");
         for(var i = 0; i<grid.length; i++){
             if(currentPlayer == 0){
-                if(grid[i] == global.CellType.User2){
+                if(grid[i].owner == global.CellType.User2){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
                 }
             }
             else{
-                if(grid[i] == global.CellType.User1){
+                if(grid[i].owner == global.CellType.User1){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
             }
@@ -387,3 +443,39 @@ function handleSpell(spellType){
 
 script.handleSpell = handleSpell
 
+
+
+
+function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
+    // 1. Get the current cell object
+    var cell = grid[gridIndex];
+
+    // 2. Create the spell effect object
+
+    var newSpellEffect = script.spellManager.getSpellDetails(spellType, currentTurn);
+    /*var newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : effectiveTurn,
+        "effectiveUser" : currentPlayer,
+
+        //"duration": 2 // Set duration based on the spell type
+    };*/
+
+    // 3. Insert the spell into the array
+    cell.spells.push(newSpellEffect);
+
+    print("Spell " + spellType + " applied to cell " + gridIndex);
+
+     
+    print("Starting Animation Wait...");
+    //await script.spellManager.showCastedSpellAnimation(activatedSpellType);
+    print("Animation Finished, continuing with grid update...");
+
+    // 4. Update the turn-based system immediately
+    //script.turnBased.setGlobalVariable("gridData", grid);
+    
+    // 5. Refresh visuals so the icon appears
+    //populateGrid();
+}

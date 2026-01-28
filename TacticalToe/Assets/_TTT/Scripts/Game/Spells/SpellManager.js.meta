@@ -26,7 +26,11 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    animHandler: false
     boardController: false
+    fireCastedEffectImage: false
+    morphCastedEffectImage: false
+    shieldCastedEffectImage: false
     spell1OptionKey: false
     spell2OptionKey: false
     spell3OptionKey: false
@@ -47,6 +51,10 @@
       spell2OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell3OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       boardController: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      shieldCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      fireCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
