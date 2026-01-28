@@ -26,6 +26,9 @@ global.SpellType = {
 //@input Component.Image fireCastedEffectImage;
 // @input Component.ScriptComponent animHandler
 
+//@input Component.ScriptComponent morphCastScript;
+
+
 
 
 
@@ -309,7 +312,8 @@ script.processAttchedSpell = processAttchedSpell;
 // 2. Spell Applied Cell Effects
 // 3. Spell is working effect
 
-async function showCastedSpellAnimation(spellType){
+async function showCastedSpellAnimation(spellType, gridIndex){
+    print("Inside showCastedSpellAnimation");
     var effectToApply;
     if(spellType == global.SpellType.Steal){
         effectToApply = script.morphCastedEffectImage;
@@ -321,14 +325,50 @@ async function showCastedSpellAnimation(spellType){
     else{
         print("ERROR to get casted effect image for : "+spellType);
     }
+    //print("Setting center"+position);
+    var so = effectToApply.getSceneObject();
+    var st = so.getComponent("Component.ScreenTransform");
+
+    //snapTo(position, st);
+    //var parentPointForB = st.worldPointToParentPoint(position); // -1..1
+    //st.anchors.setCenter(parentPointForB);
+    if (!st) {
+        print("SpellManager: effect image has no ScreenTransform");
+        return;
+    }
+
+    script.morphCastScript.setPosition(gridIndex);
+
+    //print("Setting center " + JSON.stringify(position));
+    //st.anchors.setCenter(position);
+    print("Done Setting center");
+
     effectToApply.getSceneObject().enabled = true;
-    // Await the animation completion
-    /*await new Promise(function(resolve) {
-        script.animHandler.playVideoAnimation(effectToApply, function() {
-            print("SpellManager: Animation promise resolved.");
-            resolve(); 
+    so.enabled = true;
+
+
+
+
+    print("Animation starting...");
+
+    await new Promise(function(resolve) {
+        
+        // We create an anonymous function to act as the 'onComplete'
+        script.animHandler.playVideoAnimation(script.morphCastedEffectImage, function() {
+            
+
+            // 1. Put your custom "onComplete" code here
+            print("Video finished! Now doing custom logic...");
+            //script.testImage.getSceneObject().enabled = false; 
+
+            // 2. Call resolve() to tell the 'await' it can continue
+            resolve();
         });
-    });*/
+
+    });
+
+    // 3. This code runs only AFTER resolve() is called above
+    print("Now executing the code after the await.");
     
     print("SpellManager: showCastedSpellAnimation complete.");
 
@@ -337,4 +377,44 @@ async function showCastedSpellAnimation(spellType){
 
 
 script.showCastedSpellAnimation = showCastedSpellAnimation;
+
+
+function snapTo(cardWorldCenter, effectSt) {
+    // 1) Get card's visual center in screen space (0..1,0..1)
+    //var cardScreenPos = cardSt.localPointToScreenPoint(vec2.zero());
+
+    // 2) Convert that screen pos into effect's parent anchor space (-1..1)
+    var effectWorldCenter  = effectSt.localPointToWorldPoint(vec2.zero());
+
+
+
+        // 3) Move effect SceneObject so centers match
+        var effectTransform = effectSt.getSceneObject().getTransform();
+        var currentWorldPos = effectTransform.getWorldPosition();
+
+    
+        // delta = how much to move the object so its center reaches card center
+        var delta = cardWorldCenter.sub(effectWorldCenter);
+        var newWorldPos = currentWorldPos.add(delta);
+
+         effectTransform.setWorldPosition(newWorldPos);
+
+         /*
+    
+    // 3) Zero out offsets and basic position so only anchors define the rect
+    var off = effectSt.offsets;
+    off.left = 0;
+    off.right = 0;
+    off.top = 0;
+    off.bottom = 0;
+    effectSt.offsets = off;
+
+    effectSt.position = new vec3(0, 0, 0);  // basic position
+    effectSt.pivot    = vec2.zero();        // center pivot, so center = visual center
+
+    // 4) Finally set center to that parent anchor point
+    effectSt.anchors.setCenter(effectParentPos);
+
+    */
+}
 

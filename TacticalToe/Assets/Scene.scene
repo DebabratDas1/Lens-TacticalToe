@@ -1237,8 +1237,8 @@
 - !<SceneObject/376bc1d3-7525-4312-9024-1a6e4c32b1eb>
   PrefabRemaps:
     []
-  Name: MorphEffect_!
-  Enabled: false
+  Name: MorphCastEffect_1_video
+  Enabled: true
   Layers: 1048576
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -1250,6 +1250,7 @@
   Components:
     - !<own> 873aaa93-b4ee-4397-9847-9812f63108b3
     - !<own> 3575768a-df25-4916-8aa1-3fad25f01f77
+    - !<own> d9beaedf-47dc-4e49-8c06-91114ff6a136
 - !<Camera/37858273-cc9e-47de-935a-b2055764cf3b>
   PrefabRemaps:
     []
@@ -1511,6 +1512,8 @@
       juiceAnim: !<reference.ScriptComponent> 38af2cb0-b564-49e9-9758-f545ea40e9ab
       tweenObject: !<reference.SceneObject> 0c03a2ae-1e34-4cad-a736-a6bd4f6deaed
       optionKey1: !<reference.ScriptComponent> 8a4c7a58-b861-430a-ab04-febe2ea70506
+      animHandler: !<reference.ScriptComponent> e27d5e77-ac43-4c13-8215-1d7b7afc22ef
+      testImage: !<reference.Image> 3575768a-df25-4916-8aa1-3fad25f01f77
   ScriptTypes:
     "":
       {}
@@ -3004,10 +3007,10 @@
   RawMode: true
   ForceBasic: true
   Anchor:
-    left: -1.775162
-    bottom: -1.025822
-    right: 2.555032
-    top: 1.283718
+    left: -2.183028
+    bottom: -1.019140
+    right: 2.147167
+    top: 1.290400
   Offset:
     left: 0.000000
     bottom: 0.000000
@@ -4123,6 +4126,7 @@
       shieldCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       fireCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       animHandler: !<reference.ScriptComponent> e27d5e77-ac43-4c13-8215-1d7b7afc22ef
+      morphCastScript: !<reference.ScriptComponent> d9beaedf-47dc-4e49-8c06-91114ff6a136
   ScriptTypes:
     "":
       {}
@@ -5241,6 +5245,32 @@
       delay: !<float> 0.000000
       easingFunction: Bounce
       easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/d9beaedf-47dc-4e49-8c06-91114ff6a136>
+  PrefabRemaps:
+    []
+  Name: MorphCastEffect
+  Enabled: true
+  ScriptAsset: !<reference> 13e50167-8991-47c3-9be6-6cacdadcf87e
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      positions: !<Vec4[]>
+        - {x: -2.573000, y: 1.757200, z: -0.660200, w: 1.649300}
+        - {x: -2.195600, y: 2.134600, z: -0.652700, w: 1.656800}
+        - {x: -1.813500, y: 2.516700, z: -0.652700, w: 1.656800}
+        - {x: -2.564200, y: 1.766000, z: -0.836200, w: 1.473400}
+        - {x: -2.199600, y: 2.130600, z: -0.836200, w: 1.473400}
+        - {x: -1.796800, y: 2.533400, z: -0.836200, w: 1.473400}
+        - {x: -2.557500, y: 1.772700, z: -1.019100, w: 1.290400}
+        - {x: -2.183000, y: 2.147200, z: -1.019100, w: 1.290400}
+        - {x: -1.810200, y: 1.772700, z: -1.025800, w: 1.283700}
+      thisScreenTransform: !<reference.ScreenTransform> 873aaa93-b4ee-4397-9847-9812f63108b3
   ScriptTypes:
     "":
       {}

@@ -26,8 +26,10 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    animHandler: false
     juiceAnim: false
     optionKey1: false
+    testImage: false
     tweenObject: false
   ScriptTypesHidden:
     {}
@@ -41,6 +43,8 @@
     - juiceAnim: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       tweenObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       optionKey1: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      testImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}

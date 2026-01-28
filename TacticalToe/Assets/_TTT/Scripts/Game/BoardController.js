@@ -229,7 +229,7 @@ async function gridTapped(gridIndex){
                 
                 //#####################
                 //grid[gridIndex] = global.CellType.User1;
-                attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+                await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
                 //#####################
 
 
@@ -243,7 +243,7 @@ async function gridTapped(gridIndex){
                 print("Previous grid : "+grid);
                 //grid[gridIndex].owner = global.CellType.User2;
 
-                attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+                await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
 
 
 
@@ -446,7 +446,8 @@ script.handleSpell = handleSpell
 
 
 
-function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
+
+async function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
     // 1. Get the current cell object
     var cell = grid[gridIndex];
 
@@ -470,7 +471,22 @@ function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
 
      
     print("Starting Animation Wait...");
-    //await script.spellManager.showCastedSpellAnimation(activatedSpellType);
+
+    var st = script.cells[gridIndex]
+    .getSceneObject()
+    .getComponent("Component.ScreenTransform");
+
+    var screenPos = st.localPointToWorldPoint(vec2.zero());
+
+    print("gridIndex : "+gridIndex);
+    print("grid position  : "+grid[gridIndex]);
+    print("screenPos  : "+screenPos);
+
+
+
+
+
+    await script.spellManager.showCastedSpellAnimation(activatedSpellType, gridIndex);
     print("Animation Finished, continuing with grid update...");
 
     // 4. Update the turn-based system immediately
