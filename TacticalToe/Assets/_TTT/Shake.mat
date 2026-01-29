@@ -57,5 +57,5 @@
       value: 1.000000
     uniFreq:
       typeIdx: 3
-      value: {x: 8.000000, y: 6.000000}
+      value: {x: 4.000000, y: 3.000000}
   Pass: !<reference> d7e395ee-b893-413e-89a9-fdd00f2f4b74

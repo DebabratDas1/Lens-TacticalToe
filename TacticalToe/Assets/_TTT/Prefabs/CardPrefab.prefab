@@ -63,6 +63,8 @@
   Enabled: true
   ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
   ScriptInputsDefault:
+    cardScreenTransform: true
+    animStartBounds: true
     freezeTexture: true
     spell3Texture: true
     spell4Texture: true
@@ -72,6 +74,8 @@
   ScriptInputs:
     "":
       turnBasedPlayerInfo: !<reference.ScriptComponent> e9f0eed2-f365-475c-94ec-32d7827a1e27
+      cardScreenTransform: !<reference.ScreenTransform> 00000000-0000-0000-0000-000000000000
+      animStartBounds: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
       effectImage: !<reference.Image> 7f5ab793-97c8-45a3-91b2-94128710e431
       stealTexture: !<reference.Texture> ea435a50-3e41-44a2-b93e-a4b25ac486f0
       freezeTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000

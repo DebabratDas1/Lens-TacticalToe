@@ -13,17 +13,21 @@ global.SpellType = {
 
     //@input Component.ScriptComponent turnBased;
 
+    //@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Other Script References"}
+//@input Component.ScriptComponent boardController
+// @input Component.ScriptComponent animHandler
+// @input Component.ScriptComponent juice;
+
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Below Spell Options Keys"}
 //@input Component.ScriptComponent stealOptionKey
 //@input Component.ScriptComponent spell1OptionKey
 //@input Component.ScriptComponent spell2OptionKey
 //@input Component.ScriptComponent spell3OptionKey
 
 
-//@input Component.ScriptComponent boardController
-
-//@input Component.Image shieldCastedEffectImage;
-//@input Component.Image fireCastedEffectImage;
-// @input Component.ScriptComponent animHandler
 
 
 //@ui {"widget":"separator"}
@@ -34,6 +38,9 @@ global.SpellType = {
 //@input Component.ScriptComponent morphActionScript;
 
 
+//@ui {"widget":"separator"}
+//@input Component.Image shieldCastedEffectImage;
+//@input Component.Image fireCastedEffectImage;
 
 
 
@@ -387,6 +394,10 @@ async function showCastedSpellAnimation(spellType, gridIndex){
 
     });
 
+    script.juice.shakeScreen();
+
+
+
     // 3. This code runs only AFTER resolve() is called above
     print("Now executing the code after the await.");
     
@@ -472,6 +483,8 @@ async function performSpellAction(spell, gridIndex){
 
 
     });
+
+    script.juice.shakeScreen();
 
 
 

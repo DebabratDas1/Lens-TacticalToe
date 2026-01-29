@@ -169,7 +169,7 @@ async function updateGridData(index, action, data, suppressRefresh) {
 
 script.updateGridData = updateGridData;
 
-async function populateGrid() {
+async function populateGrid(context = { isPlacement: false }) {
 
 /*
     if (isPopulating) {
@@ -191,7 +191,13 @@ async function populateGrid() {
             var newObj = script.userCard.instantiate(script.spawnParent);
             var transform = newObj.getComponent("Component.ScreenTransform");
             newObj.name = "Card_Cell_" + i;
-            transform.anchors.setCenter(positions[i]);
+
+            //Need to perform card placement animation
+
+            //transform.anchors.setCenter(positions[i]);
+
+
+print("AAAA");
             xoArray.push(newObj);
 
             var newCard = getCardComponent(newObj);
@@ -199,6 +205,16 @@ async function populateGrid() {
 
             var targetUser = (grid[i].owner == global.CellType.User1) ? 0 : 1;
             newCard.setTargetUser(targetUser);
+
+            print("Need to show card anim");
+
+            if (context.isPlacement) {
+                print("Need to show anim");
+            newCard.playCardPlacingAnim(positions[i]);
+        }
+        else{
+            transform.anchors.setCenter(positions[i]);
+        }
         }
     }
 
@@ -278,7 +294,7 @@ async function gridTapped(gridIndex){
 
         var newOwner = (currentPlayer == 0) ? global.CellType.User1 : global.CellType.User2;
         await updateGridData(gridIndex, 'setOwner', newOwner);
-
+print("Grid updated");
         //grid[gridIndex].owner = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
 
 
@@ -340,7 +356,7 @@ async function gridTapped(gridIndex){
     
     hasMovedThisTurn = true;
 
-    await populateGrid()
+    await populateGrid({ isPlacement: true });
 
     //await requestRedraw();
 

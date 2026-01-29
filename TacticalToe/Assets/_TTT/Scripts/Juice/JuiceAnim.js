@@ -25,3 +25,11 @@ function enableForSeconds(seconds) {
     });
     evt.reset(seconds); // delay in seconds
 }
+
+
+function shakeScreen(){
+    enableForSeconds(0.6);
+}
+
+script.shakeScreen = shakeScreen;
+

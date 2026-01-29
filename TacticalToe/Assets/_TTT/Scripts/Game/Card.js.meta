@@ -26,6 +26,8 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    animStartBounds: false
+    cardScreenTransform: false
     defaultTexture: false
     effectImage: false
     freezeTexture: false
@@ -43,6 +45,8 @@
     []
   DefaultScriptInputs:
     - turnBasedPlayerInfo: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      cardScreenTransform: !<reference.ScreenTransform> 00000000-0000-0000-0000-000000000000
+      animStartBounds: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
       effectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       stealTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       freezeTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
