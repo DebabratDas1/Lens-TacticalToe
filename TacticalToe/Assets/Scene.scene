@@ -452,22 +452,6 @@
     []
   Components:
     []
-- !<SceneObject/1341c00a-d3b4-4d3e-bff6-776c401fc4fa>
-  PrefabRemaps:
-    []
-  Name: MorphEffect
-  Enabled: false
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 638ef9f6-f96f-447a-9f79-8584765e6cc5
-    - !<own> 63c724c8-d9a2-4d35-9e4e-0ab5c43a356d
 - !<Text/16e36b2a-d7ca-4778-a036-ea3736aeeec4>
   PrefabRemaps:
     []
@@ -2169,58 +2153,6 @@
   ShadowDensity: 1.000000
   Materials:
     - !<reference> 970060cd-1bb5-4b31-b536-c6f047d4fa08
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<ScreenTransform/638ef9f6-f96f-447a-9f79-8584765e6cc5>
-  PrefabRemaps:
-    []
-  Name: Screen Transform
-  Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.569025
-    bottom: -0.190217
-    right: 0.784141
-    top: 1.194321
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
-- !<Image/63c724c8-d9a2-4d35-9e4e-0ab5c43a356d>
-  PrefabRemaps:
-    []
-  Name: Image
-  Enabled: true
-  RenderOrder: 0
-  StretchMode: Fill
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 019b83ef-d031-4e1d-8b6c-ee6b5700a0d3
   FlipX: false
   FlipY: false
   RotationAngle: 0
@@ -4463,7 +4395,6 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
-    - !<own> 1341c00a-d3b4-4d3e-bff6-776c401fc4fa
     - !<own> 376bc1d3-7525-4312-9024-1a6e4c32b1eb
     - !<own> e07b9325-e284-4863-94bd-d261fc292bb5
   Components:
