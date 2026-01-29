@@ -47,9 +47,11 @@ async function turnStarted(){
     await getPlayers()
     await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
 
+    highlightAllCells(false);
+
+
     //getCurrentTurn()
     await getGrid()
-    highlightAllCells(false)
     //await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
 
 
@@ -114,7 +116,7 @@ async function getGrid(){
 }
     //print("Grid : "+grid);
     debugGrid();
-    populateGrid()
+    await populateGrid()
 }
 
 function debugGrid() {
@@ -132,7 +134,49 @@ function debugGrid() {
     print("==========================");
 }
 
-function populateGrid(){
+
+/**
+ * @param {number} index - Grid cell index (0-8)
+ * @param {string} action - 'setOwner', 'addSpell', 'removeSpell'
+ * @param {any} data - The value to set (Owner ID or Spell Object)
+ */
+async function updateGridData(index, action, data) {
+    print("Updating Grid at [" + index + "] Action: " + action);
+    
+    var cell = grid[index];
+
+    switch(action) {
+        case 'setOwner':
+            cell.owner = data;
+            break;
+
+        case 'addSpell':
+            if (!cell.spells) cell.spells = [];
+            cell.spells.push(data);
+            break;
+
+        case 'removeSpell':
+            // data would be the spell type we want to remove
+            cell.spells = cell.spells.filter(function(s) {
+                return s.type !== data;
+            });
+            break;
+
+        case 'clearSpells':
+            cell.spells = [];
+            break;
+    }
+
+    // Sync to the turn-based system immediately
+    await script.turnBased.setGlobalVariable("gridData", grid);
+    
+    // Refresh the visuals
+    await populateGrid();
+}
+
+script.updateGridData = updateGridData;
+
+async function populateGrid(){
     //print("Inside populateGrid, Grid = "+grid);
 
     clearArray()
@@ -165,7 +209,7 @@ function populateGrid(){
 
             for(var spellsIndex = 0; spellsIndex< spells.length; spellsIndex++){
                 print("Spells[spellsIndex] : "+ spells[spellsIndex]);
-                script.spellManager.processAttchedSpell(newCard, spells[spellsIndex]);
+                await script.spellManager.processAttchedSpell(newCard, spells[spellsIndex], i);
 
             }
 
@@ -207,7 +251,10 @@ async function gridTapped(gridIndex){
         return;
         }
 
-        grid[gridIndex].owner = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
+        var newOwner = (currentPlayer == 0) ? global.CellType.User1 : global.CellType.User2;
+        await updateGridData(gridIndex, 'setOwner', newOwner);
+
+        //grid[gridIndex].owner = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
 
 
 
@@ -268,7 +315,7 @@ async function gridTapped(gridIndex){
     
     hasMovedThisTurn = true;
 
-    populateGrid()
+    await populateGrid()
 
     script.turnBased.setGlobalVariable("gridData", grid)
 
@@ -448,31 +495,37 @@ script.handleSpell = handleSpell
 
 
 async function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
-    // 1. Get the current cell object
-    var cell = grid[gridIndex];
+    // Get the current cell object
+    //var cell = grid[gridIndex];
 
-    // 2. Create the spell effect object
-
-    var newSpellEffect = script.spellManager.getSpellDetails(spellType, currentTurn);
-    /*var newSpellEffect = {
-        "type": spellType,
-        "caster": currentPlayer,
-        "appliedTurn" : currentTurn,
-        "effectiveTurn" : effectiveTurn,
-        "effectiveUser" : currentPlayer,
-
-        //"duration": 2 // Set duration based on the spell type
-    };*/
-
-    // 3. Insert the spell into the array
-    cell.spells.push(newSpellEffect);
+    // 1.. Create the spell effect object
 
     print("Spell " + spellType + " applied to cell " + gridIndex);
 
-     
+
+    var newSpellEffect = script.spellManager.getSpellDetails(spellType, currentTurn);
+    
+
     print("Starting Animation Wait...");
 
-    var st = script.cells[gridIndex]
+
+    // 2. Show animation first
+    await script.spellManager.showCastedSpellAnimation(spellType, gridIndex);
+
+    print("Animation Finished, continuing with grid update...");
+
+
+    // Use the central update function to add the spell and sync/populate
+    await updateGridData(gridIndex, 'addSpell', newSpellEffect);
+
+
+    //Insert the spell into the array
+    //cell.spells.push(newSpellEffect);
+
+
+     
+
+    /*var st = script.cells[gridIndex]
     .getSceneObject()
     .getComponent("Component.ScreenTransform");
 
@@ -480,14 +533,16 @@ async function attachSpellToCell(gridIndex, spellType, effectiveTurn) {
 
     print("gridIndex : "+gridIndex);
     print("grid position  : "+grid[gridIndex]);
-    print("screenPos  : "+screenPos);
+    print("screenPos  : "+screenPos);*/
 
 
 
 
 
-    await script.spellManager.showCastedSpellAnimation(activatedSpellType, gridIndex);
-    print("Animation Finished, continuing with grid update...");
+    //await script.spellManager.showCastedSpellAnimation(activatedSpellType, gridIndex);
+
+
+
 
     // 4. Update the turn-based system immediately
     //script.turnBased.setGlobalVariable("gridData", grid);

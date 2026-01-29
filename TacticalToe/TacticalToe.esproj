@@ -24,7 +24,7 @@ metaInfo:
     - Web
     - CameraKit
   platformBundlesEnabled: false
-  iconHash: ""
+  iconHash: 9cdda5158c197623fa3c7ad192e6ea6b
   videoPreviewHash: 48a18af31ca9dce48ffe2a9e407f68b6
   fromTemplateName: Default
   fromTemplateUrl: Lens Studio 5.17.0.25121001

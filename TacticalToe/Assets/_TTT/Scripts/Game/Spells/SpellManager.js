@@ -21,12 +21,18 @@ global.SpellType = {
 
 //@input Component.ScriptComponent boardController
 
-//@input Component.Image morphCastedEffectImage;
 //@input Component.Image shieldCastedEffectImage;
 //@input Component.Image fireCastedEffectImage;
 // @input Component.ScriptComponent animHandler
 
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Morph Spell References"}
+//@input Component.Image morphCastedEffectImage;
+//@input Component.Image morphActioningEffectImage;
 //@input Component.ScriptComponent morphCastScript;
+//@input Component.ScriptComponent morphActionScript;
+
 
 
 
@@ -285,17 +291,29 @@ function getSpellDetails(spellType, currentTurn){
 script.getSpellDetails = getSpellDetails;
 
 
-function processAttchedSpell(cardToApply, spell){
+async function processAttchedSpell(cardToApply, spell, gridindex){
     var spellType = spell.type;
     var caster = spell.caster;
     var effectiveTurn = spell.effectiveTurn;
     var effectiveUser = spell.effectiveUser;
+    var appliedTurn = spell.appliedTurn;
     print("Inside process attched spell in SpellManager, spell = "+spell);
     print("spell.caster = "+caster);
+    print("currentPlayer = "+currentPlayer);
+    print("CurrentTurn : "+currentTurn);
+    print("effectiveTurn : "+effectiveTurn);
+    print("appliedTurn : "+appliedTurn);
+
+
+
+
+
 
     if(effectiveTurn == currentTurn && effectiveUser == currentPlayer){
         // Need to Action
         //Need to call BoardController's Function
+        print("Trying to perform action");
+        await performSpellAction(spellType, gridindex);
     }
     else if(effectiveTurn > currentTurn){
         // Apply Attached Effect
@@ -336,6 +354,8 @@ async function showCastedSpellAnimation(spellType, gridIndex){
         print("SpellManager: effect image has no ScreenTransform");
         return;
     }
+
+    print("Trying to set morph cast effect position");
 
     script.morphCastScript.setPosition(gridIndex);
 
@@ -417,4 +437,105 @@ function snapTo(cardWorldCenter, effectSt) {
 
     */
 }
+
+
+
+async function performSpellAction(spellType, gridIndex){
+        print("Inside performSpellAction, gridIndex = "+gridIndex);
+
+        print("script.morphActionScript  :"+script.morphActionScript)
+
+        print("script.animHandler :  "+script.animHandler)
+
+
+    script.morphActionScript.setPosition(gridIndex);
+
+    if(spellType == global.SpellType.Steal){
+        print("Animation starting...");
+
+    await new Promise(function(resolve) {
+
+        print("Animation for action");
+        
+        // We create an anonymous function to act as the 'onComplete'
+        script.animHandler.playVideoAnimation(script.morphActioningEffectImage, function() {
+            
+
+            // 1. Put your custom "onComplete" code here
+            print("Morph action Video finished! Now doing custom logic...");
+            //script.testImage.getSceneObject().enabled = false; 
+
+            // 2. Call resolve() to tell the 'await' it can continue
+            resolve();
+        });
+
+    });
+
+
+
+    // 3. This code runs only AFTER resolve() is called above
+    print("Now executing the code after the await.");
+    
+    print("SpellManager: performSpellAction SpellAnimation complete.");
+
+    // 1. Determine new owner based on who casted the spell
+        var newOwner = (spell.caster == 0) ? global.CellType.User1 : global.CellType.User2;
+        
+        // 2. Change the Owner via the refactored function
+        await script.boardController.updateGridData(gridIndex, 'setOwner', newOwner);
+
+        // 3. REMOVE the spell so it doesn't trigger again next turn
+        await script.boardController.updateGridData(gridIndex, 'removeSpell', global.SpellType.Steal);
+        
+        print("Steal action finalized and spell removed.");
+
+
+
+    }
+
+/*
+
+    var grid = script.boardController.getGridData();
+
+    if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User2){
+                print("Current user is 0, and Tapped grid is occupied by Another user2");
+                print("Previous grid : "+grid);
+                
+                //#####################
+                grid[gridIndex].owner = global.CellType.User1;
+                //await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+                //#####################
+
+
+                print("Updated grid : "+grid);
+                //script.spellManager.spellUsed(activatedSpellType);
+                //script.spellManager.activateSpell(activatedSpellType);
+
+            }
+            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
+                print("Current user is 1, and Tapped grid is occupied by Another user1");
+                print("Previous grid : "+JSON.stringify( grid));
+                grid[gridIndex].owner = global.CellType.User2;
+
+                //await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
+
+
+
+                print("Updated grid : "+JSON.stringify( grid));
+                //script.spellManager.spellUsed(activatedSpellType);
+                //script.spellManager.activateSpell(activatedSpellType);
+
+
+            }
+            else{
+                print("Error during stealing")
+            }
+
+            */
+
+}
+
+
+
+
 

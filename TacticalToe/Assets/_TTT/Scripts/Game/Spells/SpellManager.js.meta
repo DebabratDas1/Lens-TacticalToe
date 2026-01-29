@@ -29,6 +29,8 @@
     animHandler: false
     boardController: false
     fireCastedEffectImage: false
+    morphActionScript: false
+    morphActioningEffectImage: false
     morphCastScript: false
     morphCastedEffectImage: false
     shieldCastedEffectImage: false
@@ -52,11 +54,13 @@
       spell2OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell3OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       boardController: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-      morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       shieldCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       fireCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      morphActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       morphCastScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      morphActionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
