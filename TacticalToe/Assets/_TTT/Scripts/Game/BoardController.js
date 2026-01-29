@@ -21,7 +21,8 @@ var cell = []
 var spellFunctionalGrids = []
 var activatedSpellType;
 
-
+var isPopulating = false;
+var needsRepopulate = false;
 
 function getGridData(){
     return grid;
@@ -51,7 +52,8 @@ async function turnStarted(){
 
 
     //getCurrentTurn()
-    await getGrid()
+    await getGrid();
+    //await requestRedraw();
     //await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
 
 
@@ -117,6 +119,7 @@ async function getGrid(){
     //print("Grid : "+grid);
     debugGrid();
     await populateGrid()
+    //await requestRedraw();
 }
 
 function debugGrid() {
@@ -140,92 +143,114 @@ function debugGrid() {
  * @param {string} action - 'setOwner', 'addSpell', 'removeSpell'
  * @param {any} data - The value to set (Owner ID or Spell Object)
  */
-async function updateGridData(index, action, data) {
-    print("Updating Grid at [" + index + "] Action: " + action);
-    
+/**
+ * Updated to allow "Silent" updates that don't trigger populateGrid
+ */
+async function updateGridData(index, action, data, suppressRefresh) {
     var cell = grid[index];
-
     switch(action) {
-        case 'setOwner':
-            cell.owner = data;
-            break;
-
-        case 'addSpell':
-            if (!cell.spells) cell.spells = [];
-            cell.spells.push(data);
-            break;
-
-        case 'removeSpell':
-            // data would be the spell type we want to remove
-            cell.spells = cell.spells.filter(function(s) {
-                return s.type !== data;
-            });
-            break;
-
-        case 'clearSpells':
-            cell.spells = [];
+        case 'setOwner': cell.owner = data; break;
+        case 'addSpell': cell.spells.push(data); break;
+        case 'removeSpell': 
+            cell.spells = cell.spells.filter(function(s) { return s.type !== data; }); 
             break;
     }
 
-    // Sync to the turn-based system immediately
     await script.turnBased.setGlobalVariable("gridData", grid);
-    
-    // Refresh the visuals
-    await populateGrid();
+
+    print("Grid = "+JSON.stringify(grid));
+    /*
+    // Only refresh visuals if we aren't already in the middle of a population loop
+    if (!suppressRefresh) {
+        await populateGrid();
+    }
+    */
 }
 
 script.updateGridData = updateGridData;
 
-async function populateGrid(){
-    //print("Inside populateGrid, Grid = "+grid);
+async function populateGrid() {
 
-    clearArray()
+/*
+    if (isPopulating) {
+        needsRepopulate = true; // Mark that we need to run again
+        return; 
+    }
+    
+    isPopulating = true;
+    needsRepopulate = false;
 
-    for(var i = 0; i<grid.length; i++){
+*/
 
-        if(grid[i].owner == global.CellType.User1 || grid[i].owner == global.CellType.User2){
-            var newObj = script.userCard.instantiate(script.spawnParent)
-            var transform = newObj.getComponent("Component.ScreenTransform")
+    print("--- Phase 1: Instantiating Cards ---");
+    clearArray();
+
+    // PHASE 1: Create all visual cards first
+    for (var i = 0; i < grid.length; i++) {
+        if (grid[i].owner !== global.CellType.None) {
+            var newObj = script.userCard.instantiate(script.spawnParent);
+            var transform = newObj.getComponent("Component.ScreenTransform");
             newObj.name = "Card_Cell_" + i;
-            transform.anchors.setCenter(positions[i])
-            xoArray.push(newObj)
-            var newCard = getCardComponent(newObj);
-            //print("New Card Name : " +newCard.getName());
+            transform.anchors.setCenter(positions[i]);
+            xoArray.push(newObj);
 
+            var newCard = getCardComponent(newObj);
             script.cells[i].setCard(newCard);
 
             var targetUser = (grid[i].owner == global.CellType.User1) ? 0 : 1;
             newCard.setTargetUser(targetUser);
-
-
-            // During doing "Populate Grid", we need to consider 2 things
-            // 1. If effective turn is less than current turn show the steady (ongoing effect) 
-            // 2. If effective turn == current turn && effective user == currentPlayer, apply spell function
-
-
-            // Now to apply effects for ongoing spells
-
-            var spells = grid[i].spells;
-
-            for(var spellsIndex = 0; spellsIndex< spells.length; spellsIndex++){
-                print("Spells[spellsIndex] : "+ spells[spellsIndex]);
-                await script.spellManager.processAttchedSpell(newCard, spells[spellsIndex], i);
-
-            }
-
-
-
-
-
-
-
-
         }
-
-        
     }
 
+    print("--- Phase 2: Processing Spells ---");
+    // PHASE 2: Now that all cards exist, process the logic
+    for (var j = 0; j < grid.length; j++) {
+        var cellSpells = grid[j].spells;
+        if (cellSpells && cellSpells.length > 0) {
+            // Get the card reference we just created
+            var cardComponent = script.cells[j].getCard(); 
+            
+            // Process spells for this specific cell
+            // Using a for-loop here to allow 'await' to work sequentially
+            for (var s = 0; s < cellSpells.length; s++) {
+                await script.spellManager.processAttchedSpell(cardComponent, cellSpells[s], j);
+            }
+        }
+    }
+/*
+    isPopulating = false; // Unlock when finished
+
+    // If a spell changed the board during the loop, run it one more time now
+    if (needsRepopulate) {
+        print("Repopulating board due to spell action changes...");
+        await populateGrid(); 
+    }
+
+    */
 }
+
+script.populateGrid = populateGrid;
+
+/*
+var redrawScheduled = false;
+
+async function requestRedraw() {
+    if (redrawScheduled) return;
+    redrawScheduled = true;
+
+    await new Promise(function(resolve) {
+        // wait one tick so all async logic finishes
+        script.createEvent("DelayedCallbackEvent")
+            .bind(function() {
+                redrawScheduled = false;
+                populateGrid();
+                resolve();
+            }).reset(0);
+    });
+}
+
+script.requestRedraw = requestRedraw;
+*/
 
 function clearArray(){
     for(var i = 0; i<xoArray.length; i++){
@@ -317,7 +342,10 @@ async function gridTapped(gridIndex){
 
     await populateGrid()
 
-    script.turnBased.setGlobalVariable("gridData", grid)
+    //await requestRedraw();
+
+
+    //script.turnBased.setGlobalVariable("gridData", grid)
 
     //var winner = getWinner()
 

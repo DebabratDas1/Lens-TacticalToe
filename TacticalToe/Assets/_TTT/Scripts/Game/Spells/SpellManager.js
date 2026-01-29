@@ -313,7 +313,7 @@ async function processAttchedSpell(cardToApply, spell, gridindex){
         // Need to Action
         //Need to call BoardController's Function
         print("Trying to perform action");
-        await performSpellAction(spellType, gridindex);
+        await performSpellAction(spell, gridindex);
     }
     else if(effectiveTurn > currentTurn){
         // Apply Attached Effect
@@ -440,7 +440,7 @@ function snapTo(cardWorldCenter, effectSt) {
 
 
 
-async function performSpellAction(spellType, gridIndex){
+async function performSpellAction(spell, gridIndex){
         print("Inside performSpellAction, gridIndex = "+gridIndex);
 
         print("script.morphActionScript  :"+script.morphActionScript)
@@ -450,7 +450,7 @@ async function performSpellAction(spellType, gridIndex){
 
     script.morphActionScript.setPosition(gridIndex);
 
-    if(spellType == global.SpellType.Steal){
+    if(spell.type == global.SpellType.Steal){
         print("Animation starting...");
 
     await new Promise(function(resolve) {
@@ -469,11 +469,16 @@ async function performSpellAction(spellType, gridIndex){
             resolve();
         });
 
+
+
     });
 
 
 
-    // 3. This code runs only AFTER resolve() is called above
+
+
+
+    // This code runs only AFTER resolve() is called above
     print("Now executing the code after the await.");
     
     print("SpellManager: performSpellAction SpellAnimation complete.");
@@ -481,13 +486,28 @@ async function performSpellAction(spellType, gridIndex){
     // 1. Determine new owner based on who casted the spell
         var newOwner = (spell.caster == 0) ? global.CellType.User1 : global.CellType.User2;
         
-        // 2. Change the Owner via the refactored function
-        await script.boardController.updateGridData(gridIndex, 'setOwner', newOwner);
-
-        // 3. REMOVE the spell so it doesn't trigger again next turn
-        await script.boardController.updateGridData(gridIndex, 'removeSpell', global.SpellType.Steal);
+     // 2. Update the data SILENTLY
+    // We pass 'true' because we don't want the board to redraw 
+    // TWICE (once for owner, once for spell removal). 
+    await script.boardController.updateGridData(gridIndex, 'setOwner', newOwner, true);
+    await script.boardController.updateGridData(gridIndex, 'removeSpell', spell.type, true);
         
         print("Steal action finalized and spell removed.");
+
+        print("Data updated. owner is now: " + newOwner);
+
+        print("Data updated in background. Now refreshing visuals...");
+
+    // 3. THE REFRESH
+    // This will clear the old card, place the new owner's card, 
+    // and show any remaining spells for this cell in one clean step.
+    // IMPORTANT: Because the owner changed, the card visual needs to swap.
+    // We call populateGrid one last time to fix the visuals.
+    await script.boardController.populateGrid();
+    //script.boardController.needsRepopulate = true;
+
+    print("Steal action finalized and visuals updated.");
+
 
 
 
