@@ -33,3 +33,15 @@ function shakeScreen(){
 
 script.shakeScreen = shakeScreen;
 
+
+function cardPlaceEffect(){
+    print("Inside card place effect");
+    script.placeAudio.play(1);
+
+    //global.tweenManager.startTween(tweenObject, 'Test_Tween');
+
+    enableForSeconds(0.6);
+}
+
+script.cardPlaceEffect = cardPlaceEffect;
+

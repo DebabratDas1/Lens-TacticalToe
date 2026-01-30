@@ -1,8 +1,8 @@
-- !<Material/cec50b9c-b6dd-412d-b8ec-9aa9e92aaa80>
+- !<Material/90805fd0-61ab-4e50-804f-276c824c5e57>
   PackagePath: ""
   PassesInfo:
-    - !<own> 080fd4c8-a885-44ed-acf9-c5f359217c7a
-- !<PassInfo/080fd4c8-a885-44ed-acf9-c5f359217c7a>
+    - !<own> 89e1d949-4054-4123-aef5-4ad8a013de86
+- !<PassInfo/89e1d949-4054-4123-aef5-4ad8a013de86>
   CachedProperties:
     - Port_Default_N369:
         typeIdx: 5
@@ -33,17 +33,17 @@
       value: 0
     baseColor:
       typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 0.000000}
+      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     baseTex:
       typeIdx: 9
       value:
-        id: 65b34c5e-b093-4ac9-b7a6-b3baffade6cd
+        id: 6d2a4542-1070-4fd1-ab8c-27067ec199f5
         sampler:
           filteringMode: Trilinear
-          wrapModeU: Repeat
-          wrapModeV: Repeat
-          wrapModeW: Repeat
-          borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+          wrapModeU: ClampToEdge
+          wrapModeV: ClampToEdge
+          wrapModeW: ClampToEdge
+          borderColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
           mipmaps: false
         type: Texture2D
   Pass: !<reference> d1964487-d647-4c1b-8cb2-32394c581a1e

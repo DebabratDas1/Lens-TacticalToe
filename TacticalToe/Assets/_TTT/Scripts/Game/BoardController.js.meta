@@ -28,7 +28,9 @@
   ScriptInputsHidden:
     animHandler: false
     cells: false
+    gameover: false
     gridParent: false
+    juice: false
     spawnParent: false
     spellManager: false
     turnBased: false
@@ -45,7 +47,9 @@
     - turnBased: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       cells: !<reference.ScriptComponent[]>
         []
+      gameover: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      juice: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       userCard: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       spawnParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       gridParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000

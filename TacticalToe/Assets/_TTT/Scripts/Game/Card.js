@@ -27,6 +27,11 @@ function initMaterial() {
     // Clone shared material so this card has its own copy
     localMat = script.effectImage.mainMaterial.clone();
     script.effectImage.mainMaterial = localMat;
+
+
+    //var c = localMat.mainPass.baseColor; 
+    //localMat.mainPass.baseColor = new vec4(c.x, c.y, c.z, 0.0); // alpha 0
+    //localMat.mainPass.baseTex = script.defaultTexture;
 }
 
 script.createEvent("OnStartEvent").bind(initMaterial);
@@ -100,7 +105,9 @@ function showAttchedSpell(spellType){
 
     }
     else{
+
          mat.mainPass.baseColor = new vec4(c.x, c.y, c.z, 0.0); // alpha 0
+         mat.mainPass.baseTex = script.defaultTexture;
     }
     print("Show attached spell finished");
 }

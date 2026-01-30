@@ -18,6 +18,8 @@ global.SpellType = {
 //@input Component.ScriptComponent boardController
 // @input Component.ScriptComponent animHandler
 // @input Component.ScriptComponent juice;
+// @input Component.ScriptComponent spellBook;
+
 
 
 //@ui {"widget":"separator"}
@@ -194,6 +196,9 @@ global.SpellType = {
                 }
 
         }
+
+        // SHOW SPELL BOOK
+        script.spellBook.showSpellbook(activatedSpellType);
 
     }
 
@@ -520,6 +525,10 @@ async function performSpellAction(spell, gridIndex){
     //script.boardController.needsRepopulate = true;
 
     print("Steal action finalized and visuals updated.");
+
+
+    script.gameover.checkGameEnd();
+
 
 
 

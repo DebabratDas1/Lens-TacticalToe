@@ -1,0 +1,68 @@
+- !<AssetImportMetadata/14756bf6-3838-498f-9036-e3fcd43ced1f>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 41b27530-f4ed-4f9a-beb3-44325f3af33b
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 41b27530-f4ed-4f9a-beb3-44325f3af33b
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> e99c5f28-a92c-4a87-a289-838827ed636b
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/e99c5f28-a92c-4a87-a289-838827ed636b>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: fb3f0aa7-7980-4a2d-9345-271f053f049f
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    boardController: false
+    player1Looser: false
+    player1LooserName: false
+    player1TieName: false
+    player1Winner: false
+    player1WinnerName: false
+    player2Looser: false
+    player2LooserName: false
+    player2TieName: false
+    player2Winner: false
+    player2WinnerName: false
+    tieIndicator: false
+    turnBased: false
+    winLooserIndicator: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - boardController: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      turnBased: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      player1Winner: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player2Winner: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player1Looser: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player2Looser: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      winLooserIndicator: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tieIndicator: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player1WinnerName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player1LooserName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player2WinnerName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player2LooserName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player1TieName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      player2TieName: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}

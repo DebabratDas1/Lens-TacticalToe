@@ -16,4 +16,4 @@
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
 - !<VideoTextureAssetData/e48ddcf5-f411-422e-990c-707d60b0f575>
   AutoPlay: true
-  Volume: 0.050000
+  Volume: 0.010000

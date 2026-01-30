@@ -38,6 +38,7 @@
     spell1OptionKey: false
     spell2OptionKey: false
     spell3OptionKey: false
+    spellBook: false
     stealOptionKey: false
     turnBased: false
   ScriptTypesHidden:
@@ -53,6 +54,7 @@
       boardController: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       juice: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      spellBook: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       stealOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell1OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell2OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000

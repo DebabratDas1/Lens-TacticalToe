@@ -1,9 +1,11 @@
 //BoardController.js
 //@input Component.ScriptComponent turnBased
 //@input Component.ScriptComponent[] cells
+//@input Component.ScriptComponent gameover
+
 
 // @input Component.ScriptComponent animHandler  // AnimationHandler.js
-
+//@input Component.ScriptComponent juice;
 
 //@input Asset.ObjectPrefab userCard
 // @input SceneObject spawnParent
@@ -169,7 +171,7 @@ async function updateGridData(index, action, data, suppressRefresh) {
 
 script.updateGridData = updateGridData;
 
-async function populateGrid(context = { isPlacement: false }) {
+async function populateGrid(context = { isPlacement: false, index: -1 }) {
 
 /*
     if (isPopulating) {
@@ -208,9 +210,10 @@ print("AAAA");
 
             print("Need to show card anim");
 
-            if (context.isPlacement) {
+            if (context.isPlacement && i === context.index) {
                 print("Need to show anim");
             newCard.playCardPlacingAnim(positions[i]);
+            script.juice.cardPlaceEffect();
         }
         else{
             transform.anchors.setCenter(positions[i]);
@@ -294,10 +297,33 @@ async function gridTapped(gridIndex){
 
         var newOwner = (currentPlayer == 0) ? global.CellType.User1 : global.CellType.User2;
         await updateGridData(gridIndex, 'setOwner', newOwner);
-print("Grid updated");
+        print("Grid updated");
         //grid[gridIndex].owner = currentPlayer == 0 ? global.CellType.User1 : global.CellType.User2
 
+        await populateGrid({
+            isPlacement: true,
+            index: gridIndex
+        });
 
+        script.gameover.checkGameEnd();
+
+        // ───────────────────────────────────────
+        // Check win/tie after placement
+        const winner = script.gameover.getWinner();
+        if (winner !== 0) {
+            // Player wins!
+            script.gameover.showWinner(winner);
+            script.turnBased.setIsFinalTurn(true);
+            return; // Optional: early exit
+        }
+
+        if (script.gameover.isBoardCompleteNoSpells()) {
+            // Board full + no spells → tie if no winner
+            script.gameover.showTie();
+            script.turnBased.setIsFinalTurn(true);
+            return;
+        }
+        // ───────────────────────────────────────
 
     }
     else if(activatedSpellType == global.SpellType.Steal){
@@ -348,6 +374,8 @@ print("Grid updated");
         
         }
 
+        await populateGrid();
+
     }
 
 
@@ -356,7 +384,7 @@ print("Grid updated");
     
     hasMovedThisTurn = true;
 
-    await populateGrid({ isPlacement: true });
+    //await populateGrid({ isPlacement: true });
 
     //await requestRedraw();
 
