@@ -5,25 +5,24 @@
 
 
 //@input Asset.Texture morphCardTexture
-//@input Asset.Texture spell2CardTexture
+//@input Asset.Texture shieldCardTexture
 //@input Asset.Texture spell3CardTexture
 //@input Asset.Texture spell4CardTexture
 //@input Asset.Texture defaultCardTexture
 
 
 //@input string morphCardName
-//@input string spell2CardName 
+//@input string shieldCardName 
 //@input string spell3CardName 
 //@input string spell4CardName 
-
+/*
 //@input string spell4CardName 
 //@input string spell4CardName 
 //@input string spell4CardName 
 //@input string spell4CardName 
-
-
+*/
 //@input string morphCardDetails
-//@input string spell2CardDetails
+//@input string shieldCardDetails
 //@input string spell3CardDetails
 //@input string spell4CardDetails
 
@@ -58,8 +57,18 @@ function showSpellbook(spellType){
 
             break;
 
-        case global.SpellType.Spell2:
+        case global.SpellType.Shield:
+
+
             // Handle Spell2
+
+            cardTexture = script.shieldCardTexture;
+            cardName = script.shieldCardName;
+            print("SHIELDCardName : "+script.shieldCardName);
+            cardDetails = script.shieldCardDetails;
+            print("SHIELDCardDetails : "+script.shieldCardDetails);
+
+            enableSpellBook();
             break;
 
         case global.SpellType.Spell3:

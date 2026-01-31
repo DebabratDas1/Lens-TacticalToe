@@ -35,7 +35,7 @@
     morphCastScript: false
     morphCastedEffectImage: false
     shieldCastedEffectImage: false
-    spell1OptionKey: false
+    shieldOptionKey: false
     spell2OptionKey: false
     spell3OptionKey: false
     spellBook: false
@@ -56,7 +56,7 @@
       juice: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spellBook: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       stealOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-      spell1OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      shieldOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell2OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell3OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000

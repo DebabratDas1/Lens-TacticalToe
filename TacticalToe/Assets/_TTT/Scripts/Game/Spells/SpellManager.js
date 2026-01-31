@@ -3,7 +3,7 @@
 global.SpellType = {
         None : 0,
         Steal   : 1,
-        Spell2  : 2,
+        Shield  : 2,
         Spell3  : 3,
         Spell4 : 4,
         Spell5: 5,
@@ -25,7 +25,7 @@ global.SpellType = {
 //@ui {"widget":"separator"}
 //@ui {"widget":"label", "label":"Below Spell Options Keys"}
 //@input Component.ScriptComponent stealOptionKey
-//@input Component.ScriptComponent spell1OptionKey
+//@input Component.ScriptComponent shieldOptionKey
 //@input Component.ScriptComponent spell2OptionKey
 //@input Component.ScriptComponent spell3OptionKey
 
@@ -231,7 +231,7 @@ function isSpellAvailable(spellType){
     if(spellType == global.SpellType.Steal){
         currentAvailable = availableSpell[0];
     }
-    else if(spellType == global.SpellType.Spell2){
+    else if(spellType == global.SpellType.Shield){
         currentAvailable = availableSpell[1]
     }
     else if(spellType == global.SpellType.Spell3){
@@ -256,8 +256,8 @@ function animateOptionKeys(spellType){
     if(spellType == SpellType.Steal){
         script.stealOptionKey.animateOption();
     }
-    else if(spellType == SpellType.Spell2){
-        script.spell1OptionKey.animateOption();
+    else if(spellType == SpellType.Shield){
+        script.shieldOptionKey.animateOption();
     }
     else if(spellType == SpellType.Spell3){
         script.spell2OptionKey.animateOption();
@@ -281,6 +281,31 @@ function getSpellDetails(spellType, currentTurn){
     var newSpellEffect;
 
     if(spellType == global.SpellType.Steal){
+        newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : currentTurn+2,
+        "effectiveUser" : currentPlayer,
+
+        //"duration": 2 // Set duration based on the spell type
+        };
+
+    }
+
+    if(spellType == global.SpellType.Steal){
+        newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : currentTurn+2,
+        "effectiveUser" : currentPlayer,
+
+        //"duration": 2 // Set duration based on the spell type
+        };
+
+    }
+    if(spellType == global.SpellType.Shield){
         newSpellEffect = {
         "type": spellType,
         "caster": currentPlayer,
@@ -348,7 +373,7 @@ async function showCastedSpellAnimation(spellType, gridIndex){
     if(spellType == global.SpellType.Steal){
         effectToApply = script.morphCastedEffectImage;
     }
-    else if(spellType == global.SpellType.Spell2){
+    else if(spellType == global.SpellType.Shield){
         effectToApply = script.shieldCastedEffectImage;
 
     }
@@ -356,16 +381,16 @@ async function showCastedSpellAnimation(spellType, gridIndex){
         print("ERROR to get casted effect image for : "+spellType);
     }
     //print("Setting center"+position);
-    var so = effectToApply.getSceneObject();
-    var st = so.getComponent("Component.ScreenTransform");
+    //var so = effectToApply.getSceneObject();
+    //var st = so.getComponent("Component.ScreenTransform");
 
     //snapTo(position, st);
     //var parentPointForB = st.worldPointToParentPoint(position); // -1..1
     //st.anchors.setCenter(parentPointForB);
-    if (!st) {
-        print("SpellManager: effect image has no ScreenTransform");
-        return;
-    }
+    //if (!st) {
+    //    print("SpellManager: effect image has no ScreenTransform");
+     //   return;
+    //}
 
     print("Trying to set morph cast effect position");
 
