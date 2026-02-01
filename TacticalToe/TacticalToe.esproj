@@ -21,7 +21,6 @@ metaInfo:
     - Back
   lensClientCompatibilities:
     - Mobile
-    - CameraKit
   platformBundlesEnabled: false
   iconHash: 9cdda5158c197623fa3c7ad192e6ea6b
   videoPreviewHash: 48a18af31ca9dce48ffe2a9e407f68b6

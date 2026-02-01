@@ -1,19 +1,19 @@
-- !<AssetImportMetadata/dba769a0-4ca4-4085-8a15-f57272e1d069>
+- !<AssetImportMetadata/8d3dc55a-95f1-4336-8b76-fe94ebcc0a9d>
   ImportedAssetIds:
-    VideoTexture: !<reference> 7434ca35-50d9-4991-b386-09915ef3722f
+    VideoTexture: !<reference> b3cc0e1b-7f48-4de1-b3ff-aeffb53f1e8b
   ImporterName: VideoTextureImporter
-  PrimaryAsset: !<reference> 7434ca35-50d9-4991-b386-09915ef3722f
+  PrimaryAsset: !<reference> b3cc0e1b-7f48-4de1-b3ff-aeffb53f1e8b
   PackageType: NotAPackage
   LegacyPackagePolicy: ~
   ExtraData:
     {}
   AssetDataMap:
-    VideoTexture: !<own> 772e3aea-c7f5-409d-ae51-34c91fcaf7df
+    VideoTexture: !<own> 862a3357-5dd5-4863-8b93-a3aa13549dff
   DependentFiles:
     []
   ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
-- !<VideoTextureAssetData/772e3aea-c7f5-409d-ae51-34c91fcaf7df>
+- !<VideoTextureAssetData/862a3357-5dd5-4863-8b93-a3aa13549dff>
   AutoPlay: false
-  Volume: 0.400000
+  Volume: 0.230000

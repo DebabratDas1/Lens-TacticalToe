@@ -47,7 +47,7 @@
     baseTex:
       typeIdx: 9
       value:
-        id: 7434ca35-50d9-4991-b386-09915ef3722f
+        id: b3cc0e1b-7f48-4de1-b3ff-aeffb53f1e8b
         sampler:
           filteringMode: Trilinear
           wrapModeU: Repeat
@@ -68,7 +68,7 @@
     opacityTex:
       typeIdx: 9
       value:
-        id: 7434ca35-50d9-4991-b386-09915ef3722f
+        id: b3cc0e1b-7f48-4de1-b3ff-aeffb53f1e8b
         sampler:
           filteringMode: Trilinear
           wrapModeU: Repeat

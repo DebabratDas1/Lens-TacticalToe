@@ -36,6 +36,7 @@
     morphAvailableNoTextOtherPlayer: false
     morphCastedEffectImage: false
     morphPositionSetScript: false
+    opponentUi: false
     poisonActionSetPositionScript: false
     poisonActioningEffectImage: false
     poisonAvailableNoTextCurrentPlayer: false
@@ -70,6 +71,7 @@
       animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       juice: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spellBook: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      opponentUi: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       stealOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       shieldOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       poisonOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000

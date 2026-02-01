@@ -1,0 +1,50 @@
+- !<AssetImportMetadata/cf655749-da85-4c90-bbc5-7b6640ea36fe>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> b0e938bf-a6af-417a-ab23-da49a6991076
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> b0e938bf-a6af-417a-ab23-da49a6991076
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> c9122c3e-e14c-451c-8636-e8bf8abbe247
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/c9122c3e-e14c-451c-8636-e8bf8abbe247>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a409260b-6519-4fa5-af1d-b2b5264b1d88
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    opponentMorphAvailNo: false
+    opponentPoisonAvailNo: false
+    opponentPurifierAvailNo: false
+    opponentShieldAvailNo: false
+    opponentUi: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - opponentMorphAvailNo: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      opponentShieldAvailNo: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      opponentPoisonAvailNo: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      opponentPurifierAvailNo: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      opponentUi: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}

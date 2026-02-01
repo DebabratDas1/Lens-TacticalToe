@@ -19,6 +19,8 @@ global.SpellType = {
 // @input Component.ScriptComponent animHandler
 // @input Component.ScriptComponent juice;
 // @input Component.ScriptComponent spellBook;
+// @input Component.ScriptComponent opponentUi;
+
 
 
 
@@ -130,6 +132,11 @@ global.SpellType = {
         print("Insid set available spells of current user : "+ availableSpell);
 
         await script.turnBased.setUserVariable(currentPlayer, "availableSpells", availableSpell);
+        if(script.morphAvailableNoTextCurrentPlayer) script.morphAvailableNoTextCurrentPlayer.text = availableSpell[0].toString();
+            if(script.shieldAvailableNoTextCurrentPlayer) script.shieldAvailableNoTextCurrentPlayer.text = availableSpell[1].toString();
+            if(script.poisonAvailableNoTextCurrentPlayer) script.poisonAvailableNoTextCurrentPlayer.text = availableSpell[2].toString();
+            if(script.purifyerAvailableNoTextCurrentPlayer) script.purifyerAvailableNoTextCurrentPlayer.text = availableSpell[3].toString();
+            print("available spells of user : "+ playerNo +" is : "+ availableSpell);
 
     }
 
@@ -143,6 +150,7 @@ global.SpellType = {
             if(script.poisonAvailableNoTextOtherPlayer) script.poisonAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[2].toString();
             if(script.purifyerAvailableNoTextOtherPlayer) script.purifyerAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[3].toString();
        print("available spells of other user : "+ otherPlayerAvailableSpell);
+       script.opponentUi.setOpponentSpellNos(otherPlayerAvailableSpell);
     }
 
 
@@ -260,6 +268,23 @@ async function spellUsed(spellType){
         print("After use steal spell = "+availableSpell[0]);
 
 
+    }
+    else if(spellType == global.SpellType.Shield){
+        print("Before use steal spell = "+availableSpell[0]);
+        availableSpell[1] = availableSpell[1]-1;
+        print("After use steal spell = "+availableSpell[0]);
+
+
+    }
+    else if(spellType == global.SpellType.Poison){
+        print("Before use steal spell = "+availableSpell[0]);
+        availableSpell[2] = availableSpell[2]-1;
+        print("After use steal spell = "+availableSpell[0]);
+
+
+    }
+    else{
+        print("Some error occurred to determine Spell used ");
     }
 
 
@@ -621,6 +646,8 @@ async function performSpellAction(spell, gridIndex){
 
 
     script.gameover.checkGameEnd();
+
+    script.boardController.updateEndTurnButton();
 
 
 

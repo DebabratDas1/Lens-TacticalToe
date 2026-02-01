@@ -28,6 +28,7 @@
   ScriptInputsHidden:
     animHandler: false
     cells: false
+    endTurnButton: false
     gameover: false
     gridParent: false
     juice: false
@@ -48,6 +49,7 @@
       cells: !<reference.ScriptComponent[]>
         []
       gameover: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      endTurnButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       animHandler: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       juice: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       userCard: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000

@@ -3,6 +3,8 @@
 //@input Component.ScriptComponent[] cells
 //@input Component.ScriptComponent gameover
 
+//@input Component.SceneObject endTurnButton
+
 
 // @input Component.ScriptComponent animHandler  // AnimationHandler.js
 //@input Component.ScriptComponent juice;
@@ -53,6 +55,8 @@ async function turnStarted(){
 
     highlightAllCells(false);
 
+    
+
 
     //getCurrentTurn()
     await getGrid();
@@ -60,7 +64,8 @@ async function turnStarted(){
     //await script.spellManager.turnStarted(currentPlayer, otherPlayer, currentTurn);
 
 
-    
+    hasActedThisTurn = false;  // reset for new turn
+    updateEndTurnButton();     // hide button at start of turn
 
 }
 
@@ -280,6 +285,7 @@ function clearArray(){
 }
 
 var hasMovedThisTurn = false;
+var hasActedThisTurn = false;
 
 async function gridTapped(gridIndex){
     print("gridIndex : "+gridIndex)
@@ -307,6 +313,7 @@ async function gridTapped(gridIndex){
         });
 
         script.gameover.checkGameEnd();
+        hasActedThisTurn = true;  // ← ACTION TAKEN: placed card
         }
     else if(activatedSpellType == global.SpellType.Steal){
         print("Inside Grid Tapped Spell STEAL");
@@ -332,6 +339,8 @@ async function gridTapped(gridIndex){
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Morph Casted
+
 
             }
             else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
@@ -346,6 +355,7 @@ async function gridTapped(gridIndex){
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Morph Casted
 
 
             }
@@ -377,6 +387,9 @@ async function gridTapped(gridIndex){
 
     
     hasMovedThisTurn = true;
+
+    hasMovedThisTurn = true;
+    updateEndTurnButton();
 
 
 }
@@ -423,10 +436,51 @@ function endTurnSafely() {
 // Expose via api so other scripts can call it
 script.endTurnSafely = endTurnSafely;
 
-/*script.turnBased.onTurnStart.add(function (evt) {
-        print("onTurnStart: user=" + evt.currentUserIndex + " turn=" + evt.turnCount);
-        turnStarted(); // your existing function
-    });*/
+
+function canEndTurn() {
+    // Case 1: Player did something this turn
+    if (hasActedThisTurn) return true;
+
+    // Case 2: Board is full (regardless of spells)
+    // Use your existing function
+    if (script.gameover.isBoardCompleteNoSpells() || isBoardFull()) {
+        return true;
+    }
+
+    return false;
+}
+
+script.canEndTurn = canEndTurn;
+
+// Helper: just check if all cells have owners (ignore spells)
+function isBoardFull() {
+    for (let i = 0; i < grid.length; i++) {
+        if (grid[i].owner === global.CellType.None) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function updateEndTurnButton() {
+    if (!script.endTurnButton) {
+        print("ERROR: endTurnButton input not connected");
+        return;
+    }
+
+    const currentEnabled = script.endTurnButton.enabled;
+    const acted = hasActedThisTurn;
+    const full = isBoardFull();
+    const complete = script.gameover.isBoardCompleteNoSpells();
+    const shouldBeEnabled = acted || full || complete;
+    print("Acted : "+acted +"  full ? = "+full+"  complete : "+complete);
+
+    print(`Updating End Turn button | Current: ${currentEnabled} → Desired: ${shouldBeEnabled}`);
+    print(`  Reasons: acted=${acted}, full=${full}, completeNoSpells=${complete}`);
+
+    script.endTurnButton.enabled = shouldBeEnabled;
+}
+script.updateEndTurnButton = updateEndTurnButton;
 
 
 
@@ -503,6 +557,7 @@ function handleSpell(spellType){
                 if(grid[i].owner == global.CellType.User2
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                 ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
@@ -512,6 +567,7 @@ function handleSpell(spellType){
                 if(grid[i].owner == global.CellType.User1
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                     ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
@@ -533,6 +589,7 @@ function handleSpell(spellType){
                 if(grid[i].owner == global.CellType.User1 
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                 ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
@@ -542,6 +599,7 @@ function handleSpell(spellType){
                 if(grid[i].owner == global.CellType.User2
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                     ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
@@ -662,6 +720,9 @@ async function ShieldCastOnCell(gridIndex){
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
 
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Shield Casted
+
+
             }
             else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User2){
                 print("Current user is 1, and Tapped grid is occupied by Another user2");
@@ -675,6 +736,9 @@ async function ShieldCastOnCell(gridIndex){
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
+
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Shield Casted
+
 
 
             }
@@ -715,6 +779,9 @@ async function poisonCastOnCell(gridIndex){
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
 
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Poison Casted
+
+
             }
             else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
                 print("Current user is 1, and Tapped grid is occupied by Another user1");
@@ -728,6 +795,8 @@ async function poisonCastOnCell(gridIndex){
                 print("Updated grid : "+grid);
                 script.spellManager.spellUsed(activatedSpellType);
                 script.spellManager.activateSpell(activatedSpellType);
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Poison Casted
+
 
 
             }
@@ -752,6 +821,7 @@ function handlePoisonSpell(){
                 if(grid[i].owner == global.CellType.User2 
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                 ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
@@ -761,6 +831,7 @@ function handlePoisonSpell(){
                 if(grid[i].owner == global.CellType.User1
                     && !hasSpellOfType(grid[i], global.SpellType.Shield)
                     && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    && !hasSpellOfType(grid[i], global.SpellType.Poison)
                     ){
                 spellFunctionalGrids.push(i);
                 highlightCell(i, true);
