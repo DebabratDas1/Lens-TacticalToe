@@ -1,58 +1,46 @@
-- !<AssetImportMetadata/aec868de-82a9-4de8-8dad-008e3f74e3fb>
+- !<AssetImportMetadata/bd30a05b-b603-498c-8ec2-39b3d08defcc>
   ImportedAssetIds:
-    ObjectPrefab: !<reference> 3a924334-4f6d-4b5c-8320-db91d868ddde
+    ObjectPrefab: !<reference> 3713998f-225e-41fb-84cf-2247ca4d7a39
   ImporterName: ObjectPrefabImporter
-  PrimaryAsset: !<reference> 3a924334-4f6d-4b5c-8320-db91d868ddde
+  PrimaryAsset: !<reference> 3713998f-225e-41fb-84cf-2247ca4d7a39
   PackageType: NotAPackage
   LegacyPackagePolicy: ~
   ExtraData:
     {}
   AssetDataMap:
-    ObjectPrefab: !<own> 2c900afb-d19e-49fd-a785-f8acf3d28e19
+    ObjectPrefab: !<own> 0d735895-d51b-4a74-9cd1-37a3a54cad22
   DependentFiles:
     []
   ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
-- !<ScreenTransform/1ae88b07-8be3-480c-7175-b2e92355e54a>
+- !<SceneObject/0756cc91-8ee8-46b9-4465-6109552f4970>
   PrefabRemaps:
     []
-  Name: Screen Transform
+  Name: CardPrefab
   Enabled: true
-  IsAdvanced: false
-  Constraints:
-    pinToLeft: false
-    pinToTop: false
-    pinToRight: false
-    pinToBottom: false
-    fixedWidth: false
-    fixedHeight: false
-    deactivatedFixedSprite: false
-    deactivatedFixedPivot: false
-  Pivot: {x: 0.000000, y: 0.000000}
-  Transform:
-    position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    hasSegmentScaleCompensation: false
-  RawMode: true
-  ForceBasic: true
-  Anchor:
-    left: -1.068978
-    bottom: -1.341870
-    right: 1.026090
-    top: 1.348209
-  Offset:
-    left: 0.000000
-    bottom: 0.000000
-    right: 0.000000
-    top: 0.000000
-- !<ObjectPrefabAssetData/2c900afb-d19e-49fd-a785-f8acf3d28e19>
-  Prototype: !<ObjectOwner/f7820b84-1858-4e0d-aa39-35199656cad8>
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 44ce4672-946d-4fc4-6df1-fb66dbf7db93
+    - !<own> 7900d0e5-ace9-467b-57b3-c43890e4eda6
+  Components:
+    - !<own> 475b57ee-b12e-4374-4338-5fa16306d50b
+    - !<own> 355dd80a-c412-4446-549f-460dc82b832c
+    - !<own> ef3ac31f-5088-41f4-4969-77bc81b9bcc2
+    - !<own> a9133763-6dd3-42d1-7a8a-b70960a3843e
+    - !<own> da1fec20-b707-403a-7d71-e02a050f9399
+    - !<own> aa271526-50d5-47ab-5a39-b8899f872944
+- !<ObjectPrefabAssetData/0d735895-d51b-4a74-9cd1-37a3a54cad22>
+  Prototype: !<ObjectOwner/3aab076a-00a1-4307-b1a2-a94d925d1aaf>
     PackagePath: ""
     objects:
-      - !<own> 78a065dd-45d5-4d3a-5205-80afbb4c81e4
-- !<Image/532ac30b-4852-427e-5617-f59d4233efc7>
+      - !<own> 0756cc91-8ee8-46b9-4465-6109552f4970
+- !<Image/10215409-2d28-43a7-5972-0ae68dcd4001>
   PrefabRemaps:
     []
   Name: Image
@@ -71,63 +59,7 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<ScriptComponent/578259f2-0eba-4607-5776-ea0a85d70616>
-  PrefabRemaps:
-    []
-  Name: Card
-  Enabled: true
-  ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
-  ScriptInputsDefault:
-    cardScreenTransform: true
-    animStartBounds: true
-    freezeTexture: true
-    spell3Texture: true
-    spell4Texture: true
-    defaultTexture: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      turnBasedPlayerInfo: !<reference.ScriptComponent> e9f0eed2-f365-475c-6b13-cd287d85e1d8
-      cardScreenTransform: !<reference.ScreenTransform> 00000000-0000-0000-0000-000000000000
-      animStartBounds: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
-      effectImage: !<reference.Image> 7f5ab793-97c8-45a3-6e4d-6bed78ef1bce
-      stealTexture: !<reference.Texture> ea435a50-3e41-44a2-b93e-a4b25ac486f0
-      freezeTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-      spell3Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-      spell4Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-      defaultTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-  ScriptTypes:
-    "":
-      {}
-- !<MaskingComponent/5b43f9d7-0c22-44c5-6201-5fdfea6b9d19>
-  PrefabRemaps:
-    []
-  Name: Masking
-  Enabled: true
-  CornerRadius: 90.000000
-- !<SceneObject/78a065dd-45d5-4d3a-5205-80afbb4c81e4>
-  PrefabRemaps:
-    []
-  Name: CardPrefab
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> df71135a-9d12-47dc-7bcc-5f4b4730247b
-    - !<own> ceb78c27-1225-49b5-563b-dfb7e72ffefe
-  Components:
-    - !<own> 84b259c4-cdc1-4638-5252-be4a5ecf8dde
-    - !<own> 79f4ba68-3e7a-4125-6429-605489acbda9
-    - !<own> e943c444-c9f9-46aa-7194-4dd653b1e2fb
-    - !<own> e9f0eed2-f365-475c-6b13-cd287d85e1d8
-    - !<own> dc762929-d787-4ec5-785a-270dbfaff104
-    - !<own> 578259f2-0eba-4607-5776-ea0a85d70616
-- !<Image/79f4ba68-3e7a-4125-6429-605489acbda9>
+- !<Image/355dd80a-c412-4446-549f-460dc82b832c>
   PrefabRemaps:
     []
   Name: Image
@@ -146,26 +78,23 @@
   RotationAngle: 0
   Pivot: {x: 0.000000, y: 0.000000}
   ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<Image/7f5ab793-97c8-45a3-6e4d-6bed78ef1bce>
+- !<SceneObject/44ce4672-946d-4fc4-6df1-fb66dbf7db93>
   PrefabRemaps:
     []
-  Name: Image
+  Name: Avatar
   Enabled: true
-  RenderOrder: 0
-  StretchMode: Fit
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> cec50b9c-b6dd-412d-b8ec-9aa9e92aaa80
-  FlipX: false
-  FlipY: false
-  RotationAngle: 0
-  Pivot: {x: 0.000000, y: 0.000000}
-  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
-- !<ScreenTransform/84b259c4-cdc1-4638-5252-be4a5ecf8dde>
+  Layers: 1048576
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> a130974f-1b0c-458e-61a4-2006901f3b57
+    - !<own> 10215409-2d28-43a7-5972-0ae68dcd4001
+- !<ScreenTransform/475b57ee-b12e-4374-4338-5fa16306d50b>
   PrefabRemaps:
     []
   Name: Screen Transform
@@ -198,7 +127,40 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
-- !<SceneObject/ceb78c27-1225-49b5-563b-dfb7e72ffefe>
+- !<ScreenTransform/5e6d3696-53ce-4116-67a9-89c38ed4859a>
+  PrefabRemaps:
+    []
+  Name: Screen Transform
+  Enabled: true
+  IsAdvanced: false
+  Constraints:
+    pinToLeft: false
+    pinToTop: false
+    pinToRight: false
+    pinToBottom: false
+    fixedWidth: false
+    fixedHeight: false
+    deactivatedFixedSprite: false
+    deactivatedFixedPivot: false
+  Pivot: {x: 0.000000, y: 0.000000}
+  Transform:
+    position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  RawMode: true
+  ForceBasic: true
+  Anchor:
+    left: -1.068978
+    bottom: -1.341870
+    right: 1.026090
+    top: 1.348209
+  Offset:
+    left: 0.000000
+    bottom: 0.000000
+    right: 0.000000
+    top: 0.000000
+- !<SceneObject/7900d0e5-ace9-467b-57b3-c43890e4eda6>
   PrefabRemaps:
     []
   Name: AttachedEffect
@@ -212,36 +174,16 @@
   Children:
     []
   Components:
-    - !<own> 1ae88b07-8be3-480c-7175-b2e92355e54a
-    - !<own> 7f5ab793-97c8-45a3-6e4d-6bed78ef1bce
-    - !<own> 5b43f9d7-0c22-44c5-6201-5fdfea6b9d19
-- !<InteractionComponent/dc762929-d787-4ec5-785a-270dbfaff104>
+    - !<own> 5e6d3696-53ce-4116-67a9-89c38ed4859a
+    - !<own> d01f7dc1-786d-4ec4-7c3c-8b4f45543ed5
+    - !<own> 93ec6bfd-5260-4378-720d-cdc764ddce21
+- !<MaskingComponent/93ec6bfd-5260-4378-720d-cdc764ddce21>
   PrefabRemaps:
     []
-  Name: Interaction
+  Name: Masking
   Enabled: true
-  Camera: !<reference> 00000000-0000-0000-0000-000000000000
-  MinimumTouchSize: 0.000000
-  DepthFilter: true
-  MeshVisuals:
-    []
-- !<SceneObject/df71135a-9d12-47dc-7bcc-5f4b4730247b>
-  PrefabRemaps:
-    []
-  Name: Avatar
-  Enabled: true
-  Layers: 1048576
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> e1b47e8e-a902-4a41-4fd1-f823cbf9377a
-    - !<own> 532ac30b-4852-427e-5617-f59d4233efc7
-- !<ScreenTransform/e1b47e8e-a902-4a41-4fd1-f823cbf9377a>
+  CornerRadius: 90.000000
+- !<ScreenTransform/a130974f-1b0c-458e-61a4-2006901f3b57>
   PrefabRemaps:
     []
   Name: Screen Transform
@@ -274,77 +216,125 @@
     bottom: 0.000000
     right: 0.000000
     top: 0.000000
-- !<ScriptComponent/e943c444-c9f9-46aa-7194-4dd653b1e2fb>
+- !<InteractionComponent/a9133763-6dd3-42d1-7a8a-b70960a3843e>
+  PrefabRemaps:
+    []
+  Name: Interaction
+  Enabled: true
+  Camera: !<reference> 00000000-0000-0000-0000-000000000000
+  MinimumTouchSize: 0.000000
+  DepthFilter: true
+  MeshVisuals:
+    []
+- !<ScriptComponent/aa271526-50d5-47ab-5a39-b8899f872944>
   PrefabRemaps:
     []
   Name: TweenScreenTransform
-  Enabled: false
+  Enabled: true
   ScriptAsset: !<reference> a8572a73-2abe-4a99-8b4e-7f2957ac4ef1
   ScriptInputsDefault:
-    sceneObjectReference: true
-    playAutomatically: true
     loopType: true
     movementType: true
     anchorsParam: true
     offsetsParam: true
     startPosition: true
-    startScale: true
     startRotation: true
-    startAnchorsSize: true
     startAnchorsCenter: true
     startOffsetsBounds: true
     startOffsetsSize: true
     startOffsetsCenter: true
-    endPosition: true
     endScale: true
     endRotation: true
-    endAnchorsSize: true
     endAnchorsCenter: true
     endOffsetsBounds: true
     endOffsetsSize: true
     endOffsetsCenter: true
     additive: true
-    time: true
+    delay: true
     easingType: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
-      sceneObjectReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      tweenName: Test_Tween
-      playAutomatically: true
+      sceneObjectReference: !<reference.SceneObject> 0756cc91-8ee8-46b9-4465-6109552f4970
+      tweenName: placeCard
+      playAutomatically: false
       loopType: 0
       type: 3
       movementType: 0
       anchorsParam: 0
       offsetsParam: 0
       startPosition: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
-      startScale: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      startScale: !<Vec3> {x: 5.000000, y: 5.000000, z: 1.000000}
       startRotation: !<float> 0.000000
       startAnchorsBounds: !<Vec4> {x: -1.218000, y: 1.322800, z: -0.787500, w: 0.520100}
-      startAnchorsSize: !<Vec2> {x: 1.000000, y: 1.000000}
+      startAnchorsSize: !<Vec2> {x: 2.000000, y: 2.000000}
       startAnchorsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
       startOffsetsBounds: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
       startOffsetsSize: !<Vec2> {x: 1.000000, y: 1.000000}
       startOffsetsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
-      endPosition: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endPosition: !<Vec3> {x: 0.000000, y: 0.000000, z: 7.000000}
       endScale: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
       endRotation: !<float> 0.000000
       endAnchorsBounds: !<Vec4> {x: -0.151300, y: 0.130300, z: 0.010700, w: 0.168100}
-      endAnchorsSize: !<Vec2> {x: 2.000000, y: 2.000000}
+      endAnchorsSize: !<Vec2> {x: 1.000000, y: 1.000000}
       endAnchorsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
       endOffsetsBounds: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
       endOffsetsSize: !<Vec2> {x: 2.000000, y: 2.000000}
       endOffsetsCenter: !<Vec2> {x: 0.000000, y: 0.000000}
       additive: false
-      time: !<float> 1.000000
-      delay: 0.250000
-      easingFunction: Quintic
+      time: 0.500000
+      delay: !<float> 0.000000
+      easingFunction: Cubic
       easingType: Out
   ScriptTypes:
     "":
       {}
-- !<ScriptComponent/e9f0eed2-f365-475c-6b13-cd287d85e1d8>
+- !<Image/d01f7dc1-786d-4ec4-7c3c-8b4f45543ed5>
+  PrefabRemaps:
+    []
+  Name: Image
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Fit
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> cec50b9c-b6dd-412d-b8ec-9aa9e92aaa80
+  FlipX: false
+  FlipY: false
+  RotationAngle: 0
+  Pivot: {x: 0.000000, y: 0.000000}
+  ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+- !<ScriptComponent/da1fec20-b707-403a-7d71-e02a050f9399>
+  PrefabRemaps:
+    []
+  Name: Card
+  Enabled: true
+  ScriptAsset: !<reference> 129178ff-d68d-4c4f-9623-781af682e410
+  ScriptInputsDefault:
+    spell3Texture: true
+    spell4Texture: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      turnBasedPlayerInfo: !<reference.ScriptComponent> ef3ac31f-5088-41f4-4969-77bc81b9bcc2
+      cardScreenTransform: !<reference.ScreenTransform> 475b57ee-b12e-4374-4338-5fa16306d50b
+      animStartBounds: !<Vec4> {x: -1.218000, y: 1.322800, z: -0.787500, w: 0.520100}
+      effectImage: !<reference.Image> d01f7dc1-786d-4ec4-7c3c-8b4f45543ed5
+      stealTexture: !<reference.Texture> ee63d03d-362a-4fb1-968d-72392fb7d21b
+      shieldTexture: !<reference.Texture> 09e38c70-9aeb-4656-acc0-7decbd46e43c
+      spell3Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      spell4Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      defaultTexture: !<reference.Texture> 65b34c5e-b093-4ac9-b7a6-b3baffade6cd
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/ef3ac31f-5088-41f4-4969-77bc81b9bcc2>
   PrefabRemaps:
     []
   Name: Turn Based Player Info
@@ -374,7 +364,7 @@
         applyActionInputs:
           outputType: Image
           meshVisual: !<reference.MaterialMeshVisual> 00000000-0000-0000-0000-000000000000
-          image: !<reference.Image> 532ac30b-4852-427e-5617-f59d4233efc7
+          image: !<reference.Image> 10215409-2d28-43a7-5972-0ae68dcd4001
           material: !<reference.Material> 00000000-0000-0000-0000-000000000000
           showAdvancedOptions: false
           meshVisualCloneType: CloneOnce

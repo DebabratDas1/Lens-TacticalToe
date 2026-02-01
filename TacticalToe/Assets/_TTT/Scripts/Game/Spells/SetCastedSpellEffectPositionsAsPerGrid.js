@@ -1,4 +1,4 @@
-//MorphCastEffect.js
+//SetCastedSpellEffectPositionsAsPerGrid.js
 
 //@input vec4[] positions;
 //@input Component.ScreenTransform thisScreenTransform;

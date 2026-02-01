@@ -9,7 +9,7 @@
 
 // @input Component.Image effectImage
 // @input Asset.Texture stealTexture
-// @input Asset.Texture freezeTexture
+// @input Asset.Texture shieldTexture
 // @input Asset.Texture spell3Texture
 // @input Asset.Texture spell4Texture
 // @input Asset.Texture defaultTexture
@@ -100,6 +100,12 @@ function showAttchedSpell(spellType){
     mat.mainPass.baseColor = new vec4(c.x, c.y, c.z, 0.6); // alpha 1
     if(spellType == global.SpellType.Steal){
          mat.mainPass.baseTex = script.stealTexture;
+
+
+
+    }
+    else if(spellType == global.SpellType.Shield){
+         mat.mainPass.baseTex = script.shieldTexture;
 
 
 

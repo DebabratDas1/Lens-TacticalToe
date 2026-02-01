@@ -32,10 +32,13 @@
     juice: false
     morphActionScript: false
     morphActioningEffectImage: false
-    morphCastScript: false
     morphCastedEffectImage: false
+    morphPositionSetScript: false
+    shieldActionSetPositionScript: false
+    shieldActioningEffectImage: false
     shieldCastedEffectImage: false
     shieldOptionKey: false
+    shieldPositionSetScript: false
     spell2OptionKey: false
     spell3OptionKey: false
     spellBook: false
@@ -61,9 +64,12 @@
       spell3OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       morphActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
-      morphCastScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      morphPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       morphActionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       shieldCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      shieldPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      shieldActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      shieldActionSetPositionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       fireCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -

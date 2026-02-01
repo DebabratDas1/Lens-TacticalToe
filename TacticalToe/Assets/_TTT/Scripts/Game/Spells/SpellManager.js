@@ -36,12 +36,24 @@ global.SpellType = {
 //@ui {"widget":"label", "label":"Morph Spell References"}
 //@input Component.Image morphCastedEffectImage;
 //@input Component.Image morphActioningEffectImage;
-//@input Component.ScriptComponent morphCastScript;
+//@input Component.ScriptComponent morphPositionSetScript;
 //@input Component.ScriptComponent morphActionScript;
 
 
 //@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Shield Spell References"}
 //@input Component.Image shieldCastedEffectImage;
+//@input Component.ScriptComponent shieldPositionSetScript;
+//@input Component.Image shieldActioningEffectImage;
+//@input Component.ScriptComponent shieldActionSetPositionScript;
+
+
+
+
+
+
+//@ui {"widget":"separator"}
+
 //@input Component.Image fireCastedEffectImage;
 
 
@@ -370,11 +382,15 @@ script.processAttchedSpell = processAttchedSpell;
 async function showCastedSpellAnimation(spellType, gridIndex){
     print("Inside showCastedSpellAnimation");
     var effectToApply;
+    var positionScript = null;
     if(spellType == global.SpellType.Steal){
         effectToApply = script.morphCastedEffectImage;
+        positionScript = script.morphPositionSetScript;
     }
     else if(spellType == global.SpellType.Shield){
         effectToApply = script.shieldCastedEffectImage;
+        positionScript = script.shieldPositionSetScript;
+
 
     }
     else{
@@ -392,16 +408,16 @@ async function showCastedSpellAnimation(spellType, gridIndex){
      //   return;
     //}
 
-    print("Trying to set morph cast effect position");
+    print("Trying to set cast effect position");
 
-    script.morphCastScript.setPosition(gridIndex);
+    positionScript.setPosition(gridIndex);
 
     //print("Setting center " + JSON.stringify(position));
     //st.anchors.setCenter(position);
     print("Done Setting center");
 
     effectToApply.getSceneObject().enabled = true;
-    so.enabled = true;
+    //so.enabled = true;
 
 
 
@@ -411,7 +427,7 @@ async function showCastedSpellAnimation(spellType, gridIndex){
     await new Promise(function(resolve) {
         
         // We create an anonymous function to act as the 'onComplete'
-        script.animHandler.playVideoAnimation(script.morphCastedEffectImage, function() {
+        script.animHandler.playVideoAnimation(effectToApply, function() {
             
 
             // 1. Put your custom "onComplete" code here
@@ -489,11 +505,30 @@ async function performSpellAction(spell, gridIndex){
         print("script.animHandler :  "+script.animHandler)
 
 
-    script.morphActionScript.setPosition(gridIndex);
 
     if(spell.type == global.SpellType.Steal){
         print("Animation starting...");
+        script.morphActionScript.setPosition(gridIndex);
+        var newOwner = (spell.caster == 0) ? global.CellType.User1 : global.CellType.User2;
 
+        await spellActionAnimation(script.morphActioningEffectImage);
+
+        // 1. Determine new owner based on who casted the spell
+        
+     // 2. Update the data SILENTLY
+    // We pass 'true' because we don't want the board to redraw 
+    // TWICE (once for owner, once for spell removal). 
+    await script.boardController.updateGridData(gridIndex, 'setOwner', newOwner, true);
+        
+        print("Steal action finalized and spell removed.");
+
+        print("Data updated. owner is now: " + newOwner);
+
+        print("Data updated in background. Now refreshing visuals...");
+
+    }
+
+/*
     await new Promise(function(resolve) {
 
         print("Animation for action");
@@ -512,9 +547,21 @@ async function performSpellAction(spell, gridIndex){
 
 
 
-    });
+    });*/
+    else if(spell.type == global.SpellType.Shield){
+        script.shieldActionSetPositionScript.setPosition(gridIndex);
+        await spellActionAnimation(script.shieldActioningEffectImage);
 
-    script.juice.shakeScreen();
+    }
+    else{
+        print("Something wrong to Perform to do Spell Action : "+JSON.stringify(spell));
+        return;
+    }
+
+    await script.boardController.updateGridData(gridIndex, 'removeSpell', spell.type, true);
+
+
+    //script.juice.shakeScreen();
 
 
 
@@ -526,21 +573,7 @@ async function performSpellAction(spell, gridIndex){
     
     print("SpellManager: performSpellAction SpellAnimation complete.");
 
-    // 1. Determine new owner based on who casted the spell
-        var newOwner = (spell.caster == 0) ? global.CellType.User1 : global.CellType.User2;
-        
-     // 2. Update the data SILENTLY
-    // We pass 'true' because we don't want the board to redraw 
-    // TWICE (once for owner, once for spell removal). 
-    await script.boardController.updateGridData(gridIndex, 'setOwner', newOwner, true);
-    await script.boardController.updateGridData(gridIndex, 'removeSpell', spell.type, true);
-        
-        print("Steal action finalized and spell removed.");
-
-        print("Data updated. owner is now: " + newOwner);
-
-        print("Data updated in background. Now refreshing visuals...");
-
+    
     // 3. THE REFRESH
     // This will clear the old card, place the new owner's card, 
     // and show any remaining spells for this cell in one clean step.
@@ -549,7 +582,7 @@ async function performSpellAction(spell, gridIndex){
     await script.boardController.populateGrid();
     //script.boardController.needsRepopulate = true;
 
-    print("Steal action finalized and visuals updated.");
+    print(" action finalized and visuals updated.");
 
 
     script.gameover.checkGameEnd();
@@ -557,6 +590,28 @@ async function performSpellAction(spell, gridIndex){
 
 
 
+
+    }
+
+
+    async function spellActionAnimation(actionEffectImage){
+        await new Promise(function(resolve) {
+
+        print("Animation for action");
+        
+        // We create an anonymous function to act as the 'onComplete'
+        script.animHandler.playVideoAnimation(actionEffectImage, function() {
+            
+
+            // 1. Put your custom "onComplete" code here
+            print(actionEffectImage + " action Video finished! Now doing custom logic...");
+            //script.testImage.getSceneObject().enabled = false; 
+
+            // 2. Call resolve() to tell the 'await' it can continue
+            resolve();
+        });
+});
+    script.juice.shakeScreen();
 
     }
 
@@ -600,7 +655,7 @@ async function performSpellAction(spell, gridIndex){
 
             */
 
-}
+//}
 
 
 

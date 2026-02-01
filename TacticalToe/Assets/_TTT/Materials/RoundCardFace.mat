@@ -5,7 +5,7 @@
 - !<PassInfo/32f09376-2fd9-4071-b5af-115e14b2d176>
   CachedProperties:
     []
-  DepthWrite: true
+  DepthWrite: false
   DepthTest: false
   DepthFunction: LessEqual
   TwoSided: false
