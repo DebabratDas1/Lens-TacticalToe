@@ -10,7 +10,7 @@
 // @input Component.Image effectImage
 // @input Asset.Texture stealTexture
 // @input Asset.Texture shieldTexture
-// @input Asset.Texture spell3Texture
+// @input Asset.Texture poisonTexture
 // @input Asset.Texture spell4Texture
 // @input Asset.Texture defaultTexture
 
@@ -98,6 +98,8 @@ function showAttchedSpell(spellType){
     var mat = script.effectImage.mainMaterial;
     var c = mat.mainPass.baseColor; 
     mat.mainPass.baseColor = new vec4(c.x, c.y, c.z, 0.6); // alpha 1
+print("Inside show attached spell");
+
     if(spellType == global.SpellType.Steal){
          mat.mainPass.baseTex = script.stealTexture;
 
@@ -110,6 +112,13 @@ function showAttchedSpell(spellType){
 
 
     }
+    else if(spellType == global.SpellType.Poison){
+         print("Poison will be attached");
+
+         mat.mainPass.baseTex = script.poisonTexture;
+    }
+
+    
     else{
 
          mat.mainPass.baseColor = new vec4(c.x, c.y, c.z, 0.0); // alpha 0

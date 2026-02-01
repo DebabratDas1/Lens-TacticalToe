@@ -32,14 +32,26 @@
     juice: false
     morphActionScript: false
     morphActioningEffectImage: false
+    morphAvailableNoTextCurrentPlayer: false
+    morphAvailableNoTextOtherPlayer: false
     morphCastedEffectImage: false
     morphPositionSetScript: false
+    poisonActionSetPositionScript: false
+    poisonActioningEffectImage: false
+    poisonAvailableNoTextCurrentPlayer: false
+    poisonAvailableNoTextOtherPlayer: false
+    poisonCastedEffectImage: false
+    poisonOptionKey: false
+    poisonPositionSetScript: false
+    purifyerAvailableNoTextCurrentPlayer: false
+    purifyerAvailableNoTextOtherPlayer: false
     shieldActionSetPositionScript: false
     shieldActioningEffectImage: false
+    shieldAvailableNoTextCurrentPlayer: false
+    shieldAvailableNoTextOtherPlayer: false
     shieldCastedEffectImage: false
     shieldOptionKey: false
     shieldPositionSetScript: false
-    spell2OptionKey: false
     spell3OptionKey: false
     spellBook: false
     stealOptionKey: false
@@ -60,7 +72,7 @@
       spellBook: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       stealOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       shieldOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
-      spell2OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      poisonOptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       spell3OptionKey: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       morphCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       morphActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
@@ -70,6 +82,18 @@
       shieldPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       shieldActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       shieldActionSetPositionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      poisonCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      poisonPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      poisonActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      poisonActionSetPositionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      morphAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      shieldAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      poisonAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      purifyerAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      morphAvailableNoTextOtherPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      shieldAvailableNoTextOtherPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      poisonAvailableNoTextOtherPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      purifyerAvailableNoTextOtherPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
       fireCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -

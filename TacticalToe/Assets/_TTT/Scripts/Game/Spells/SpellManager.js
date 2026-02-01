@@ -4,7 +4,7 @@ global.SpellType = {
         None : 0,
         Steal   : 1,
         Shield  : 2,
-        Spell3  : 3,
+        Poison  : 3,
         Spell4 : 4,
         Spell5: 5,
         Spell6: 6
@@ -26,7 +26,7 @@ global.SpellType = {
 //@ui {"widget":"label", "label":"Below Spell Options Keys"}
 //@input Component.ScriptComponent stealOptionKey
 //@input Component.ScriptComponent shieldOptionKey
-//@input Component.ScriptComponent spell2OptionKey
+//@input Component.ScriptComponent poisonOptionKey
 //@input Component.ScriptComponent spell3OptionKey
 
 
@@ -46,6 +46,30 @@ global.SpellType = {
 //@input Component.ScriptComponent shieldPositionSetScript;
 //@input Component.Image shieldActioningEffectImage;
 //@input Component.ScriptComponent shieldActionSetPositionScript;
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Poison Spell References"}
+//@input Component.Image poisonCastedEffectImage;
+//@input Component.ScriptComponent poisonPositionSetScript;
+//@input Component.Image poisonActioningEffectImage;
+//@input Component.ScriptComponent poisonActionSetPositionScript;
+
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Current Player Available Spells"}
+//@input Component.Text morphAvailableNoTextCurrentPlayer
+//@input Component.Text shieldAvailableNoTextCurrentPlayer
+//@input Component.Text poisonAvailableNoTextCurrentPlayer
+//@input Component.Text purifyerAvailableNoTextCurrentPlayer
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Other Player Available Spells"}
+//@input Component.Text morphAvailableNoTextOtherPlayer
+//@input Component.Text shieldAvailableNoTextOtherPlayer
+//@input Component.Text poisonAvailableNoTextOtherPlayer
+//@input Component.Text purifyerAvailableNoTextOtherPlayer
+
+
 
 
 
@@ -95,7 +119,11 @@ global.SpellType = {
        if(availableSpell == undefined){
             availableSpell = [2,2,2,2,2];
        }
-       print("available spells of user : "+ playerNo +" is : "+ availableSpell);
+            if(script.morphAvailableNoTextCurrentPlayer) script.morphAvailableNoTextCurrentPlayer.text = availableSpell[0].toString();
+            if(script.shieldAvailableNoTextCurrentPlayer) script.shieldAvailableNoTextCurrentPlayer.text = availableSpell[1].toString();
+            if(script.poisonAvailableNoTextCurrentPlayer) script.poisonAvailableNoTextCurrentPlayer.text = availableSpell[2].toString();
+            if(script.purifyerAvailableNoTextCurrentPlayer) script.purifyerAvailableNoTextCurrentPlayer.text = availableSpell[3].toString();
+            print("available spells of user : "+ playerNo +" is : "+ availableSpell);
     }
 
     async function setAvailableSpells(){
@@ -110,6 +138,10 @@ global.SpellType = {
        if(otherPlayerAvailableSpell == undefined){
             otherPlayerAvailableSpell = [2,2,2,2,2];
        }
+            if(script.morphAvailableNoTextOtherPlayer) script.morphAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[0].toString();
+            if(script.shieldAvailableNoTextOtherPlayer) script.shieldAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[1].toString();
+            if(script.poisonAvailableNoTextOtherPlayer) script.poisonAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[2].toString();
+            if(script.purifyerAvailableNoTextOtherPlayer) script.purifyerAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[3].toString();
        print("available spells of other user : "+ otherPlayerAvailableSpell);
     }
 
@@ -246,7 +278,7 @@ function isSpellAvailable(spellType){
     else if(spellType == global.SpellType.Shield){
         currentAvailable = availableSpell[1]
     }
-    else if(spellType == global.SpellType.Spell3){
+    else if(spellType == global.SpellType.Poison){
         currentAvailable = availableSpell[2]
     }
     else{
@@ -271,8 +303,8 @@ function animateOptionKeys(spellType){
     else if(spellType == SpellType.Shield){
         script.shieldOptionKey.animateOption();
     }
-    else if(spellType == SpellType.Spell3){
-        script.spell2OptionKey.animateOption();
+    else if(spellType == SpellType.Poison){
+        script.poisonOptionKey.animateOption();
     }
     else if(spellType == SpellType.Spell4){
         script.spell3OptionKey.animateOption();
@@ -317,7 +349,7 @@ function getSpellDetails(spellType, currentTurn){
         };
 
     }
-    if(spellType == global.SpellType.Shield){
+    else if(spellType == global.SpellType.Shield){
         newSpellEffect = {
         "type": spellType,
         "caster": currentPlayer,
@@ -326,6 +358,16 @@ function getSpellDetails(spellType, currentTurn){
         "effectiveUser" : currentPlayer,
 
         //"duration": 2 // Set duration based on the spell type
+        };
+
+    }
+    else if(spellType == global.SpellType.Poison){
+        newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : currentTurn+2,
+        "effectiveUser" : currentPlayer,
         };
 
     }
@@ -390,6 +432,12 @@ async function showCastedSpellAnimation(spellType, gridIndex){
     else if(spellType == global.SpellType.Shield){
         effectToApply = script.shieldCastedEffectImage;
         positionScript = script.shieldPositionSetScript;
+
+
+    }
+    else if(spellType == global.SpellType.Poison){
+        effectToApply = script.poisonCastedEffectImage;
+        positionScript = script.poisonPositionSetScript;
 
 
     }
@@ -527,30 +575,17 @@ async function performSpellAction(spell, gridIndex){
         print("Data updated in background. Now refreshing visuals...");
 
     }
-
-/*
-    await new Promise(function(resolve) {
-
-        print("Animation for action");
-        
-        // We create an anonymous function to act as the 'onComplete'
-        script.animHandler.playVideoAnimation(script.morphActioningEffectImage, function() {
-            
-
-            // 1. Put your custom "onComplete" code here
-            print("Morph action Video finished! Now doing custom logic...");
-            //script.testImage.getSceneObject().enabled = false; 
-
-            // 2. Call resolve() to tell the 'await' it can continue
-            resolve();
-        });
-
-
-
-    });*/
     else if(spell.type == global.SpellType.Shield){
         script.shieldActionSetPositionScript.setPosition(gridIndex);
         await spellActionAnimation(script.shieldActioningEffectImage);
+
+    }
+    else if(spell.type == global.SpellType.Poison){
+        print("Inside poison action");
+        script.poisonActionSetPositionScript.setPosition(gridIndex);
+        await spellActionAnimation(script.poisonActioningEffectImage);
+        await script.boardController.updateGridData(gridIndex, 'setOwner', global.CellType.None, true);
+
 
     }
     else{
@@ -614,48 +649,6 @@ async function performSpellAction(spell, gridIndex){
     script.juice.shakeScreen();
 
     }
-
-/*
-
-    var grid = script.boardController.getGridData();
-
-    if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User2){
-                print("Current user is 0, and Tapped grid is occupied by Another user2");
-                print("Previous grid : "+grid);
-                
-                //#####################
-                grid[gridIndex].owner = global.CellType.User1;
-                //await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
-                //#####################
-
-
-                print("Updated grid : "+grid);
-                //script.spellManager.spellUsed(activatedSpellType);
-                //script.spellManager.activateSpell(activatedSpellType);
-
-            }
-            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
-                print("Current user is 1, and Tapped grid is occupied by Another user1");
-                print("Previous grid : "+JSON.stringify( grid));
-                grid[gridIndex].owner = global.CellType.User2;
-
-                //await attachSpellToCell(gridIndex, global.SpellType.Steal, currentTurn+2);
-
-
-
-                print("Updated grid : "+JSON.stringify( grid));
-                //script.spellManager.spellUsed(activatedSpellType);
-                //script.spellManager.activateSpell(activatedSpellType);
-
-
-            }
-            else{
-                print("Error during stealing")
-            }
-
-            */
-
-//}
 
 
 

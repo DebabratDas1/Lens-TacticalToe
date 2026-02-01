@@ -307,26 +307,7 @@ async function gridTapped(gridIndex){
         });
 
         script.gameover.checkGameEnd();
-/*
-        // ───────────────────────────────────────
-        // Check win/tie after placement
-        const winner = script.gameover.getWinner();
-        if (winner !== 0) {
-            // Player wins!
-            script.gameover.showWinner(winner);
-            script.turnBased.setIsFinalTurn(true);
-            return; // Optional: early exit
         }
-
-        if (script.gameover.isBoardCompleteNoSpells()) {
-            // Board full + no spells → tie if no winner
-            script.gameover.showTie();
-            script.turnBased.setIsFinalTurn(true);
-            return;
-        }
-        // ───────────────────────────────────────
-*/
-    }
     else if(activatedSpellType == global.SpellType.Steal){
         print("Inside Grid Tapped Spell STEAL");
         print("spellFunctionalGrids.includes(gridIndex)" + spellFunctionalGrids.includes(gridIndex));
@@ -382,93 +363,20 @@ async function gridTapped(gridIndex){
     // TODO : For SHIELD
     else if(activatedSpellType == global.SpellType.Shield){
         await ShieldCastOnCell(gridIndex);
-
-        /*  From here in another function ShieldCastOnCell()
-        print("Inside Grid Tapped Spell Shield");
-        print("spellFunctionalGrids.includes(gridIndex)" + spellFunctionalGrids.includes(gridIndex));
-        print("spellFunctionalGrids   "+spellFunctionalGrids);
+    }
 
 
-        if(spellFunctionalGrids.includes(gridIndex)){
-            print("FunctionalSpell includes current grid");
-
-            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex].owner);
-
-            if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User1){
-                print("Current user is 0, and Tapped grid is occupied by Another user1");
-                print("Previous grid : "+grid);
-                
-                //#####################
-                //grid[gridIndex] = global.CellType.User1;
-                await attachSpellToCell(gridIndex, global.SpellType.Shield, currentTurn+2);
-                //#####################
-
-
-                print("Updated grid : "+grid);
-                script.spellManager.spellUsed(activatedSpellType);
-                script.spellManager.activateSpell(activatedSpellType);
-
-            }
-            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User2){
-                print("Current user is 1, and Tapped grid is occupied by Another user2");
-                print("Previous grid : "+grid);
-                //grid[gridIndex].owner = global.CellType.User2;
-
-                await attachSpellToCell(gridIndex, global.SpellType.Shield, currentTurn+2);
-
-
-
-                print("Updated grid : "+grid);
-                script.spellManager.spellUsed(activatedSpellType);
-                script.spellManager.activateSpell(activatedSpellType);
-
-
-            }
-            else{
-                print("Error during stealing")
-            }
+    else if(activatedSpellType == global.SpellType.Poison){
+        await poisonCastOnCell(gridIndex);
+    }
 
         
-        }
-
-        await populateGrid();
-  End of  ShieldCastOnCell() */
-    }
 
 
     print("Grid  = "+grid);
 
     
     hasMovedThisTurn = true;
-
-    //await populateGrid({ isPlacement: true });
-
-    //await requestRedraw();
-
-
-    //script.turnBased.setGlobalVariable("gridData", grid)
-
-    //var winner = getWinner()
-
-    /*if(winner != 0){
-        script.winners[currentPlayer].enabled = true
-        script.winners[otherPlayer].enabled = true
-
-        script.turnBased.setIsFinalTurn(true)
-
-
-    }
-    else{
-        if(currentTurn == 8){
-            script.tie[0].enabled = true
-            script.tie[1].enabled = true
-            script.turnBased.setIsFinalTurn(true)
-
-
-        }
-    }*/
-
-    //script.turnBased.endTurn()
 
 
 }
@@ -646,6 +554,10 @@ function handleSpell(spellType){
 
         print(spellFunctionalGrids + "  spellFunctionalGrids");
     }
+    else if(spellType == global.SpellType.Poison){
+        handlePoisonSpell();  
+    }
+
 
     else{
         print("More spells is being processed");
@@ -776,4 +688,88 @@ async function ShieldCastOnCell(gridIndex){
         await populateGrid();
 
 
+}
+
+async function poisonCastOnCell(gridIndex){
+    print("Inside Grid Tapped Spell Poison");
+        print("spellFunctionalGrids.includes(gridIndex)" + spellFunctionalGrids.includes(gridIndex));
+        print("spellFunctionalGrids   "+spellFunctionalGrids);
+
+
+        if(spellFunctionalGrids.includes(gridIndex)){
+            print("FunctionalSpell includes current grid");
+
+            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex].owner);
+
+            if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User2){
+                print("Current user is 0, and Tapped grid is occupied by Another user2");
+                print("Previous grid : "+grid);
+                
+                //#####################
+                //grid[gridIndex] = global.CellType.User1;
+                await attachSpellToCell(gridIndex, global.SpellType.Poison, currentTurn+2);
+                //#####################
+
+
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+
+            }
+            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User1){
+                print("Current user is 1, and Tapped grid is occupied by Another user1");
+                print("Previous grid : "+grid);
+                //grid[gridIndex].owner = global.CellType.User2;
+
+                await attachSpellToCell(gridIndex, global.SpellType.Poison, currentTurn+2);
+
+
+
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+
+
+            }
+            else{
+                print("Error during stealing")
+            }
+
+        
+        }
+
+        await populateGrid();
+
+
+}
+
+
+
+function handlePoisonSpell(){
+    print("Inside poison Type Spell Handling ----");
+        for(var i = 0; i<grid.length; i++){
+            if(currentPlayer == 0){
+                if(grid[i].owner == global.CellType.User2 
+                    && !hasSpellOfType(grid[i], global.SpellType.Shield)
+                    && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                ){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+                }
+            }
+            else{
+                if(grid[i].owner == global.CellType.User1
+                    && !hasSpellOfType(grid[i], global.SpellType.Shield)
+                    && !hasSpellOfType(grid[i], global.SpellType.Steal)
+                    ){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+            }
+
+            }
+            
+        }
+        activatedSpellType = global.SpellType.Poison;
+
+        print(spellFunctionalGrids + "  spellFunctionalGrids");
 }

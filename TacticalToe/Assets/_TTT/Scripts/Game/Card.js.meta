@@ -30,8 +30,8 @@
     cardScreenTransform: false
     defaultTexture: false
     effectImage: false
+    poisonTexture: false
     shieldTexture: false
-    spell3Texture: false
     spell4Texture: false
     stealTexture: false
     turnBasedPlayerInfo: false
@@ -50,7 +50,7 @@
       effectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       stealTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       shieldTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-      spell3Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      poisonTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       spell4Texture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       defaultTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
