@@ -33,12 +33,12 @@
     poisonCardDetails: false
     poisonCardName: false
     poisonCardTexture: false
+    purifierCardDetails: false
+    purifierCardName: false
+    purifierCardTexture: false
     shieldCardDetails: false
     shieldCardName: false
     shieldCardTexture: false
-    spell4CardDetails: false
-    spell4CardName: false
-    spell4CardTexture: false
     spellBook: false
     spellDetails: false
     spellImage: false
@@ -59,16 +59,16 @@
       morphCardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       shieldCardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       poisonCardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
-      spell4CardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      purifierCardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       defaultCardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       morphCardName: ""
       shieldCardName: ""
       poisonCardName: ""
-      spell4CardName: ""
+      purifierCardName: ""
       morphCardDetails: ""
       shieldCardDetails: ""
       poisonCardDetails: ""
-      spell4CardDetails: ""
+      purifierCardDetails: ""
   ScriptTypes:
     -
       {}

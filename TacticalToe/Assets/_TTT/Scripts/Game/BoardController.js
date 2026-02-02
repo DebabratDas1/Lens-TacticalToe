@@ -28,6 +28,9 @@ var activatedSpellType;
 var isPopulating = false;
 var needsRepopulate = false;
 
+var hasPlacedCardThisTurn = false;
+var spellsUsedThisTurn = {};
+
 function getGridData(){
     return grid;
 }
@@ -65,6 +68,13 @@ async function turnStarted(){
 
 
     hasActedThisTurn = false;  // reset for new turn
+    // Reset all turn-based action tracking
+    hasActedThisTurn       = false;
+    hasPlacedCardThisTurn  = false;
+    hasMovedThisTurn       = false;
+    spellsUsedThisTurn     = {};
+
+
     updateEndTurnButton();     // hide button at start of turn
 
 }
@@ -296,6 +306,12 @@ async function gridTapped(gridIndex){
     }*/
     if(activatedSpellType == undefined || activatedSpellType == global.SpellType.None){
         print("Inside Grid Tapped Spell None");
+
+        // Block if already placed a card this turn
+        if (hasPlacedCardThisTurn) {
+            print("You already placed a card this turn!");
+            return;
+        }
         
 
         if(grid[gridIndex].owner != 0){
@@ -314,6 +330,7 @@ async function gridTapped(gridIndex){
 
         script.gameover.checkGameEnd();
         hasActedThisTurn = true;  // ← ACTION TAKEN: placed card
+        hasPlacedCardThisTurn = true;
         }
     else if(activatedSpellType == global.SpellType.Steal){
         print("Inside Grid Tapped Spell STEAL");
@@ -378,6 +395,10 @@ async function gridTapped(gridIndex){
 
     else if(activatedSpellType == global.SpellType.Poison){
         await poisonCastOnCell(gridIndex);
+    }
+
+    else if(activatedSpellType == global.SpellType.Purifier){
+        await purifierCastOnCell(gridIndex);
     }
 
         
@@ -616,6 +637,10 @@ function handleSpell(spellType){
         handlePoisonSpell();  
     }
 
+    else if(spellType == global.SpellType.Purifier){
+        handlePurifierSpell();  
+    }
+
 
     else{
         print("More spells is being processed");
@@ -813,6 +838,65 @@ async function poisonCastOnCell(gridIndex){
 }
 
 
+async function purifierCastOnCell(gridIndex){
+
+    print("Inside Grid Tapped Spell Purifier");
+        print("spellFunctionalGrids.includes(gridIndex)" + spellFunctionalGrids.includes(gridIndex));
+        print("spellFunctionalGrids   "+spellFunctionalGrids);
+
+
+        if(spellFunctionalGrids.includes(gridIndex)){
+            print("FunctionalSpell includes current grid");
+
+            print("Current player : "+currentPlayer +"  grid[gridIndex]  : "+grid[gridIndex].owner);
+
+            if(currentPlayer == 0 && grid[gridIndex].owner == global.CellType.User1){
+                print("Current user is 0, and Tapped grid is occupied by Another user1");
+                print("Previous grid : "+grid);
+                
+                //#####################
+                //grid[gridIndex] = global.CellType.User1;
+                await attachSpellToCell(gridIndex, global.SpellType.Purifier, currentTurn);
+                //#####################
+
+
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Poison Casted
+
+
+            }
+            else if(currentPlayer == 1 && grid[gridIndex].owner == global.CellType.User2){
+                print("Current user is 1, and Tapped grid is occupied by Another user2");
+                print("Previous grid : "+grid);
+                //grid[gridIndex].owner = global.CellType.User2;
+
+                await attachSpellToCell(gridIndex, global.SpellType.Purifier, currentTurn);
+
+
+
+                print("Updated grid : "+grid);
+                script.spellManager.spellUsed(activatedSpellType);
+                script.spellManager.activateSpell(activatedSpellType);
+                hasActedThisTurn = true;  // ← ACTION TAKEN: Poison Casted
+
+
+
+            }
+            else{
+                print("Error during stealing")
+            }
+
+        
+        }
+
+        await populateGrid();
+
+}
+
+
 
 function handlePoisonSpell(){
     print("Inside poison Type Spell Handling ----");
@@ -843,4 +927,37 @@ function handlePoisonSpell(){
         activatedSpellType = global.SpellType.Poison;
 
         print(spellFunctionalGrids + "  spellFunctionalGrids");
+}
+
+function handlePurifierSpell(){
+
+    print("Inside Purifier Type Spell Handling ----");
+        for(var i = 0; i<grid.length; i++){
+            if(currentPlayer == 0){
+                if(grid[i].owner == global.CellType.User1 
+                    && !hasSpellOfType(grid[i], global.SpellType.Shield)
+                    && (hasSpellOfType(grid[i], global.SpellType.Steal)
+                    || hasSpellOfType(grid[i], global.SpellType.Poison))
+                ){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+                }
+            }
+            else{
+                if(grid[i].owner == global.CellType.User2
+                    && !hasSpellOfType(grid[i], global.SpellType.Shield)
+                    && (hasSpellOfType(grid[i], global.SpellType.Steal)
+                    || hasSpellOfType(grid[i], global.SpellType.Poison))
+                    ){
+                spellFunctionalGrids.push(i);
+                highlightCell(i, true);
+            }
+
+            }
+            
+        }
+        activatedSpellType = global.SpellType.Purifier;
+
+        print(spellFunctionalGrids + "  spellFunctionalGrids");
+
 }

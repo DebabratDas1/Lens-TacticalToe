@@ -5,7 +5,7 @@ global.SpellType = {
         Steal   : 1,
         Shield  : 2,
         Poison  : 3,
-        Spell4 : 4,
+        Purifier : 4,
         Spell5: 5,
         Spell6: 6
     };
@@ -55,6 +55,15 @@ global.SpellType = {
 //@input Component.ScriptComponent poisonPositionSetScript;
 //@input Component.Image poisonActioningEffectImage;
 //@input Component.ScriptComponent poisonActionSetPositionScript;
+
+//@ui {"widget":"separator"}
+//@ui {"widget":"label", "label":"Purifier Spell References"}
+//@input Component.Image purifierCastedEffectImage;
+//@input Component.ScriptComponent purifierPositionSetScript;
+/*
+//@input Component.Image purifierActioningEffectImage;
+//@input Component.ScriptComponent purifierActionSetPositionScript;
+*/
 
 
 //@ui {"widget":"separator"}
@@ -150,7 +159,9 @@ global.SpellType = {
             if(script.poisonAvailableNoTextOtherPlayer) script.poisonAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[2].toString();
             if(script.purifyerAvailableNoTextOtherPlayer) script.purifyerAvailableNoTextOtherPlayer.text = otherPlayerAvailableSpell[3].toString();
        print("available spells of other user : "+ otherPlayerAvailableSpell);
-       script.opponentUi.setOpponentSpellNos(otherPlayerAvailableSpell);
+       if(currentTurn > 0){
+            script.opponentUi.setOpponentSpellNos(otherPlayerAvailableSpell);
+       }
     }
 
 
@@ -270,16 +281,23 @@ async function spellUsed(spellType){
 
     }
     else if(spellType == global.SpellType.Shield){
-        print("Before use steal spell = "+availableSpell[0]);
+        print("Before use steal spell = "+availableSpell[1]);
         availableSpell[1] = availableSpell[1]-1;
-        print("After use steal spell = "+availableSpell[0]);
+        print("After use steal spell = "+availableSpell[1]);
 
 
     }
     else if(spellType == global.SpellType.Poison){
-        print("Before use steal spell = "+availableSpell[0]);
+        print("Before use steal spell = "+availableSpell[2]);
         availableSpell[2] = availableSpell[2]-1;
-        print("After use steal spell = "+availableSpell[0]);
+        print("After use steal spell = "+availableSpell[2]);
+
+
+    }
+    else if(spellType == global.SpellType.Purifier){
+        print("Before use steal spell = "+availableSpell[3]);
+        availableSpell[2] = availableSpell[2]-1;
+        print("After use steal spell = "+availableSpell[3]);
 
 
     }
@@ -306,6 +324,9 @@ function isSpellAvailable(spellType){
     else if(spellType == global.SpellType.Poison){
         currentAvailable = availableSpell[2]
     }
+    else if(spellType == global.SpellType.Purifier){
+        currentAvailable = availableSpell[3]
+    }
     else{
         print("Something error occurred");
     }
@@ -331,7 +352,7 @@ function animateOptionKeys(spellType){
     else if(spellType == SpellType.Poison){
         script.poisonOptionKey.animateOption();
     }
-    else if(spellType == SpellType.Spell4){
+    else if(spellType == SpellType.Purifier){
         script.spell3OptionKey.animateOption();
     }
     else{
@@ -392,6 +413,17 @@ function getSpellDetails(spellType, currentTurn){
         "caster": currentPlayer,
         "appliedTurn" : currentTurn,
         "effectiveTurn" : currentTurn+2,
+        "effectiveUser" : currentPlayer,
+        };
+
+    }
+
+    else if(spellType == global.SpellType.Purifier){
+        newSpellEffect = {
+        "type": spellType,
+        "caster": currentPlayer,
+        "appliedTurn" : currentTurn,
+        "effectiveTurn" : currentTurn,
         "effectiveUser" : currentPlayer,
         };
 
@@ -463,6 +495,12 @@ async function showCastedSpellAnimation(spellType, gridIndex){
     else if(spellType == global.SpellType.Poison){
         effectToApply = script.poisonCastedEffectImage;
         positionScript = script.poisonPositionSetScript;
+
+
+    }
+    else if(spellType == global.SpellType.Purifier){
+        effectToApply = script.purifierCastedEffectImage;
+        positionScript = script.purifierPositionSetScript;
 
 
     }
@@ -610,6 +648,17 @@ async function performSpellAction(spell, gridIndex){
         script.poisonActionSetPositionScript.setPosition(gridIndex);
         await spellActionAnimation(script.poisonActioningEffectImage);
         await script.boardController.updateGridData(gridIndex, 'setOwner', global.CellType.None, true);
+
+
+    }
+    else if(spell.type == global.SpellType.Purifier){
+        print("Inside Purifier action");
+        //script.poisonActionSetPositionScript.setPosition(gridIndex);
+        //await spellActionAnimation(script.poisonActioningEffectImage);
+        await script.boardController.updateGridData(gridIndex, 'removeSpell', global.SpellType.Poison, true);
+        await script.boardController.updateGridData(gridIndex, 'removeSpell', global.SpellType.Steal, true);
+
+        script.juice.shakeScreen();
 
 
     }

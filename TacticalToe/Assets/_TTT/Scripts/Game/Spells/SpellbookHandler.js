@@ -7,20 +7,20 @@
 //@input Asset.Texture morphCardTexture
 //@input Asset.Texture shieldCardTexture
 //@input Asset.Texture poisonCardTexture
-//@input Asset.Texture spell4CardTexture
+//@input Asset.Texture purifierCardTexture
 //@input Asset.Texture defaultCardTexture
 
 
 //@input string morphCardName
 //@input string shieldCardName 
 //@input string poisonCardName 
-//@input string spell4CardName 
+//@input string purifierCardName 
 
 
 //@input string morphCardDetails
 //@input string shieldCardDetails
 //@input string poisonCardDetails
-//@input string spell4CardDetails
+//@input string purifierCardDetails
 
 
 var mat = script.spellImage.mainMaterial.clone();
@@ -79,8 +79,16 @@ function showSpellbook(spellType){
             enableSpellBook();
             break;
 
-        case global.SpellType.Spell4:
+        case global.SpellType.Purifier:
             // Handle Spell4
+            cardTexture = script.purifierCardTexture;
+            cardName = script.purifierCardName;
+            print("purifierCardName : "+script.purifierCardName);
+            cardDetails = script.purifierCardDetails;
+            print("purifierCardDetails : "+script.purifierCardDetails);
+
+            enableSpellBook();
+            break;
             break;
 
         case global.SpellType.Spell5:

@@ -44,6 +44,10 @@
     poisonCastedEffectImage: false
     poisonOptionKey: false
     poisonPositionSetScript: false
+    purifierActionSetPositionScript: false
+    purifierActioningEffectImage: false
+    purifierCastedEffectImage: false
+    purifierPositionSetScript: false
     purifyerAvailableNoTextCurrentPlayer: false
     purifyerAvailableNoTextOtherPlayer: false
     shieldActionSetPositionScript: false
@@ -88,6 +92,10 @@
       poisonPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       poisonActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
       poisonActionSetPositionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      purifierCastedEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      purifierPositionSetScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      purifierActioningEffectImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
+      purifierActionSetPositionScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       morphAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
       shieldAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
       poisonAvailableNoTextCurrentPlayer: !<reference.Text> 00000000-0000-0000-0000-000000000000
